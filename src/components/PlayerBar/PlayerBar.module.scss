@@ -6,11 +6,11 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
-  width: 100%; /* Используем 100% ширины родительского элемента */
-  max-width: 600px; /* Максимальная ширина остается 600px */
-  min-width: 220px; /* Минимальная ширина остается 220px */
+  width: 100%;
+  max-width: 600px;
+  min-width: 220px;
   height: 600px;
-  box-sizing: border-box; /* Включаем отступы и границы в общую ширину и высоту */
+  box-sizing: border-box;
 }
 
 .player_info {
