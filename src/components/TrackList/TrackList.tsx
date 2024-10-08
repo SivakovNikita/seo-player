@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import Track from '../Track/Track';
 import styles from './TrackList.module.scss';
-import { TrackContext } from '../Player/TrackContex';
+import { TrackContext } from '../PlayerBar/TrackContex';
 
 const TrackList = () => {
   const { trackList } = useContext(TrackContext);
