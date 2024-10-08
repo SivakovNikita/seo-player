@@ -1,11 +1,5 @@
-import PlayerBlock from './blocks/PalyerBlock/PalyerBlock';
-
 function MyApp() {
-  return (
-    <>
-      <PlayerBlock />
-    </>
-  );
+  return <>hello</>;
 }
 
 export default MyApp;
