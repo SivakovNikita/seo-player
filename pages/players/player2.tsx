@@ -1,5 +1,5 @@
 function Player() {
-  return <span>залупа</span>;
+  return <span>Text</span>;
 }
 
 export default Player;
