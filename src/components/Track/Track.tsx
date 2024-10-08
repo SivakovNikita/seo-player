@@ -6,6 +6,7 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from './useWindowWidth';
 import Image from 'next/image';
+import React from 'react';
 
 const Track = ({ track, index }) => {
   const { play, pause, next, state, currentIndex } = useContext(TrackContext);
