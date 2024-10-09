@@ -18,58 +18,51 @@ export interface MediaSessionProps {
 const useMediaSession = (props: MediaSessionProps) => {
   const { track, onPlay, onPause, onPreviousTrack, onNextTrack } = props;
 
-  const loadImage = (src) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => resolve(img);
-      img.onerror = () => resolve(null);
-    });
-  };
-
-  const loadArtwork = async (artwork) => {
-    return Promise.all(artwork.map((img) => loadImage(img.src)));
-  };
-
   useEffect(() => {
     if ('mediaSession' in navigator) {
       const { mediaSession } = navigator;
 
-      const updateMediaSession = async () => {
-        const loadedArtwork = await loadArtwork(track.artwork);
-        mediaSession.metadata = new MediaMetadata({
-          title: track.title || '',
-          artist: track.artist || '',
-          artwork: loadedArtwork.filter(Boolean),
-        });
+      mediaSession.metadata = new MediaMetadata({
+        title: track.title || '',
+        artist: track.artist || '',
+        artwork: track.artwork || [],
+      });
+      console.log(mediaSession.metadata.artwork);
 
-        console.log(mediaSession.metadata.artwork);
-      };
-
-      updateMediaSession();
-
-      const events = [
-        { action: 'play', handler: onPlay },
-        { action: 'pause', handler: onPause },
-        { action: 'previoustrack', handler: track.prev ? onPreviousTrack : null },
-        { action: 'nexttrack', handler: track.next ? onNextTrack : null },
+      const events: { action: MediaSessionAction; handler: MediaSessionActionHandler | null }[] = [
+        {
+          action: 'play',
+          handler: onPlay || null,
+        },
+        {
+          action: 'pause',
+          handler: onPause || null,
+        },
+        {
+          action: 'previoustrack',
+          handler: track.prev && onPreviousTrack ? onPreviousTrack : null,
+        },
+        {
+          action: 'nexttrack',
+          handler: track.next && onNextTrack ? onNextTrack : null,
+        },
       ];
 
-      events.forEach(({ action, handler }) => {
-        if (handler) {
-          mediaSession.setActionHandler(action, async () => {
-            try {
-              await handler();
-            } catch (error) {
-              console.error(`Error handling ${action}:`, error);
-            }
-          });
+      events.forEach((event) => {
+        try {
+          mediaSession.setActionHandler(event.action, event.handler);
+        } catch (error) {
+          console.log(error.name);
         }
       });
 
       return () => {
-        events.forEach(({ action }) => {
-          mediaSession.setActionHandler(action, null);
+        events.forEach((event) => {
+          try {
+            mediaSession.setActionHandler(event.action, null);
+          } catch (error) {
+            console.log(error.name);
+          }
         });
       };
     }
