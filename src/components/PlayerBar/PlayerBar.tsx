@@ -104,6 +104,7 @@ const PlayerBar = ({ trackList }) => {
           <ProgressBar currentTime={currentTrackDuration} duration={trackDuration} onSeek={handleSeek} />
         </div>
         <VolumeBar currentVolume={currentVolume} adjustVolume={adjustVolume} />
+        <span>{track.title}</span>
       </div>
 
       <TrackProvider
@@ -116,6 +117,7 @@ const PlayerBar = ({ trackList }) => {
       >
         <Tracklist />
       </TrackProvider>
+      <span>{track.title}</span>
       <span>-icons</span>
     </div>
   );

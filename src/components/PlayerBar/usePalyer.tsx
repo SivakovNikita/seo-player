@@ -20,6 +20,7 @@ export const usePlayer = <T extends { src: string }>({
 
   useEffect(() => {
     const newAudio = new Audio();
+    newAudio.autoplay = true;
     newAudio.volume = 0.5;
     setcurrentVolume(newAudio.volume);
     setAudio(newAudio);
@@ -68,6 +69,7 @@ export const usePlayer = <T extends { src: string }>({
         } catch (error) {
           if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
             console.error('Ошибка:', error);
+            alert('Ошибка:');
           }
         }
       }
