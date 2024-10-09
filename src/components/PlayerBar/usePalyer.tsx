@@ -14,15 +14,14 @@ export const usePlayer = <T extends { src: string }>({
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
   const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
-  const [currentVolume, setCurrentVolume] = useState(0);
+  const [currentVolume, setcurrentVolume] = useState(0);
   const [isPrevDisabled, setPrevDisabled] = useState(true);
   const [isNextDisabled, setNextDisabled] = useState(true);
 
   useEffect(() => {
     const newAudio = new Audio();
     newAudio.volume = 0.5;
-    newAudio.autoplay = true;
-    setCurrentVolume(newAudio.volume);
+    setcurrentVolume(newAudio.volume);
     setAudio(newAudio);
 
     return () => {
@@ -53,30 +52,22 @@ export const usePlayer = <T extends { src: string }>({
         try {
           audio.src = src;
 
-          const awaiter = new Promise<void>((resolve, reject) => {
+          const awaiter = new Promise<void>((resolve) => {
             const callback = () => {
               audio.removeEventListener('loadstart', callback);
               audio.removeEventListener('abort', callback);
               resolve();
             };
-
-            const errorCallback = (e: ErrorEvent) => {
-              audio.removeEventListener('error', errorCallback);
-              reject(new Error(`Error loading audio: ${e.message}`));
-            };
-
             audio.addEventListener('loadstart', callback);
             audio.addEventListener('abort', callback);
-            audio.addEventListener('error', errorCallback);
           });
 
-          await audio.load();
+          audio.load();
           await awaiter;
           await audio.play();
         } catch (error) {
-          console.error('Error during load and play:', error);
-          if (error.name === 'NotAllowedError') {
-            alert('Autoplay is prevented by the browser, please interact to play the track.');
+          if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
+            console.error('Ошибка:', error);
           }
         }
       }
@@ -89,7 +80,7 @@ export const usePlayer = <T extends { src: string }>({
       setCurrentTrackIndex(index);
       await loadAndPlay(queue[index].src);
     },
-    [queue, loadAndPlay],
+    [currentTrackIndex, queue, repeat, loadAndPlay, audio],
   );
 
   const next = useCallback(async () => {
@@ -104,14 +95,7 @@ export const usePlayer = <T extends { src: string }>({
     }
 
     setCurrentTrackIndex(newIndex);
-
-    try {
-      await loadAndPlay(queue[newIndex].src);
-    } catch (error) {
-      if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError') {
-        console.log('Autoplay is prevented by the browser, waiting for user interaction.');
-      }
-    }
+    await loadAndPlay(queue[newIndex].src);
   }, [currentTrackIndex, queue, repeat, loadAndPlay, audio]);
 
   const prev = useCallback(async () => {
@@ -142,7 +126,7 @@ export const usePlayer = <T extends { src: string }>({
     if (audio) {
       const volumeValue = Number(volume);
       audio.volume = volumeValue;
-      setCurrentVolume(volumeValue);
+      setcurrentVolume(volumeValue);
     }
   };
 
@@ -152,7 +136,6 @@ export const usePlayer = <T extends { src: string }>({
     const handleLoadedMetadata = () => {
       const duration = audio.duration;
       setTrackDuration(duration);
-      setCurrentTrackDuration(0);
     };
 
     const updateTime = () => {
@@ -171,7 +154,6 @@ export const usePlayer = <T extends { src: string }>({
     const handlePlayStop = () => {
       setIsPlaying(!audio.paused);
     };
-
     audio.addEventListener('play', handlePlayStop);
     audio.addEventListener('pause', handlePlayStop);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -186,11 +168,11 @@ export const usePlayer = <T extends { src: string }>({
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('ended', handleEnd);
     };
-  }, [audio, next, repeat]);
+  }, [audio, currentTrackIndex, next, repeat]);
 
   useEffect(() => {
     setPrevDisabled(currentTrackIndex === 0 && repeat !== 'all');
-  }, [currentTrackIndex, repeat]);
+  }, [currentTrackIndex, audio, repeat]);
 
   useEffect(() => {
     setNextDisabled(currentTrackIndex === queue.length - 1 && repeat !== 'all');

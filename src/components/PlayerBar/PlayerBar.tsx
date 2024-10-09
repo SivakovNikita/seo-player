@@ -85,6 +85,7 @@ const PlayerBar = ({ trackList }) => {
       >
         <Tracklist />
       </TrackProvider>
+      <span>usePlayer reverse</span>
     </div>
   );
 };
