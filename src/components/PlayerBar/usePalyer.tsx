@@ -74,10 +74,9 @@ export const usePlayer = <T extends { src: string }>({
           await awaiter;
           await audio.play();
         } catch (error) {
-          if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError') {
-            console.log('Autoplay is prevented by the browser, waiting for user interaction.');
-          } else {
-            console.error('Error during playback', error);
+          console.error('Error during load and play:', error);
+          if (error.name === 'NotAllowedError') {
+            alert('Autoplay is prevented by the browser, please interact to play the track.');
           }
         }
       }
