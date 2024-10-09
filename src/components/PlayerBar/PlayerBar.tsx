@@ -15,6 +15,7 @@ import VolumeBar from '../VolumeBar/VolumeBar';
 const PlayerBar = ({ trackList }) => {
   const {
     isPlaying,
+    audioContext,
     pause,
     play,
     next,
@@ -118,7 +119,7 @@ const PlayerBar = ({ trackList }) => {
         <Tracklist />
       </TrackProvider>
       <span>{track.title}</span>
-      <span>AudioContext</span>
+      <span>AudioContext: {audioContext?.state ? audioContext?.state : 'hello'}</span>
     </div>
   );
 };

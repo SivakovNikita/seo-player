@@ -18,50 +18,51 @@ export const usePlayer = <T extends { src: string }>({
   const [isPrevDisabled, setPrevDisabled] = useState(true);
   const [isNextDisabled, setNextDisabled] = useState(true);
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
-
-  // useEffect(() => {
-  //   const newAudio = new Audio();
-  //   newAudio.autoplay = true;
-  //   newAudio.volume = 0.5;
-  //   setcurrentVolume(newAudio.volume);
-  //   setAudio(newAudio);
-
-  //   return () => {
-  //     newAudio.pause();
-  //   };
-  // }, []);
+  const [isFirstPlay, setIsFirstPlay] = useState(false);
 
   useEffect(() => {
-    const newAudioCtx = new AudioContext();
-    setAudioContext(newAudioCtx);
-
     const newAudio = new Audio();
     newAudio.volume = 0.5;
     setCurrentVolume(newAudio.volume);
     setAudio(newAudio);
 
-    // Позволяет автоматическое воспроизведение после пользовательского взаимодействия
-    document.addEventListener('click', () => {
+    return () => {
+      newAudio.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleUserGesture = () => {
+      const newAudioCtx = new AudioContext();
+      setAudioContext(newAudioCtx);
       newAudioCtx.resume().then(() => {
         console.log('Audio context resumed');
       });
-    });
+      document.removeEventListener('click', handleUserGesture);
+    };
+
+    document.addEventListener('click', handleUserGesture);
 
     return () => {
-      newAudio.pause();
-      newAudioCtx.close();
+      document.removeEventListener('click', handleUserGesture);
     };
   }, []);
 
   const play = useCallback(() => {
     if (audio) {
+      if (!isFirstPlay) {
+        setIsFirstPlay(true); // Устанавливаем флаг после первого клика
+      }
       if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
         audio.src = queue[currentTrackIndex].src;
         audio.load();
       }
-      audio.play();
+      audio.play().catch((error) => {
+        console.error('Ошибка воспроизведения:', error);
+        alert('Ошибка воспроизведения: ' + error.message);
+      });
     }
-  }, [audio, currentTrackIndex, queue]);
+  }, [audio, currentTrackIndex, queue, isFirstPlay]);
 
   const pause = useCallback(() => {
     if (audio) {
@@ -205,6 +206,7 @@ export const usePlayer = <T extends { src: string }>({
 
   return {
     isPlaying,
+    audioContext,
     pause,
     play,
     next,
