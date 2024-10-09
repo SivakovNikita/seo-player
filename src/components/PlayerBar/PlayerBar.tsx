@@ -1,17 +1,16 @@
 import styles from './PlayerBar.module.scss';
 import { usePlayer } from './usePalyer';
 import useMediaSession from './useMediaSession';
-import { FaPlay, FaPause } from 'react-icons/fa';
-import { TbPlayerTrackNextFilled, TbPlayerTrackPrevFilled } from 'react-icons/tb';
+import { CgPlayButton } from 'react-icons/cg';
+import { CgPlayPause } from 'react-icons/cg';
+import { CgPlayTrackNext } from 'react-icons/cg';
+import { CgPlayTrackPrev } from 'react-icons/cg';
 import ProgressBar from '../ProgressBar/ProgressBar';
-import clsx from 'clsx';
-import Image from 'next/image';
 import { useMemo } from 'react';
 import React from 'react';
 import Tracklist from '../TrackList/TrackList';
 import { TrackProvider } from './TrackContex';
 import VolumeBar from '../VolumeBar/VolumeBar';
-import TimerBar from '../TimerBar/TimerBar';
 
 const PlayerBar = ({ trackList }) => {
   const {
@@ -62,13 +61,13 @@ const PlayerBar = ({ trackList }) => {
       <div className={styles.controls_container}>
         <div className={styles.player_navigation}>
           <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
-            <TbPlayerTrackPrevFilled />
+            <CgPlayTrackPrev />
           </button>
           <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
-            {isPlaying ? <FaPause /> : <FaPlay />}
+            {isPlaying ? <CgPlayPause /> : <CgPlayButton />}
           </button>
           <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
-            <TbPlayerTrackNextFilled />
+            <CgPlayTrackNext />
           </button>
         </div>
         <div className={styles.controls_wrapper}>
