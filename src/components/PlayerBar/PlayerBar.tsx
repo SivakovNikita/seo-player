@@ -118,7 +118,7 @@ const PlayerBar = ({ trackList }) => {
         <Tracklist />
       </TrackProvider>
       <span>{track.title}</span>
-      <span>-icons</span>
+      <span>AudioContext</span>
     </div>
   );
 };
