@@ -1,4 +1,8 @@
 .trackList_wrapper {
+  overflow: scroll;
   width: 100%;
   height: 500px;
+  @media (max-width: 430px) {
+    font-size: 68px;
+  }
 }

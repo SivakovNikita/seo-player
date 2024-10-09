@@ -5,6 +5,7 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 import { TbPlayerTrackNextFilled, TbPlayerTrackPrevFilled } from 'react-icons/tb';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import clsx from 'clsx';
+import Image from 'next/image';
 import { useMemo } from 'react';
 import React from 'react';
 import Tracklist from '../TrackList/TrackList';

@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from './useWindowWidth';
+import { CgPlayButtonO } from 'react-icons/cg';
 import Image from 'next/image';
 import React from 'react';
 
@@ -30,7 +31,7 @@ const Track = ({ track, index }) => {
     } else if (!isCurrent) {
       setPlaying(false);
     }
-  }, [isCurrent, state]);
+  }, [isCurrent, playing, state]);
 
   return (
     <div
@@ -59,7 +60,8 @@ const Track = ({ track, index }) => {
           ) : null}
         </div>
       ) : (
-        <div className={styles.images_wrapper} onClick={(event) => event.stopPropagation()}>
+        // onClick={(event) => event.stopPropagation()}
+        <div className={styles.images_wrapper}>
           <button
             className={styles.play_pause__mobile}
             onClick={(event) => {
@@ -71,7 +73,7 @@ const Track = ({ track, index }) => {
               }
             }}
           >
-            {showPlayButtonMobile ? <FaPlay /> : null}
+            {showPlayButtonMobile ? <CgPlayButtonO /> : null}
             {isCurrent && state ? <Equalizer /> : null}
           </button>
           <Image
