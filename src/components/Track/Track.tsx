@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import { TrackContext } from '../PlayerBar/TrackContex';
 import styles from './Track.module.scss';
 import { useContext, useEffect, useState } from 'react';
-import { FaPlay, FaPause } from 'react-icons/fa';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from './useWindowWidth';
-import { CgPlayButtonO } from 'react-icons/cg';
+import { CgPlayButton } from 'react-icons/cg';
+import { CgPlayPause } from 'react-icons/cg';
 import Image from 'next/image';
 import React from 'react';
 
@@ -43,7 +43,7 @@ const Track = ({ track, index }) => {
         <div className={styles.images_wrapper}>
           {showPlayButton ? (
             <button className={styles.play_pause} onClick={() => next(index)}>
-              <FaPlay />
+              <CgPlayButton />
             </button>
           ) : null}
           <Image
@@ -55,7 +55,7 @@ const Track = ({ track, index }) => {
           />
           {playing ? (
             <button className={styles.play_pause} onClick={state ? () => pause() : () => play()}>
-              {state ? !isHovered ? <Equalizer /> : <FaPause /> : <FaPlay />}
+              {state ? !isHovered ? <Equalizer /> : <CgPlayPause /> : <CgPlayButton />}
             </button>
           ) : null}
         </div>
@@ -73,7 +73,7 @@ const Track = ({ track, index }) => {
               }
             }}
           >
-            {showPlayButtonMobile ? <CgPlayButtonO /> : null}
+            {showPlayButtonMobile ? <CgPlayButton /> : null}
             {isCurrent && state ? <Equalizer /> : null}
           </button>
           <Image

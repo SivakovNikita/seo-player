@@ -29,13 +29,17 @@ export const usePlayer = <T extends { src: string }>({
     };
   }, []);
 
-  const play = useCallback(() => {
+  const play = useCallback(async () => {
     if (audio) {
       if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
         audio.src = queue[currentTrackIndex].src;
         audio.load();
       }
-      audio.play();
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, [audio, currentTrackIndex]);
 
@@ -64,7 +68,11 @@ export const usePlayer = <T extends { src: string }>({
 
           await audio.load();
           await awaiter;
-          await audio.play();
+          try {
+            await audio.play();
+          } catch (error) {
+            console.error('Ошибка при воспроизведении:', error);
+          }
         } catch (error) {
           if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
             console.error('Ошибка:', error);
