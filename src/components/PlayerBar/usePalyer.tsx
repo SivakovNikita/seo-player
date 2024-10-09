@@ -52,19 +52,22 @@ export const usePlayer = <T extends { src: string }>({
         try {
           audio.src = src;
 
-          // const awaiter = new Promise<void>((resolve) => {
-          //   const callback = () => {
-          //     audio.removeEventListener('loadstart', callback);
-          //     audio.removeEventListener('abort', callback);
-          //     resolve();
-          //   };
-          //   audio.addEventListener('loadstart', callback);
-          //   audio.addEventListener('abort', callback);
-          // });
-
-          await audio.load();
-          // await awaiter;
-          await audio.play();
+          const awaiter = new Promise<void>((resolve) => {
+            const callback = () => {
+              audio.removeEventListener('loadstart', callback);
+              audio.removeEventListener('abort', callback);
+              resolve();
+            };
+            audio.addEventListener('loadstart', callback);
+            audio.addEventListener('abort', callback);
+          });
+          try {
+            await audio.load();
+            await awaiter;
+            await audio.play();
+          } catch (error) {
+            console.log(error);
+          }
         } catch (error) {
           if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
             console.error('Ошибка:', error);
