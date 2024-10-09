@@ -27,7 +27,6 @@ const useMediaSession = (props: MediaSessionProps) => {
         artist: track.artist || '',
         artwork: track.artwork || [],
       });
-      console.log(mediaSession.metadata.artwork);
 
       const events: { action: MediaSessionAction; handler: MediaSessionActionHandler | null }[] = [
         {

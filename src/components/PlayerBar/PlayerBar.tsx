@@ -45,8 +45,7 @@ const PlayerBar = ({ trackList }) => {
           prev: !isPrevDisabled,
         }
       : { title: '', artist: '', artwork: [], next: false, prev: false };
-  }, [currentTrackIndex, isNextDisabled, isPrevDisabled]);
-  console.log(track.artwork);
+  }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackList]);
 
   useMediaSession({
     track,
