@@ -14,19 +14,42 @@ export const usePlayer = <T extends { src: string }>({
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
   const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
-  const [currentVolume, setcurrentVolume] = useState(0);
+  const [currentVolume, setCurrentVolume] = useState(0);
   const [isPrevDisabled, setPrevDisabled] = useState(true);
   const [isNextDisabled, setNextDisabled] = useState(true);
+  const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
+
+  // useEffect(() => {
+  //   const newAudio = new Audio();
+  //   newAudio.autoplay = true;
+  //   newAudio.volume = 0.5;
+  //   setcurrentVolume(newAudio.volume);
+  //   setAudio(newAudio);
+
+  //   return () => {
+  //     newAudio.pause();
+  //   };
+  // }, []);
 
   useEffect(() => {
+    const newAudioCtx = new AudioContext();
+    setAudioContext(newAudioCtx);
+
     const newAudio = new Audio();
-    newAudio.autoplay = true;
     newAudio.volume = 0.5;
-    setcurrentVolume(newAudio.volume);
+    setCurrentVolume(newAudio.volume);
     setAudio(newAudio);
+
+    // Позволяет автоматическое воспроизведение после пользовательского взаимодействия
+    document.addEventListener('click', () => {
+      newAudioCtx.resume().then(() => {
+        console.log('Audio context resumed');
+      });
+    });
 
     return () => {
       newAudio.pause();
+      newAudioCtx.close();
     };
   }, []);
 
@@ -128,7 +151,7 @@ export const usePlayer = <T extends { src: string }>({
     if (audio) {
       const volumeValue = Number(volume);
       audio.volume = volumeValue;
-      setcurrentVolume(volumeValue);
+      setCurrentVolume(volumeValue);
     }
   };
 
