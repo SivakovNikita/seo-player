@@ -1,10 +1,10 @@
 import styles from './PlayerBar.module.scss';
 import { usePlayer } from './usePalyer';
 import useMediaSession from './useMediaSession';
-import { CgPlayButton } from 'react-icons/cg';
-import { CgPlayPause } from 'react-icons/cg';
-import { CgPlayTrackNext } from 'react-icons/cg';
-import { CgPlayTrackPrev } from 'react-icons/cg';
+// import { CgPlayButton } from 'react-icons/cg';
+// import { CgPlayPause } from 'react-icons/cg';
+// import { CgPlayTrackNext } from 'react-icons/cg';
+// import { CgPlayTrackPrev } from 'react-icons/cg';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { useMemo } from 'react';
 import React from 'react';
@@ -56,17 +56,48 @@ const PlayerBar = ({ trackList }) => {
   });
 
   return (
+    // <div className={styles.player_container}>
+    //   <div className={styles.controls_container}>
+    //     <div className={styles.player_navigation}>
+    //       <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
+    //         `<CgPlayTrackPrev />
+    //       </button>
+    //       <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
+    //         {isPlaying ? <CgPlayPause /> : <CgPlayButton />}
+    //       </button>
+    //       <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
+    //         <CgPlayTrackNext />
+    //       </button>
+    //     </div>
+    //     <div className={styles.controls_wrapper}>
+    //       <ProgressBar currentTime={currentTrackDuration} duration={trackDuration} onSeek={handleSeek} />
+    //     </div>
+    //     <VolumeBar currentVolume={currentVolume} adjustVolume={adjustVolume} />
+    //   </div>
+
+    //   <TrackProvider
+    //     trackList={trackList}
+    //     play={play}
+    //     pause={pause}
+    //     next={setNext}
+    //     state={isPlaying}
+    //     currentIndex={currentTrackIndex}
+    //   >
+    //     <Tracklist />
+    //   </TrackProvider>
+    //   <span>usePlayer reverse</span>
+    // </div>
     <div className={styles.player_container}>
       <div className={styles.controls_container}>
         <div className={styles.player_navigation}>
           <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
-            <CgPlayTrackPrev />
+            Play
           </button>
           <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
-            {isPlaying ? <CgPlayPause /> : <CgPlayButton />}
+            {isPlaying ? 'Pause' : 'Play'}
           </button>
           <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
-            <CgPlayTrackNext />
+            Next
           </button>
         </div>
         <div className={styles.controls_wrapper}>
@@ -85,7 +116,7 @@ const PlayerBar = ({ trackList }) => {
       >
         <Tracklist />
       </TrackProvider>
-      <span>usePlayer reverse</span>
+      <span>-icons</span>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import styles from './Track.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from './useWindowWidth';
-import { CgPlayButton } from 'react-icons/cg';
-import { CgPlayPause } from 'react-icons/cg';
+// import { CgPlayButton } from 'react-icons/cg';
+// import { CgPlayPause } from 'react-icons/cg';
 import Image from 'next/image';
 import React from 'react';
 
@@ -43,7 +43,7 @@ const Track = ({ track, index }) => {
         <div className={styles.images_wrapper}>
           {showPlayButton ? (
             <button className={styles.play_pause} onClick={() => next(index)}>
-              <CgPlayButton />
+              Play
             </button>
           ) : null}
           <Image
@@ -55,7 +55,7 @@ const Track = ({ track, index }) => {
           />
           {playing ? (
             <button className={styles.play_pause} onClick={state ? () => pause() : () => play()}>
-              {state ? !isHovered ? <Equalizer /> : <CgPlayPause /> : <CgPlayButton />}
+              {state ? !isHovered ? <Equalizer /> : 'Play' : 'Pause'}
             </button>
           ) : null}
         </div>
@@ -73,7 +73,7 @@ const Track = ({ track, index }) => {
               }
             }}
           >
-            {showPlayButtonMobile ? <CgPlayButton /> : null}
+            {showPlayButtonMobile ? 'Play' : null}
             {isCurrent && state ? <Equalizer /> : null}
           </button>
           <Image
