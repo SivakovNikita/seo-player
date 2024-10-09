@@ -64,14 +64,14 @@ const Track = ({ track, index }) => {
         <div className={styles.images_wrapper}>
           <button
             className={styles.play_pause__mobile}
-            onClick={(event) => {
-              event.stopPropagation();
-              if (isCurrent) {
-                state ? pause() : play();
-              } else {
-                next(index);
-              }
-            }}
+            // onClick={(event) => {
+            //   event.stopPropagation();
+            //   if (isCurrent) {
+            //     state ? pause() : play();
+            //   } else {
+            //     next(index);
+            //   }
+            // }}
           >
             {showPlayButtonMobile ? <CgPlayButton /> : null}
             {isCurrent && state ? <Equalizer /> : null}
