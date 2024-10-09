@@ -14,7 +14,7 @@ export interface MediaSessionProps {
   onPreviousTrack?: (...args: any[]) => any;
   onNextTrack?: (...args: any[]) => any;
 }
-
+console.log('');
 const useMediaSession = (props: MediaSessionProps) => {
   const { track, onPlay, onPause, onPreviousTrack, onNextTrack } = props;
 
