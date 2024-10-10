@@ -9,6 +9,8 @@ interface ProgressBarProps {
   onSeek: (time: number) => void;
 }
 const ProgressBar = React.memo(({ currentTime, duration, onSeek }: ProgressBarProps) => {
+  console.log('ProgressBar props', currentTime, duration);
+
   const ref = useRef<HTMLDivElement>(null);
   const dragginTimeRef = useRef<number | null>(null);
   const [dragginTime, setDragginTime] = useState<number | null>(null);
