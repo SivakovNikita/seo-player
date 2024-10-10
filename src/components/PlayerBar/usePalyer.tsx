@@ -151,8 +151,8 @@ export const usePlayer = <T extends { src: string }>({
       }
     };
 
-    const handlePlayStop = () => {
-      setIsPlaying(!audio.paused);
+    const handlePlayStop = async () => {
+      await setIsPlaying(!audio.paused);
     };
     audio.addEventListener('play', handlePlayStop);
     audio.addEventListener('pause', handlePlayStop);
