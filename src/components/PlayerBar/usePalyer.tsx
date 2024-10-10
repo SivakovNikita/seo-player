@@ -58,20 +58,22 @@ export const usePlayer = <T extends { src: string }>({
   const play = useCallback(() => {
     console.log('play');
 
-    if (audio && !isPlaying) {
+    if (audio) {
       if (!isFirstPlay) {
+        console.log('isFirstPlay');
+
         setIsFirstPlay(true);
       }
       if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
-        audio.src = queue[currentTrackIndex].src;
-        audio.load();
+        console.log('audio.readyState');
+        loadAndPlay(queue[currentTrackIndex].src);
       }
-      audio.play().catch((error) => {
-        console.error('Ошибка воспроизведения:', error);
-        alert('Ошибка воспроизведения: ' + error.message);
-      });
+      // audio.play().catch((error) => {
+      //   console.error('Ошибка воспроизведения:', error);
+      //   alert('Ошибка воспроизведения: ' + error.message);
+      // });
     }
-  }, [audio, currentTrackIndex, queue, isFirstPlay, isPlaying]);
+  }, [audio, currentTrackIndex, queue, isFirstPlay]);
 
   const pause = useCallback(() => {
     console.log('pause');
@@ -84,6 +86,8 @@ export const usePlayer = <T extends { src: string }>({
 
   const loadAndPlay = useCallback(
     async (src: string) => {
+      console.log('loadAndPlay');
+
       if (audio && src) {
         try {
           audio.src = src;
@@ -108,7 +112,7 @@ export const usePlayer = <T extends { src: string }>({
           audio.load();
           await awaiter;
           await audio.play();
-          console.log('loadAndPlay');
+          console.log('loadAndPlay end');
         } catch (error) {
           if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
             console.error('Ошибка:', error);
@@ -139,13 +143,19 @@ export const usePlayer = <T extends { src: string }>({
         return audio?.pause();
       }
     }
-    setCurrentTrackDuration(0);
+
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
 
     if (audioContext && audioContext.state !== 'running') {
       await audioContext.resume();
       console.log('Audio context resumed after track switch');
+    }
+
+    if (audio?.paused) {
+      console.log(1);
+
+      audio.play();
     }
   }, [currentTrackIndex, queue, repeat, loadAndPlay, audio, audioContext]);
 
