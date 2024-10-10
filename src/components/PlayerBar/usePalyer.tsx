@@ -123,6 +123,7 @@ export const usePlayer = <T extends { src: string }>({
   const setNext = useCallback(
     async (index: number) => {
       setCurrentTrackIndex(index);
+      setCurrentTrackDuration(0);
       await loadAndPlay(queue[index].src);
     },
     [currentTrackIndex, queue, repeat, loadAndPlay, audio],
@@ -139,7 +140,7 @@ export const usePlayer = <T extends { src: string }>({
         return audio?.pause();
       }
     }
-
+    setCurrentTrackDuration(0);
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
 
