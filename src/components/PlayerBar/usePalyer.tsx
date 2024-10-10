@@ -142,7 +142,7 @@ export const usePlayer = <T extends { src: string }>({
       }
     }
 
-    setIsLoading(true);
+    setIsLoading(true); // Начинаем процесс загрузки
 
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
@@ -186,6 +186,10 @@ export const usePlayer = <T extends { src: string }>({
     if (audio) {
       audio.currentTime = time;
       setCurrentTrackDuration(time);
+
+      if (audio.paused && !isLoading) {
+        audio.play();
+      }
     }
   };
 

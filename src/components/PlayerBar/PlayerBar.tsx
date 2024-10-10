@@ -1,10 +1,7 @@
 import styles from './PlayerBar.module.scss';
+import Image from 'next/image';
 import { usePlayer } from './usePalyer';
 import useMediaSession from './useMediaSession';
-// import { CgPlayButton } from 'react-icons/cg';
-// import { CgPlayPause } from 'react-icons/cg';
-// import { CgPlayTrackNext } from 'react-icons/cg';
-// import { CgPlayTrackPrev } from 'react-icons/cg';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { useMemo } from 'react';
 import React from 'react';
@@ -96,7 +93,11 @@ const PlayerBar = ({ trackList }) => {
             Prev
           </button>
           <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
-            {isPlaying ? 'Pause' : 'Play'}
+            {isPlaying ? (
+              <Image src="/images/navigation/Icon_pause_36x36.svg" width={36} height={36} alt="stop button" />
+            ) : (
+              <Image src="/images/navigation/Icon_next_36x36.svg" width={36} height={36} alt="play button" />
+            )}
           </button>
           <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
             Next
