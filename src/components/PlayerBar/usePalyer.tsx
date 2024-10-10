@@ -142,7 +142,17 @@ export const usePlayer = <T extends { src: string }>({
 
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
-  }, [currentTrackIndex, queue, repeat, loadAndPlay, audio]);
+
+    // Проверка и возобновление AudioContext для iOS
+    if (audioContext && audioContext.state !== 'running') {
+      await audioContext.resume();
+      console.log('Audio context resumed after track switch');
+    }
+
+    if (audio?.paused) {
+      audio.play();
+    }
+  }, [currentTrackIndex, queue, repeat, loadAndPlay, audio, audioContext]);
 
   const prev = useCallback(async () => {
     let newIndex = currentTrackIndex - 1;
