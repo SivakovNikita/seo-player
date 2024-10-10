@@ -57,26 +57,16 @@ export const usePlayer = <T extends { src: string }>({
   }, []);
 
   const play = useCallback(() => {
-    console.log('play');
-
     if (audio) {
-      if (!isFirstPlay) {
-        setIsFirstPlay(true);
-      }
       if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
         audio.src = queue[currentTrackIndex].src;
         audio.load();
       }
-      audio.play().catch((error) => {
-        console.error('Ошибка воспроизведения:', error);
-        alert('Ошибка воспроизведения: ' + error.message);
-      });
+      audio.play();
     }
-  }, [audio, currentTrackIndex, queue, isFirstPlay]);
+  }, [audio, currentTrackIndex]);
 
   const pause = useCallback(() => {
-    console.log('pause');
-
     if (audio) {
       audio.pause();
       setIsPlaying(!audio.paused);
@@ -110,11 +100,10 @@ export const usePlayer = <T extends { src: string }>({
           await awaiter;
           await audio.play();
           console.log('loadAndPlay');
+          setIsPlaying(true);
         } catch (error) {
-          if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
-            console.error('Ошибка:', error);
-            alert('Ошибка:');
-          }
+          console.error('Ошибка:', error);
+          alert('Ошибка: ' + error.message);
         }
       }
     },
@@ -127,7 +116,7 @@ export const usePlayer = <T extends { src: string }>({
       setCurrentTrackDuration(0);
       await loadAndPlay(queue[index].src);
     },
-    [currentTrackIndex, queue, repeat, loadAndPlay, audio],
+    [queue, loadAndPlay],
   );
 
   const next = useCallback(async () => {
@@ -138,37 +127,24 @@ export const usePlayer = <T extends { src: string }>({
       if (repeat === 'all') {
         newIndex = 0;
       } else {
-        return audio?.pause();
+        return pause();
       }
     }
 
-    setIsLoading(true); // Начинаем процесс загрузки
-
+    setIsLoading(true);
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
     if (audio) {
-      console.log(
-        'audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA && audio.paused',
-        audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA && audio.paused,
-      );
-
       if (audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA && audio.paused) {
-        if (audioContext && audioContext.state !== 'running') {
-          await audioContext.resume();
-          console.log('Audio context resumed after track switch');
-        }
-
-        await audio.play();
+        play();
       }
     }
 
-    setIsLoading(false); // Завершаем процесс загрузки
-  }, [currentTrackIndex, queue, repeat, loadAndPlay, audio, audioContext]);
+    setIsLoading(false);
+  }, [currentTrackIndex, queue, repeat, loadAndPlay, play, pause]);
 
   const prev = useCallback(async () => {
     let newIndex = currentTrackIndex - 1;
-
-    setIsPlaying(false);
 
     if (newIndex < 0) {
       if (repeat === 'all') {
@@ -186,10 +162,6 @@ export const usePlayer = <T extends { src: string }>({
     if (audio) {
       audio.currentTime = time;
       setCurrentTrackDuration(time);
-
-      if (audio.paused && !isLoading) {
-        audio.play();
-      }
     }
   };
 
@@ -214,8 +186,6 @@ export const usePlayer = <T extends { src: string }>({
     };
 
     const handleEnd = () => {
-      console.log('handleEnd');
-
       if (repeat === 'one') {
         audio.currentTime = 0;
         audio.play();
@@ -225,12 +195,8 @@ export const usePlayer = <T extends { src: string }>({
     };
 
     const handlePlayStop = () => {
-      if (isLoading) return;
-
-      console.log('handlePlayStop');
       setIsPlaying(!audio.paused);
     };
-
     audio.addEventListener('play', handlePlayStop);
     audio.addEventListener('pause', handlePlayStop);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -249,7 +215,7 @@ export const usePlayer = <T extends { src: string }>({
 
   useEffect(() => {
     setPrevDisabled(currentTrackIndex === 0 && repeat !== 'all');
-  }, [currentTrackIndex, audio, repeat]);
+  }, [currentTrackIndex, repeat]);
 
   useEffect(() => {
     setNextDisabled(currentTrackIndex === queue.length - 1 && repeat !== 'all');

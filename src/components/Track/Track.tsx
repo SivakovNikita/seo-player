@@ -43,7 +43,7 @@ const Track = ({ track, index }) => {
         <div className={styles.images_wrapper}>
           {showPlayButton ? (
             <button className={styles.play_pause} onClick={() => next(index)}>
-              Play
+              <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
             </button>
           ) : null}
           <Image
@@ -55,12 +55,19 @@ const Track = ({ track, index }) => {
           />
           {playing ? (
             <button className={styles.play_pause} onClick={state ? () => pause() : () => play()}>
-              {state ? !isHovered ? <Equalizer /> : 'Play' : 'Pause'}
+              {state ? (
+                !isHovered ? (
+                  <Equalizer />
+                ) : (
+                  <Image src="/images/navigation/Icon_pause_36x36.svg" width={36} height={36} alt="pause button" />
+                )
+              ) : (
+                <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
+              )}
             </button>
           ) : null}
         </div>
       ) : (
-        // onClick={(event) => event.stopPropagation()}
         <div className={styles.images_wrapper}>
           <button
             className={styles.play_pause__mobile}

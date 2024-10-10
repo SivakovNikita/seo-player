@@ -55,52 +55,21 @@ const PlayerBar = ({ trackList }) => {
   });
 
   return (
-    // <div className={styles.player_container}>
-    //   <div className={styles.controls_container}>
-    //     <div className={styles.player_navigation}>
-    //       <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
-    //         `<CgPlayTrackPrev />
-    //       </button>
-    //       <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
-    //         {isPlaying ? <CgPlayPause /> : <CgPlayButton />}
-    //       </button>
-    //       <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
-    //         <CgPlayTrackNext />
-    //       </button>
-    //     </div>
-    //     <div className={styles.controls_wrapper}>
-    //       <ProgressBar currentTime={currentTrackDuration} duration={trackDuration} onSeek={handleSeek} />
-    //     </div>
-    //     <VolumeBar currentVolume={currentVolume} adjustVolume={adjustVolume} />
-    //   </div>
-
-    //   <TrackProvider
-    //     trackList={trackList}
-    //     play={play}
-    //     pause={pause}
-    //     next={setNext}
-    //     state={isPlaying}
-    //     currentIndex={currentTrackIndex}
-    //   >
-    //     <Tracklist />
-    //   </TrackProvider>
-    //   <span>usePlayer reverse</span>
-    // </div>
     <div className={styles.player_container}>
       <div className={styles.controls_container}>
         <div className={styles.player_navigation}>
           <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
-            Prev
+            <Image src="/images/navigation/Icon_prev_36x36.svg" width={36} height={36} alt="stop button" />
           </button>
           <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
             {isPlaying ? (
               <Image src="/images/navigation/Icon_pause_36x36.svg" width={36} height={36} alt="stop button" />
             ) : (
-              <Image src="/images/navigation/Icon_next_36x36.svg" width={36} height={36} alt="play button" />
+              <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
             )}
           </button>
           <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
-            Next
+            <Image src="/images/navigation/Icon_next_36x36.svg" width={36} height={36} alt="stop button" />
           </button>
         </div>
         <div className={styles.controls_wrapper}>
