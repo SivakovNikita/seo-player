@@ -22,7 +22,6 @@ export const usePlayer = <T extends { src: string }>({
 
   useEffect(() => {
     const newAudio = new Audio();
-    audioContext?.resume();
     newAudio.volume = 0.5;
     setCurrentVolume(newAudio.volume);
     setAudio(newAudio);
@@ -57,6 +56,8 @@ export const usePlayer = <T extends { src: string }>({
   }, []);
 
   const play = useCallback(() => {
+    console.log('play');
+
     if (audio) {
       if (!isFirstPlay) {
         setIsFirstPlay(true);
@@ -73,6 +74,8 @@ export const usePlayer = <T extends { src: string }>({
   }, [audio, currentTrackIndex, queue, isFirstPlay]);
 
   const pause = useCallback(() => {
+    console.log('pause');
+
     if (audio) {
       audio.pause();
       setIsPlaying(!audio.paused);
@@ -90,6 +93,7 @@ export const usePlayer = <T extends { src: string }>({
               audio.removeEventListener('loadstart', callback);
               audio.removeEventListener('abort', callback);
               resolve();
+              console.log('loadAndPlay callback');
             };
             audio.addEventListener('loadstart', callback);
             audio.addEventListener('abort', callback);
@@ -98,6 +102,7 @@ export const usePlayer = <T extends { src: string }>({
           audio.load();
           await awaiter;
           await audio.play();
+          console.log('loadAndPlay');
         } catch (error) {
           if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
             console.error('Ошибка:', error);
@@ -118,6 +123,7 @@ export const usePlayer = <T extends { src: string }>({
   );
 
   const next = useCallback(async () => {
+    console.log('next');
     let newIndex = currentTrackIndex + 1;
 
     if (newIndex >= queue.length) {
@@ -177,6 +183,8 @@ export const usePlayer = <T extends { src: string }>({
     };
 
     const handleEnd = () => {
+      console.log('handleEnd');
+
       if (repeat === 'one') {
         audio.currentTime = 0;
         audio.play();
@@ -186,6 +194,8 @@ export const usePlayer = <T extends { src: string }>({
     };
 
     const handlePlayStop = () => {
+      console.log('handlePlayStop');
+
       setIsPlaying(!audio.paused);
     };
 

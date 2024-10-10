@@ -92,7 +92,7 @@ const PlayerBar = ({ trackList }) => {
       <div className={styles.controls_container}>
         <div className={styles.player_navigation}>
           <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
-            Play
+            Prev
           </button>
           <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
             {isPlaying ? 'Pause' : 'Play'}
@@ -105,7 +105,6 @@ const PlayerBar = ({ trackList }) => {
           <ProgressBar currentTime={currentTrackDuration} duration={trackDuration} onSeek={handleSeek} />
         </div>
         <VolumeBar currentVolume={currentVolume} adjustVolume={adjustVolume} />
-        <span>{track.title}</span>
       </div>
 
       <TrackProvider
@@ -119,7 +118,7 @@ const PlayerBar = ({ trackList }) => {
         <Tracklist />
       </TrackProvider>
       <span>{track.title}</span>
-      <span>AudioContext 3: {audioContext?.state ? audioContext?.state : 'hello'}</span>
+      <span>AudioContext 4: {audioContext?.state ? audioContext?.state : 'hello'}</span>
     </div>
   );
 };
