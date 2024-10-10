@@ -84,6 +84,7 @@ export const usePlayer = <T extends { src: string }>({
   );
 
   const next = useCallback(async () => {
+    console.log('next');
     let newIndex = currentTrackIndex + 1;
 
     if (newIndex >= queue.length) {
@@ -96,6 +97,10 @@ export const usePlayer = <T extends { src: string }>({
 
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
+
+    if (audio && audio.paused) {
+      audio.play();
+    }
   }, [currentTrackIndex, queue, repeat, loadAndPlay, audio]);
 
   const prev = useCallback(async () => {
