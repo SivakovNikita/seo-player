@@ -92,7 +92,13 @@ export const usePlayer = <T extends { src: string }>({
             const callback = () => {
               audio.removeEventListener('loadstart', callback);
               audio.removeEventListener('abort', callback);
-              resolve();
+              try {
+                resolve();
+                console.log('loadAndPlay resolve');
+              } catch (error) {
+                console.log(error.message);
+              }
+
               console.log('loadAndPlay callback');
             };
             audio.addEventListener('loadstart', callback);
