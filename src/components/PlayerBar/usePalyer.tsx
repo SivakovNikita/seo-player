@@ -34,18 +34,25 @@ export const usePlayer = <T extends { src: string }>({
 
   useEffect(() => {
     const handleUserGesture = () => {
-      const newAudioCtx = new AudioContext();
-      setAudioContext(newAudioCtx);
-      newAudioCtx.resume().then(() => {
-        console.log('Audio context resumed');
-      });
-      document.removeEventListener('click', handleUserGesture);
+      if (window.AudioContext) {
+        const newAudioCtx = new window.AudioContext();
+
+        newAudioCtx.resume().then(() => {
+          console.log('Audio context resumed');
+        });
+        setAudioContext(newAudioCtx);
+
+        document.removeEventListener('click', handleUserGesture);
+        document.removeEventListener('touchend', handleUserGesture);
+      }
     };
 
     document.addEventListener('click', handleUserGesture);
+    document.addEventListener('touchend', handleUserGesture);
 
     return () => {
       document.removeEventListener('click', handleUserGesture);
+      document.removeEventListener('touchend', handleUserGesture);
     };
   }, []);
 
@@ -182,18 +189,11 @@ export const usePlayer = <T extends { src: string }>({
       setIsPlaying(!audio.paused);
     };
 
-    const handleUserGesture = () => {
-      audioContext?.resume().then(() => {
-        console.log('Audio context resumed');
-      });
-    };
-
     audio.addEventListener('play', handlePlayStop);
     audio.addEventListener('pause', handlePlayStop);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('ended', handleEnd);
-    audio.addEventListener('ended', handleUserGesture);
 
     return () => {
       audio.pause();
@@ -202,7 +202,6 @@ export const usePlayer = <T extends { src: string }>({
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('ended', handleEnd);
-      audio.removeEventListener('ended', handleUserGesture);
     };
   }, [audio, currentTrackIndex, next, repeat]);
 
