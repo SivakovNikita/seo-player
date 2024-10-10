@@ -8,7 +8,7 @@
   min-width: 220px;
   height: 36px;
   margin: 5px 5px 5px 5px;
-  padding: 3px;
+  padding: 3px 5px 3px 3px;
   transition: border 0.3s ease;
   border: 1px solid black;
   border-radius: 5px;
@@ -23,15 +23,15 @@
   }
 
   @media (max-width: 430px) {
-    height: 56px;
+    height: 48px;
   }
 }
 
 .images_wrapper {
   position: relative;
-  @media (max-width: 430px) {
-    height: 56px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .track_image {
@@ -93,7 +93,6 @@
   left: 0;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(1px);
   border: none;
   width: 36px;
   height: 36px;

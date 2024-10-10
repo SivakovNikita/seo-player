@@ -4,13 +4,13 @@ import styles from './Track.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from './useWindowWidth';
-// import { CgPlayButton } from 'react-icons/cg';
-// import { CgPlayPause } from 'react-icons/cg';
 import Image from 'next/image';
 import React from 'react';
 
 const Track = ({ track, index }) => {
   const { play, pause, next, state, currentIndex } = useContext(TrackContext);
+  console.log(track);
+
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);
   const [playing, setPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);

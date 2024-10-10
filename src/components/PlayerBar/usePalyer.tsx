@@ -59,6 +59,8 @@ export const usePlayer = <T extends { src: string }>({
     console.log('play');
 
     if (audio) {
+      console.log('audio');
+
       if (!isFirstPlay) {
         console.log('isFirstPlay');
 
@@ -67,11 +69,14 @@ export const usePlayer = <T extends { src: string }>({
       if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
         console.log('audio.readyState');
         loadAndPlay(queue[currentTrackIndex].src);
+      } else {
+        audio.play();
       }
       // audio.play().catch((error) => {
       //   console.error('Ошибка воспроизведения:', error);
       //   alert('Ошибка воспроизведения: ' + error.message);
       // });
+      console.log('end');
     }
   }, [audio, currentTrackIndex, queue, isFirstPlay]);
 
