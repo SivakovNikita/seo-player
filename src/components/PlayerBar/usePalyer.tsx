@@ -56,33 +56,19 @@ export const usePlayer = <T extends { src: string }>({
   }, []);
 
   const play = useCallback(() => {
-    console.log('play');
-
     if (audio) {
-      console.log('audio');
-
       if (!isFirstPlay) {
-        console.log('isFirstPlay');
-
         setIsFirstPlay(true);
       }
       if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
-        console.log('audio.readyState');
         loadAndPlay(queue[currentTrackIndex].src);
       } else {
         audio.play();
       }
-      // audio.play().catch((error) => {
-      //   console.error('Ошибка воспроизведения:', error);
-      //   alert('Ошибка воспроизведения: ' + error.message);
-      // });
-      console.log('end');
     }
   }, [audio, currentTrackIndex, queue, isFirstPlay]);
 
   const pause = useCallback(() => {
-    console.log('pause');
-
     if (audio) {
       audio.pause();
       setIsPlaying(!audio.paused);
@@ -91,8 +77,6 @@ export const usePlayer = <T extends { src: string }>({
 
   const loadAndPlay = useCallback(
     async (src: string) => {
-      console.log('loadAndPlay');
-
       if (audio && src) {
         try {
           audio.src = src;
@@ -103,12 +87,9 @@ export const usePlayer = <T extends { src: string }>({
               audio.removeEventListener('abort', callback);
               try {
                 resolve();
-                console.log('loadAndPlay resolve');
               } catch (error) {
                 console.log(error.message);
               }
-
-              console.log('loadAndPlay callback');
             };
             audio.addEventListener('loadstart', callback);
             audio.addEventListener('abort', callback);
@@ -117,11 +98,9 @@ export const usePlayer = <T extends { src: string }>({
           audio.load();
           await awaiter;
           await audio.play();
-          console.log('loadAndPlay end');
         } catch (error) {
           if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
             console.error('Ошибка:', error);
-            alert('Ошибка:');
           }
         }
       }
@@ -138,7 +117,6 @@ export const usePlayer = <T extends { src: string }>({
   );
 
   const next = useCallback(async () => {
-    console.log('next');
     let newIndex = currentTrackIndex + 1;
 
     if (newIndex >= queue.length) {
@@ -154,12 +132,9 @@ export const usePlayer = <T extends { src: string }>({
 
     if (audioContext && audioContext.state !== 'running') {
       await audioContext.resume();
-      console.log('Audio context resumed after track switch');
     }
 
     if (audio?.paused) {
-      console.log(1);
-
       audio.play();
     }
   }, [currentTrackIndex, queue, repeat, loadAndPlay, audio, audioContext]);
@@ -209,8 +184,6 @@ export const usePlayer = <T extends { src: string }>({
     };
 
     const handleEnd = () => {
-      console.log('handleEnd');
-
       if (repeat === 'one') {
         audio.currentTime = 0;
         audio.play();
@@ -220,8 +193,6 @@ export const usePlayer = <T extends { src: string }>({
     };
 
     const handlePlayStop = () => {
-      console.log('handlePlayStop');
-
       setIsPlaying(!audio.paused);
     };
 

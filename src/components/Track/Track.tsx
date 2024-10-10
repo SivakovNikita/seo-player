@@ -9,7 +9,6 @@ import React from 'react';
 
 const Track = ({ track, index }) => {
   const { play, pause, next, state, currentIndex } = useContext(TrackContext);
-  console.log(track);
 
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);
   const [playing, setPlaying] = useState(false);
@@ -80,7 +79,9 @@ const Track = ({ track, index }) => {
               }
             }}
           >
-            {showPlayButtonMobile ? 'Play' : null}
+            {showPlayButtonMobile ? (
+              <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
+            ) : null}
             {isCurrent && state ? <Equalizer /> : null}
           </button>
           <Image

@@ -33,7 +33,6 @@ const PlayerBar = ({ trackList }) => {
 
   const track = useMemo(() => {
     const trackData = trackList[currentTrackIndex];
-    console.log(trackData);
 
     return trackData
       ? {
