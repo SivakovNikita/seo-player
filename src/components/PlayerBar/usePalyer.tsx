@@ -127,21 +127,22 @@ export const usePlayer = <T extends { src: string }>({
       if (repeat === 'all') {
         newIndex = 0;
       } else {
-        return pause();
+        return audio?.pause();
       }
     }
 
-    setIsLoading(true);
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
-    if (audio) {
-      if (audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA && audio.paused) {
-        play();
-      }
+
+    if (audioContext && audioContext.state !== 'running') {
+      await audioContext.resume();
+      console.log('Audio context resumed after track switch');
     }
 
-    setIsLoading(false);
-  }, [currentTrackIndex, queue, repeat, loadAndPlay, play, pause]);
+    if (audio && audio.paused) {
+      audio.play();
+    }
+  }, [currentTrackIndex, queue, repeat, loadAndPlay, audio, audioContext]);
 
   const prev = useCallback(async () => {
     let newIndex = currentTrackIndex - 1;
