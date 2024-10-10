@@ -119,7 +119,7 @@ const PlayerBar = ({ trackList }) => {
         <Tracklist />
       </TrackProvider>
       <span>{track.title}</span>
-      <span>AudioContext: {audioContext?.state ? audioContext?.state : 'hello'}</span>
+      <span>AudioContext 2: {audioContext?.state ? audioContext?.state : 'hello'}</span>
     </div>
   );
 };

@@ -22,6 +22,7 @@ export const usePlayer = <T extends { src: string }>({
 
   useEffect(() => {
     const newAudio = new Audio();
+    audioContext?.resume();
     newAudio.volume = 0.5;
     setCurrentVolume(newAudio.volume);
     setAudio(newAudio);
@@ -51,7 +52,7 @@ export const usePlayer = <T extends { src: string }>({
   const play = useCallback(() => {
     if (audio) {
       if (!isFirstPlay) {
-        setIsFirstPlay(true); // Устанавливаем флаг после первого клика
+        setIsFirstPlay(true);
       }
       if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
         audio.src = queue[currentTrackIndex].src;
@@ -180,11 +181,19 @@ export const usePlayer = <T extends { src: string }>({
     const handlePlayStop = () => {
       setIsPlaying(!audio.paused);
     };
+
+    const handleUserGesture = () => {
+      audioContext?.resume().then(() => {
+        console.log('Audio context resumed');
+      });
+    };
+
     audio.addEventListener('play', handlePlayStop);
     audio.addEventListener('pause', handlePlayStop);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('ended', handleEnd);
+    audio.addEventListener('ended', handleUserGesture);
 
     return () => {
       audio.pause();
@@ -193,6 +202,7 @@ export const usePlayer = <T extends { src: string }>({
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('ended', handleEnd);
+      audio.removeEventListener('ended', handleUserGesture);
     };
   }, [audio, currentTrackIndex, next, repeat]);
 
