@@ -10,7 +10,7 @@ import Image from 'next/image';
 import React from 'react';
 
 const Track = ({ track, index }) => {
-  const { play, pause, next, state, currentIndex } = useContext(TrackContext);
+  const { duration, play, pause, next, state, currentIndex } = useContext(TrackContext);
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);
   const [playing, setPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -90,7 +90,7 @@ const Track = ({ track, index }) => {
         <span className={styles.track_title}>{track.title}</span>
       </div>
       <div className={styles.track_time_wrapper}>
-        <span className={styles.track_time}>{track.duration}</span>
+        <span className={styles.track_time}>{duration}</span>
       </div>
     </div>
   );

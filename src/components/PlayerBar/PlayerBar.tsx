@@ -41,12 +41,13 @@ const PlayerBar = ({ trackList }) => {
       ? {
           title: trackData.title,
           artist: trackData.artist,
+          duration: trackDuration,
           artwork: trackData.img,
           next: !isNextDisabled,
           prev: !isPrevDisabled,
         }
-      : { title: '', artist: '', artwork: [], next: false, prev: false };
-  }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackList]);
+      : { title: '', artist: '', duration: '', artwork: [], next: false, prev: false };
+  }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackDuration, trackList]);
 
   useMediaSession({
     track,
@@ -118,7 +119,7 @@ const PlayerBar = ({ trackList }) => {
         <Tracklist />
       </TrackProvider>
       <span>{track.title}</span>
-      <span>AudioContext 5: {audioContext?.state ? audioContext?.state : 'hello'}</span>
+      <span>AudioContext 6: {audioContext?.state ? audioContext?.state : 'hello'}</span>
     </div>
   );
 };

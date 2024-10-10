@@ -47,6 +47,8 @@ const ProgressBar = React.memo(({ currentTime, duration, onSeek }: ProgressBarPr
 
   const progressPercentage = Math.round((currentTime / duration) * 100);
   const calculatedWidth = dragginTime !== null ? (dragginTime / duration) * 100 : progressPercentage;
+  console.log('progressPercentage', progressPercentage);
+  console.log('calculatedWidth', calculatedWidth);
 
   return (
     <div ref={ref} className={styles.progress_bar} onMouseDown={handleStart} onTouchStart={handleStart}>
