@@ -19,6 +19,7 @@ export const usePlayer = <T extends { src: string }>({
   const [isNextDisabled, setNextDisabled] = useState(true);
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const [isFirstPlay, setIsFirstPlay] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const newAudio = new Audio();
@@ -140,13 +141,28 @@ export const usePlayer = <T extends { src: string }>({
         return audio?.pause();
       }
     }
-    setCurrentTrackDuration(0);
+
+    setIsLoading(true);
+
     setCurrentTrackIndex(newIndex);
     await loadAndPlay(queue[newIndex].src);
+    if (audio) {
+      console.log(
+        'audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA && audio.paused',
+        audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA && audio.paused,
+      );
 
-    if (audio?.paused) {
-      audio.play();
+      if (audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA && audio.paused) {
+        if (audioContext && audioContext.state !== 'running') {
+          await audioContext.resume();
+          console.log('Audio context resumed after track switch');
+        }
+
+        await audio.play();
+      }
     }
+
+    setIsLoading(false); // Завершаем процесс загрузки
   }, [currentTrackIndex, queue, repeat, loadAndPlay, audio, audioContext]);
 
   const prev = useCallback(async () => {
@@ -205,8 +221,9 @@ export const usePlayer = <T extends { src: string }>({
     };
 
     const handlePlayStop = () => {
-      console.log('handlePlayStop');
+      if (isLoading) return;
 
+      console.log('handlePlayStop');
       setIsPlaying(!audio.paused);
     };
 
