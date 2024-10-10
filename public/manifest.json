@@ -1,0 +1,26 @@
+{
+  "name": "Музыка для бизнеса",
+  "short_name": "Плейлист музыки для бизнеса",
+  "description": "Музыкальные плейлисты Звук Бизнес.",
+  "start_url": "/players",
+  "display": "standalone",
+  "background_color": "#000000",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/trackImage/trackCover.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/trackImage/trackCover.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["music", "business", "entertainment"],
+  "lang": "ru",
+  "dir": "ltr",
+  "permissions": ["audio"]
+}

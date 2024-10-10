@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import styles from './ProgressBar.module.scss';
 import React from 'react';
 import TimerBar from '../TimerBar/TimerBar';
