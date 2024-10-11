@@ -7,26 +7,26 @@ import useWindowWidth from './useWindowWidth';
 import Image from 'next/image';
 import React from 'react';
 
-// type TrackImage = {
-//   src: string;
-//   sizes: string;
-//   type: string;
-// };
+type TrackImage = {
+  src: string;
+  sizes: string;
+  type: string;
+};
 
-// type Track = {
-//   title: string;
-//   src: string;
-//   artist: string;
-//   duration: string;
-//   img: TrackImage[];
-// };
+type Track = {
+  title?: string;
+  src?: string;
+  artist?: string;
+  duration?: string;
+  img?: TrackImage[];
+};
 
-// interface TrackInterface {
-//   track?: Track;
-//   index: number;
-// }
+interface TrackInterface {
+  track: Track;
+  index: number;
+}
 
-const Track = ({ track, index }) => {
+const Track = ({ track, index }: TrackInterface) => {
   const { play, pause, next, state, currentIndex } = useContext(TrackContext);
 
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);

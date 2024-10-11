@@ -8,10 +8,16 @@ const TrackList = () => {
 
   return (
     <div className={styles.trackList_wrapper}>
-      {trackList.map((track) => {
-        let index = trackList.indexOf(track);
-        return <Track key={index} index={index} track={track} />;
-      })}
+      {trackList.map((track, index) => (
+        <Track
+          key={index}
+          index={index}
+          track={{
+            ...track,
+            src: track.src || '', // Ensure src is always a string
+          }}
+        />
+      ))}
     </div>
   );
 };
