@@ -7,11 +7,13 @@
     height: 350px;
     margin-top: 20px;
     margin-left: -20px;
-    padding-left: 20px;
+    padding-left: 10px;
     margin-right: -20px;
-    padding-right: 20px;
+    padding-right: 10px;
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow: scroll;
+    scrollbar-color: #00b399 #abaab0;
+    scrollbar-width: thin;
   }
 
   &::-webkit-scrollbar {
@@ -19,18 +21,18 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #abaab0;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #abaab0;
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #abaab0;
   }
 
   scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
+  scrollbar-color: #00b399 #abaab0;
 }
