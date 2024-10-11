@@ -1,7 +1,7 @@
 export const trackList = [
   {
     title: 'Ритм времени',
-    src: '/Tracks/barbershop/barbershop_1.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_1.mp3',
     artist: 'Звук Бизнес',
     duration: '02:09',
     img: [
@@ -39,7 +39,7 @@ export const trackList = [
   },
   {
     title: 'Голос улиц',
-    src: '/Tracks/barbershop/barbershop_2.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_2.mp3',
     artist: 'Звук Бизнес',
     duration: '03:12',
     img: [
@@ -77,7 +77,7 @@ export const trackList = [
   },
   {
     title: 'Свобода звука',
-    src: '/Tracks/barbershop/barbershop_3.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_3.mp3',
     artist: 'Звук Бизнес',
     duration: '03:13',
     img: [
@@ -115,7 +115,7 @@ export const trackList = [
   },
   {
     title: 'За горизонтом',
-    src: '/Tracks/barbershop/barbershop_4.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_4.mp3',
     artist: 'Звук Бизнес',
     duration: '03:21',
     img: [
@@ -153,7 +153,7 @@ export const trackList = [
   },
   {
     title: 'Звуковые потоки',
-    src: '/Tracks/barbershop/barbershop_5.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_5.mp3',
     artist: 'Звук Бизнес',
     duration: '02:59',
     img: [
@@ -191,7 +191,7 @@ export const trackList = [
   },
   {
     title: 'В тени городов',
-    src: '/Tracks/barbershop/barbershop_6.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_6.mp3',
     artist: 'Звук Бизнес',
     duration: '02:39',
     img: [
@@ -229,7 +229,7 @@ export const trackList = [
   },
   {
     title: 'Новый день',
-    src: '/Tracks/barbershop/barbershop_7.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_7.mp3',
     artist: 'Звук Бизнес',
     duration: '04:06',
     img: [
@@ -267,7 +267,7 @@ export const trackList = [
   },
   {
     title: 'Один шаг вперёд',
-    src: '/Tracks/barbershop/barbershop_8.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_8.mp3',
     artist: 'Звук Бизнес',
     duration: '02:27',
     img: [
@@ -305,7 +305,7 @@ export const trackList = [
   },
   {
     title: 'На грани битов',
-    src: '/Tracks/barbershop/barbershop_9.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_9.mp3',
     artist: 'Звук Бизнес',
     duration: '03:56',
     img: [
@@ -343,7 +343,7 @@ export const trackList = [
   },
   {
     title: 'Сквозь шум',
-    src: '/Tracks/barbershop/barbershop_10.mp3',
+    src: '/api/audio?file=Tracks/barbershop/barbershop_10.mp3',
     artist: 'Звук Бизнес',
     duration: '02:43',
     img: [

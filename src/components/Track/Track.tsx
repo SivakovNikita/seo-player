@@ -7,7 +7,26 @@ import useWindowWidth from './useWindowWidth';
 import Image from 'next/image';
 import React from 'react';
 
-const Track = ({ track, index }) => {
+type TrackImage = {
+  src: string;
+  sizes: string;
+  type: string;
+};
+
+type Track = {
+  title: string;
+  src: string;
+  artist: string;
+  duration: string;
+  img: TrackImage[];
+};
+
+interface TrackInterface {
+  track: Track;
+  index: number;
+}
+
+const Track = ({ track, index }: TrackInterface) => {
   const { play, pause, next, state, currentIndex } = useContext(TrackContext);
 
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);
@@ -80,7 +99,7 @@ const Track = ({ track, index }) => {
             }}
           >
             {showPlayButtonMobile ? (
-              <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
+              <Image src="/images/navigation/Icon_play_36x36.svg" width={48} height={48} alt="play button" />
             ) : null}
             {isCurrent && state ? <Equalizer /> : null}
           </button>
@@ -90,6 +109,7 @@ const Track = ({ track, index }) => {
             height={30}
             src="/images/trackImage/trackCover96x96.svg"
             alt={'Музыка для бизнеса: ' + track.artist}
+            priority
           />
         </div>
       )}

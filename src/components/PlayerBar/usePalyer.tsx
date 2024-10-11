@@ -80,6 +80,7 @@ export const usePlayer = <T extends { src: string }>({
       if (audio && src) {
         try {
           audio.src = src;
+          console.log(audio.src);
 
           const awaiter = new Promise<void>((resolve) => {
             const callback = () => {
