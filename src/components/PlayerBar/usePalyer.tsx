@@ -31,6 +31,39 @@ export const usePlayer = <T extends { src: string }>({
     };
   }, []);
 
+  const loadAndPlay = useCallback(
+    async (src: string) => {
+      if (audio && src) {
+        try {
+          audio.src = src;
+
+          const awaiter = new Promise<void>((resolve) => {
+            const callback = () => {
+              audio.removeEventListener('loadstart', callback);
+              audio.removeEventListener('abort', callback);
+              try {
+                resolve();
+              } catch (error) {
+                console.log(error.message);
+              }
+            };
+            audio.addEventListener('loadstart', callback);
+            audio.addEventListener('abort', callback);
+          });
+
+          audio.load();
+          await awaiter;
+          await audio.play();
+        } catch (error) {
+          if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
+            console.error('Ошибка:', error);
+          }
+        }
+      }
+    },
+    [audio],
+  );
+
   useEffect(() => {
     const handleUserGesture = () => {
       if (window.AudioContext) {
@@ -66,7 +99,7 @@ export const usePlayer = <T extends { src: string }>({
         audio.play();
       }
     }
-  }, [audio, currentTrackIndex, queue, isFirstPlay]);
+  }, [audio, isFirstPlay, loadAndPlay, queue, currentTrackIndex]);
 
   const pause = useCallback(() => {
     if (audio) {
@@ -75,46 +108,12 @@ export const usePlayer = <T extends { src: string }>({
     }
   }, [audio]);
 
-  const loadAndPlay = useCallback(
-    async (src: string) => {
-      if (audio && src) {
-        try {
-          audio.src = src;
-          console.log(audio.src);
-
-          const awaiter = new Promise<void>((resolve) => {
-            const callback = () => {
-              audio.removeEventListener('loadstart', callback);
-              audio.removeEventListener('abort', callback);
-              try {
-                resolve();
-              } catch (error) {
-                console.log(error.message);
-              }
-            };
-            audio.addEventListener('loadstart', callback);
-            audio.addEventListener('abort', callback);
-          });
-
-          audio.load();
-          await awaiter;
-          await audio.play();
-        } catch (error) {
-          if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
-            console.error('Ошибка:', error);
-          }
-        }
-      }
-    },
-    [audio],
-  );
-
   const setNext = useCallback(
     async (index: number) => {
       setCurrentTrackIndex(index);
       await loadAndPlay(queue[index].src);
     },
-    [currentTrackIndex, queue, repeat, loadAndPlay, audio],
+    [queue, loadAndPlay],
   );
 
   const next = useCallback(async () => {
@@ -176,6 +175,8 @@ export const usePlayer = <T extends { src: string }>({
     if (!audio) return;
 
     const handleLoadedMetadata = () => {
+      console.log('hi!');
+
       const duration = audio.duration;
       setTrackDuration(duration);
     };

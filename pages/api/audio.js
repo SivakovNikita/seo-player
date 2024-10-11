@@ -1,41 +1,52 @@
 import fs from 'fs';
 import path from 'path';
 
+const CHUNK_SIZE = 500 * 1024;
+
 export default function handler(req, res) {
-  const range = req.headers.range;
-  if (!range) {
-    res.status(400).send('Requires Range header');
-    return;
-  }
+  const {
+    query: { file },
+  } = req;
 
-  const { file } = req.query;
-  if (!file) {
-    res.status(400).send('File query parameter is missing');
-    return;
-  }
+  const audioPath = path.join(process.cwd(), 'public', file);
 
-  const audioPath = path.resolve(`./public/${file}`);
   if (!fs.existsSync(audioPath)) {
-    res.status(404).send('File not found');
-    return;
+    return res.status(404).send('File not found');
   }
 
-  const audioSize = fs.statSync(audioPath).size;
+  const stats = fs.statSync(audioPath);
+  const fileSize = stats.size;
+  const range = req.headers.range;
 
-  const CHUNK_SIZE = 500 * 1024;
-  const start = Number(range.replace(/\D/g, ''));
-  const end = Math.min(start + CHUNK_SIZE, audioSize - 1);
+  if (!range) {
+    return res.status(400).send('Requires Range header');
+  }
 
-  const contentLength = end - start + 1;
-  const headers = {
-    'Content-Range': `bytes ${start}-${end}/${audioSize}`,
+  const match = range.match(/bytes=(\d+)-(\d+)?/);
+  if (!match) {
+    return res.status(400).send('Invalid Range');
+  }
+
+  const start = parseInt(match[1], 10);
+  const end = match[2] ? parseInt(match[2], 10) : fileSize - 1;
+
+  if (start >= fileSize || end >= fileSize || start < 0) {
+    return res.status(416).send('Requested Range Not Satisfiable');
+  }
+
+  res.writeHead(206, {
+    'Content-Range': `bytes ${start}-${end}/${fileSize}`,
     'Accept-Ranges': 'bytes',
-    'Content-Length': contentLength,
+    'Content-Length': end - start + 1,
     'Content-Type': 'audio/mpeg',
-  };
-  console.log(`bytes ${start}-${end}/${audioSize}`);
-  res.writeHead(206, headers);
+    'Cache-Control': 'no-store',
+  });
 
-  const audioStream = fs.createReadStream(audioPath, { start, end });
-  audioStream.pipe(res);
+  const readStream = fs.createReadStream(audioPath, { start, end });
+  readStream.on('error', (err) => {
+    console.error('Stream Error:', err);
+    res.end();
+  });
+
+  readStream.pipe(res);
 }
