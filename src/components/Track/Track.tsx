@@ -59,11 +59,15 @@ const Track = ({ track, index }: TrackInterface) => {
     >
       {!isMobile ? (
         <div className={styles.images_wrapper}>
-          {showPlayButton ? (
-            <button className={styles.play_pause} onClick={() => next(index)}>
-              <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
-            </button>
-          ) : null}
+          <button
+            className={clsx(styles.play_pause, {
+              [styles.visible]: showPlayButton,
+              [styles.hidden]: !showPlayButton,
+            })}
+            onClick={() => next(index)}
+          >
+            <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
+          </button>
           <Image
             className={clsx({ [styles.track_image]: true, [styles.track_image__active]: isCurrent && state })}
             width={30}

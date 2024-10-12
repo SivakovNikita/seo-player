@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-const CHUNK_SIZE = 500 * 1024;
-
 export default function handler(req, res) {
   const {
     query: { file },
