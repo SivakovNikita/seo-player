@@ -17,6 +17,10 @@
   height: 100%;
   border-radius: 3px 3px 3px 3px;
   animation: up-and-down 1.3s ease infinite alternate;
+
+  @media (max-width: 430px) {
+    width: 5px;
+  }
 }
 
 .playing__bar1 {

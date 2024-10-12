@@ -69,9 +69,7 @@ export const usePlayer = <T extends { src: string }>({
       if (window.AudioContext) {
         const newAudioCtx = new window.AudioContext();
 
-        newAudioCtx.resume().then(() => {
-          console.log('Audio context resumed');
-        });
+        newAudioCtx.resume();
         setAudioContext(newAudioCtx);
 
         document.removeEventListener('click', handleUserGesture);
@@ -175,8 +173,6 @@ export const usePlayer = <T extends { src: string }>({
     if (!audio) return;
 
     const handleLoadedMetadata = () => {
-      console.log('hi!');
-
       const duration = audio.duration;
       setTrackDuration(duration);
     };

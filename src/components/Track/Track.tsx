@@ -37,7 +37,7 @@ const Track = ({ track, index }: TrackInterface) => {
   const currentTrackNotPlaying = isCurrent && !playing;
   const showPlayButton = (isHovered && !isCurrent) || (isHovered && currentTrackNotPlaying);
   const width = useWindowWidth();
-  const isMobile = width <= 768;
+  const isMobile = width <= 430;
 
   useEffect(() => {
     setIsCurrentPlaying(state && currentIndex === index);

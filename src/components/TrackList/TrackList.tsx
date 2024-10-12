@@ -14,7 +14,7 @@ const TrackList = () => {
           index={index}
           track={{
             ...track,
-            src: track.src || '', // Ensure src is always a string
+            src: track.src || '',
           }}
         />
       ))}
