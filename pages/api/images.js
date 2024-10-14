@@ -1,13 +1,40 @@
-export default function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+import fs from 'fs';
+import path from 'path';
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+export default function handler(req, res) {
+  const {
+    query: { file },
+  } = req;
+
+  const imagePath = path.join(process.cwd(), 'public', file);
+
+  if (!fs.existsSync(imagePath)) {
+    return res.status(404).send('File not found');
   }
 
-  const { file } = req.query;
+  const extname = path.extname(imagePath).toLowerCase();
+  let contentType;
 
-  res.status(200).json({ imageUrl: file });
+  switch (extname) {
+    case '.png':
+      contentType = 'image/png';
+      break;
+    case '.jpg':
+    case '.jpeg':
+      contentType = 'image/jpeg';
+      break;
+    case '.gif':
+      contentType = 'image/gif';
+      break;
+    default:
+      return res.status(400).send('Unsupported file type');
+  }
+
+  res.setHeader('Content-Type', contentType);
+  fs.createReadStream(imagePath)
+    .on('error', (err) => {
+      console.error('Stream Error:', err);
+      res.status(500).send('Internal Server Error');
+    })
+    .pipe(res);
 }
