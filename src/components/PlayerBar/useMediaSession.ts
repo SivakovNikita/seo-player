@@ -14,19 +14,21 @@ export interface MediaSessionProps {
   onPreviousTrack?: (...args: any[]) => any;
   onNextTrack?: (...args: any[]) => any;
 }
-console.log('');
+
 const useMediaSession = (props: MediaSessionProps) => {
   const { track, onPlay, onPause, onPreviousTrack, onNextTrack } = props;
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
       const { mediaSession } = navigator;
+      console.log('mediaSession');
 
       mediaSession.metadata = new MediaMetadata({
         title: track.title || '',
         artist: track.artist || '',
         artwork: track.artwork || [],
       });
+      console.log(mediaSession.metadata);
 
       const events: { action: MediaSessionAction; handler: MediaSessionActionHandler | null }[] = [
         {
@@ -49,6 +51,7 @@ const useMediaSession = (props: MediaSessionProps) => {
 
       events.forEach((event) => {
         try {
+          console.log(event.action, event.handler);
           mediaSession.setActionHandler(event.action, event.handler);
         } catch (error) {
           console.log(error.name);
