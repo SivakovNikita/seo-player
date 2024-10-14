@@ -40,6 +40,7 @@ const PlayerBar = ({ trackList }) => {
           artist: trackData.artist,
           duration: trackDuration,
           artwork: trackData.img,
+          isPlaying: isPlaying,
           next: !isNextDisabled,
           prev: !isPrevDisabled,
         }

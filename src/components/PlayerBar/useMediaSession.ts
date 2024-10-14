@@ -5,6 +5,7 @@ export interface MediaSessionProps {
     title?: string;
     artist?: string;
     artwork?: MediaImage[];
+    isPlaying?: boolean;
     next?: boolean;
     prev?: boolean;
   };
@@ -19,7 +20,7 @@ const useMediaSession = (props: MediaSessionProps) => {
   const { track, onPlay, onPause, onPreviousTrack, onNextTrack } = props;
 
   useEffect(() => {
-    if ('mediaSession' in navigator) {
+    if ('mediaSession' in navigator && track.isPlaying) {
       const { mediaSession } = navigator;
       console.log('mediaSession');
 
