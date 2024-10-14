@@ -21,7 +21,7 @@ export default function handler(req, res) {
       break;
     case '.jpg':
     case '.jpeg':
-      contentType = 'image/jpeg';
+      contentType = 'image/png';
       break;
     case '.gif':
       contentType = 'image/gif';

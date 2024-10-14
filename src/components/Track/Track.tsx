@@ -66,13 +66,18 @@ const Track = ({ track, index }: TrackInterface) => {
             })}
             onClick={() => next(index)}
           >
-            <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
+            <Image
+              src="/api/images?file=/images/navigation/Icon_play_36x36.svg"
+              width={36}
+              height={36}
+              alt="play button"
+            />
           </button>
           <Image
             className={clsx({ [styles.track_image]: true, [styles.track_image__active]: isCurrent && state })}
             width={30}
             height={30}
-            src="/images/trackImage/trackCover96x96.svg"
+            src="/api/images?file=/images/trackImage/trackCover96x96.svg"
             alt={'Музыка для бизнеса:' + track.artist}
           />
           {playing ? (
@@ -81,10 +86,20 @@ const Track = ({ track, index }: TrackInterface) => {
                 !isHovered ? (
                   <Equalizer />
                 ) : (
-                  <Image src="/images/navigation/Icon_pause_36x36.svg" width={36} height={36} alt="pause button" />
+                  <Image
+                    src="/api/images?file=/images/navigation/Icon_pause_36x36.svg"
+                    width={36}
+                    height={36}
+                    alt="pause button"
+                  />
                 )
               ) : (
-                <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
+                <Image
+                  src="/api/images?file=/images/navigation/Icon_play_36x36.svg"
+                  width={36}
+                  height={36}
+                  alt="play button"
+                />
               )}
             </button>
           ) : null}
@@ -103,7 +118,12 @@ const Track = ({ track, index }: TrackInterface) => {
             }}
           >
             {showPlayButtonMobile ? (
-              <Image src="/images/navigation/Icon_play_36x36.svg" width={48} height={48} alt="play button" />
+              <Image
+                src="/api/images?file=/images/navigation/Icon_play_36x36.svg"
+                width={48}
+                height={48}
+                alt="play button"
+              />
             ) : null}
             {isCurrent && state ? <Equalizer /> : null}
           </button>
@@ -111,7 +131,7 @@ const Track = ({ track, index }: TrackInterface) => {
             className={clsx({ [styles.track_image]: true, [styles.track_image__active]: isCurrent && state })}
             width={30}
             height={30}
-            src="/images/trackImage/trackCover96x96.svg"
+            src="/api/images?file=/images/trackImage/trackCover96x96.svg"
             alt={'Музыка для бизнеса: ' + track.artist}
             priority
           />
