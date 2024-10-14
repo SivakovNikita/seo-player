@@ -30,6 +30,7 @@ const useMediaSession = (props: MediaSessionProps) => {
         artwork: track.artwork || [],
       });
       console.log(mediaSession.metadata);
+      console.log(mediaSession.metadata.artwork);
 
       const events: { action: MediaSessionAction; handler: MediaSessionActionHandler | null }[] = [
         {
