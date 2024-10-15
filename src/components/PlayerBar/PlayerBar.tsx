@@ -25,6 +25,7 @@ const PlayerBar = ({ trackList }) => {
     isPrevDisabled,
     isNextDisabled,
     trackDuration,
+    loadProgress,
     currentTrackDuration,
   } = usePlayer({
     queue: trackList,
@@ -69,7 +70,12 @@ const PlayerBar = ({ trackList }) => {
           play={play}
         />
         <div className={styles.controls_wrapper}>
-          <ProgressBar currentTime={currentTrackDuration} duration={trackDuration} onSeek={handleSeek} />
+          <ProgressBar
+            currentTime={currentTrackDuration}
+            duration={trackDuration}
+            loadProgress={loadProgress}
+            onSeek={handleSeek}
+          />
         </div>
         <VolumeBar currentVolume={currentVolume} adjustVolume={adjustVolume} />
       </div>

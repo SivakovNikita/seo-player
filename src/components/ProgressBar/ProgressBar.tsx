@@ -6,9 +6,10 @@ import TimerBar from '../TimerBar/TimerBar';
 interface ProgressBarProps {
   currentTime: number;
   duration: number;
+  loadProgress: number;
   onSeek: (time: number) => void;
 }
-const ProgressBar = React.memo(({ currentTime, duration, onSeek }: ProgressBarProps) => {
+const ProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }: ProgressBarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const dragginTimeRef = useRef<number | null>(null);
   const [dragginTime, setDragginTime] = useState<number | null>(null);
@@ -51,6 +52,7 @@ const ProgressBar = React.memo(({ currentTime, duration, onSeek }: ProgressBarPr
   return (
     <div ref={ref} className={styles.progress_bar} onMouseDown={handleStart} onTouchStart={handleStart}>
       <TimerBar currentTrackDuration={currentTime} duration={duration} />
+      <div className={styles.track_loading_progress} style={{ width: `${loadProgress}%` }}></div>
       <div className={styles.track_progress} style={{ width: `${calculatedWidth}%` }}></div>
     </div>
   );

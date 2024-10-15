@@ -19,6 +19,7 @@ export const usePlayer = <T extends { src: string }>({
   const [isNextDisabled, setNextDisabled] = useState(true);
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const [isFirstPlay, setIsFirstPlay] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0);
 
   useEffect(() => {
     const newAudio = new Audio();
@@ -194,11 +195,22 @@ export const usePlayer = <T extends { src: string }>({
       setIsPlaying(!audio.paused);
     };
 
+    const handleProgress = () => {
+      if (audio.buffered.length > 0) {
+        const bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+        const duration = audio.duration;
+        if (duration > 0) {
+          setLoadProgress((bufferedEnd / duration) * 100);
+        }
+      }
+    };
+
     audio.addEventListener('play', handlePlayStop);
     audio.addEventListener('pause', handlePlayStop);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('ended', handleEnd);
+    audio.addEventListener('progress', handleProgress);
 
     return () => {
       audio.pause();
@@ -207,6 +219,7 @@ export const usePlayer = <T extends { src: string }>({
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('ended', handleEnd);
+      audio.removeEventListener('progress', handleProgress);
     };
   }, [audio, currentTrackIndex, next, repeat]);
 
@@ -234,6 +247,7 @@ export const usePlayer = <T extends { src: string }>({
     isPrevDisabled,
     isNextDisabled,
     trackDuration,
+    loadProgress,
     currentTrackDuration,
   };
 };
