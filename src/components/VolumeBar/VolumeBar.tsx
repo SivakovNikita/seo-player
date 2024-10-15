@@ -5,12 +5,14 @@ import { FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
 
 interface VolumeBarProps {
   currentVolume: number;
-  adjustVolume: (time: number) => void;
+  adjustVolume: (volume: number) => void;
 }
+
 const VolumeBar = React.memo(({ currentVolume, adjustVolume }: VolumeBarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const volumeLevelRef = useRef<number | null>(null);
   const [volumeLevel, setVolumeLevel] = useState<number | null>(null);
+  const [previousVolume, setPreviousVolume] = useState<number>(currentVolume);
 
   const handleChange = (e: MouseEvent | TouchEvent) => {
     if (ref.current) {
@@ -44,13 +46,30 @@ const VolumeBar = React.memo(({ currentVolume, adjustVolume }: VolumeBarProps) =
     }
   };
 
+  const handleMuteClick = () => {
+    if (currentVolume !== 0) {
+      setPreviousVolume(currentVolume);
+      adjustVolume(0);
+    }
+  };
+
+  const handleUnmuteClick = () => {
+    if (currentVolume === 0) {
+      adjustVolume(previousVolume);
+    }
+  };
+
   const progressPercentage = Math.round((currentVolume / 1) * 100);
   const calculatedWidth = volumeLevel !== null ? (volumeLevel / 1) * 100 : progressPercentage;
 
   return (
     <div className={styles.volume_control_container}>
       <div className={styles.icon_wrapper}>
-        {currentVolume !== 0 ? <FaVolumeUp className={styles.icon} /> : <FaVolumeMute className={styles.icon} />}
+        {currentVolume !== 0 ? (
+          <FaVolumeUp className={styles.icon} onClick={handleMuteClick} />
+        ) : (
+          <FaVolumeMute className={styles.icon} onClick={handleUnmuteClick} />
+        )}
       </div>
       <div ref={ref} className={styles.volume_bar} onMouseDown={handleStart} onTouchStart={handleStart}>
         <div className={styles.volume_level} style={{ width: `${calculatedWidth}%` }}></div>
