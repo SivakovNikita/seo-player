@@ -5,7 +5,6 @@ import useWindowWidth from '../Track/useWindowWidth';
 const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, next, pause, play }) => {
   const width = useWindowWidth();
   const isMobile = width <= 430;
-  console.log(isMobile);
 
   return (
     <div className={styles.player_navigation}>
