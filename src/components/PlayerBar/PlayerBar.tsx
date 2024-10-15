@@ -8,6 +8,7 @@ import React from 'react';
 import Tracklist from '../TrackList/TrackList';
 import { TrackProvider } from './TrackContex';
 import VolumeBar from '../VolumeBar/VolumeBar';
+import PlayerNavigation from '../PlayerNavigation/PlayerNavigation';
 
 const PlayerBar = ({ trackList }) => {
   const {
@@ -58,45 +59,15 @@ const PlayerBar = ({ trackList }) => {
   return (
     <div className={styles.player_container}>
       <div className={styles.controls_container}>
-        <div className={styles.player_navigation}>
-          <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
-            <Image
-              src="/images/navigation/Icon_prev_36x36.svg"
-              width={36}
-              height={36}
-              alt="stop button"
-              priority={true}
-            />
-          </button>
-          <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
-            {isPlaying ? (
-              <Image
-                src="/images/navigation/Icon_pause_36x36.svg"
-                width={36}
-                height={36}
-                alt="stop button"
-                priority={true}
-              />
-            ) : (
-              <Image
-                src="/images/navigation/Icon_play_36x36.svg"
-                width={36}
-                height={36}
-                alt="play button"
-                priority={true}
-              />
-            )}
-          </button>
-          <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
-            <Image
-              src="/images/navigation/Icon_next_36x36.svg"
-              width={36}
-              height={36}
-              alt="stop button"
-              priority={true}
-            />
-          </button>
-        </div>
+        <PlayerNavigation
+          isPlaying={isPlaying}
+          isPrevDisabled={isPrevDisabled}
+          isNextDisabled={isNextDisabled}
+          prev={prev}
+          next={next}
+          pause={pause}
+          play={play}
+        />
         <div className={styles.controls_wrapper}>
           <ProgressBar currentTime={currentTrackDuration} duration={trackDuration} onSeek={handleSeek} />
         </div>
