@@ -22,15 +22,12 @@ const useMediaSession = (props: MediaSessionProps) => {
   useEffect(() => {
     if ('mediaSession' in navigator && track.isPlaying) {
       const { mediaSession } = navigator;
-      console.log('mediaSession');
 
       mediaSession.metadata = new MediaMetadata({
         title: track.title || '',
         artist: track.artist || '',
         artwork: track.artwork || [],
       });
-      console.log(mediaSession.metadata);
-      console.log(mediaSession.metadata.artwork);
 
       const events: { action: MediaSessionAction; handler: MediaSessionActionHandler | null }[] = [
         {
