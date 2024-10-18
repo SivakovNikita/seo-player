@@ -6,6 +6,7 @@ import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from './useWindowWidth';
 import Image from 'next/image';
 import React from 'react';
+import Loader from '../Loader/Loader';
 
 type TrackImage = {
   src: string;
@@ -27,7 +28,7 @@ interface TrackInterface {
 }
 
 const Track = ({ track, index }: TrackInterface) => {
-  const { play, pause, next, state, currentIndex } = useContext(TrackContext);
+  const { play, pause, next, state, currentIndex, isLoading } = useContext(TrackContext);
 
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);
   const [playing, setPlaying] = useState(false);
@@ -68,6 +69,7 @@ const Track = ({ track, index }: TrackInterface) => {
           >
             <Image src="/images/navigation/Icon_play_36x36.svg" width={36} height={36} alt="play button" />
           </button>
+
           <Image
             className={clsx({ [styles.track_image]: true, [styles.track_image__active]: isCurrent && state })}
             width={30}
@@ -79,7 +81,11 @@ const Track = ({ track, index }: TrackInterface) => {
             <button className={styles.play_pause} onClick={state ? () => pause() : () => play()}>
               {state ? (
                 !isHovered ? (
-                  <Equalizer />
+                  isLoading ? (
+                    <Loader isLoading={isLoading} />
+                  ) : (
+                    <Equalizer />
+                  )
                 ) : (
                   <Image src="/images/navigation/Icon_pause_36x36.svg" width={36} height={36} alt="pause button" />
                 )
@@ -105,7 +111,8 @@ const Track = ({ track, index }: TrackInterface) => {
             {showPlayButtonMobile ? (
               <Image src="/images/navigation/Icon_play_36x36.svg" width={48} height={48} alt="play button" />
             ) : null}
-            {isCurrent && state ? <Equalizer /> : null}
+            {isCurrent && isLoading ? <Loader isLoading={isLoading} /> : null}
+            {isCurrent && state && !isLoading ? <Equalizer /> : null}
           </button>
           <Image
             className={clsx({ [styles.track_image]: true, [styles.track_image__active]: isCurrent && state })}

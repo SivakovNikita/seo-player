@@ -20,6 +20,7 @@ export const usePlayer = <T extends { src: string }>({
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const [isFirstPlay, setIsFirstPlay] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const newAudio = new Audio();
@@ -53,8 +54,10 @@ export const usePlayer = <T extends { src: string }>({
           });
 
           audio.load();
+          setIsLoading(true);
           await awaiter;
           await audio.play();
+          setIsLoading(false);
         } catch (error) {
           if (error instanceof MediaError && error.code !== MediaError.MEDIA_ERR_ABORTED) {
             console.error('Ошибка:', error);
@@ -233,6 +236,7 @@ export const usePlayer = <T extends { src: string }>({
 
   return {
     isPlaying,
+    isLoading,
     audioContext,
     pause,
     play,

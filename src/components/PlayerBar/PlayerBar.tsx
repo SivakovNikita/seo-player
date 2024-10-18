@@ -9,10 +9,12 @@ import Tracklist from '../TrackList/TrackList';
 import { TrackProvider } from './TrackContex';
 import VolumeBar from '../VolumeBar/VolumeBar';
 import PlayerNavigation from '../PlayerNavigation/PlayerNavigation';
+import Loader from '../Loader/Loader';
 
 const PlayerBar = ({ trackList }) => {
   const {
     isPlaying,
+    isLoading,
     pause,
     play,
     next,
@@ -69,6 +71,7 @@ const PlayerBar = ({ trackList }) => {
           pause={pause}
           play={play}
         />
+
         <div className={styles.controls_wrapper}>
           <ProgressBar
             currentTime={currentTrackDuration}
@@ -81,6 +84,7 @@ const PlayerBar = ({ trackList }) => {
       </div>
 
       <TrackProvider
+        isLoading={isLoading}
         trackList={trackList}
         play={play}
         pause={pause}

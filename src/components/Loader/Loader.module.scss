@@ -1,0 +1,32 @@
+.loader_container {
+  padding: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  &__active {
+    display: block;
+  }
+}
+
+.loader {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #abaab0 94%, transparent) top/4px 4px no-repeat,
+    conic-gradient(transparent 30%, #ffffff);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), black 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), black 0);
+  animation: spinner-ub 0.5s infinite linear;
+}
+
+@keyframes spinner-ub {
+  100% {
+    transform: rotate(1turn);
+  }
+}

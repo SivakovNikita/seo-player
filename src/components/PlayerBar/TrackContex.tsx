@@ -15,6 +15,7 @@ interface TrackContextProps {
   play: (index?: number) => void;
   state: boolean;
   currentIndex: number;
+  isLoading: boolean;
 }
 
 export const TrackContext = createContext<TrackContextProps>({
@@ -24,6 +25,7 @@ export const TrackContext = createContext<TrackContextProps>({
   play: () => {},
   state: false,
   currentIndex: 0,
+  isLoading: false,
 });
 
 interface TrackProviderProps {
@@ -34,6 +36,7 @@ interface TrackProviderProps {
   play?: (index?: number) => void;
   state?: boolean;
   currentIndex?: number;
+  isLoading?: boolean;
 }
 
 export const TrackProvider = ({
@@ -44,9 +47,10 @@ export const TrackProvider = ({
   play = () => {},
   state = false,
   currentIndex = 0,
+  isLoading = false,
 }: TrackProviderProps) => {
   return (
-    <TrackContext.Provider value={{ trackList, next, play, pause, state, currentIndex }}>
+    <TrackContext.Provider value={{ trackList, next, play, pause, state, currentIndex, isLoading }}>
       {children}
     </TrackContext.Provider>
   );
