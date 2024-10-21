@@ -76,7 +76,7 @@ export const trackListJazzCafe = [
     ],
   },
   {
-    title: ' Неспешные ноты',
+    title: 'Неспешные ноты',
     src: '/api/audio?file=Tracks/jazz-cafe/jazz-cafe_3.mp3',
     artist: 'Звук Бизнес',
     duration: '03:31',
