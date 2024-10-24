@@ -1,19 +1,14 @@
-import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-export default function Page() {
-  return (
-    <div style={{ color: 'white' }}>
-      <h1>List of Zvuk b2b players</h1>
-      <ul>
-        <Link href="/players/BarbershopPlaylist" prefetch={true}>
-          Барбершопы
-        </Link>
-        <Link href="/players/JazzCafePlaylist" prefetch={true}>
-          Jazz Cafe
-        </Link>
+function MyApp() {
+  const router = useRouter();
 
-        <li></li>
-      </ul>
-    </div>
-  );
+  useEffect(() => {
+    router.push('https://zvuk-b2b.com/?utm_source=seo-player&utm_medium=redirect');
+  }, [router]);
+
+  return null;
 }
+
+export default MyApp;
