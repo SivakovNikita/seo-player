@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { trackImagePaths } from './trackImagePaths';
+import { trackImagePaths } from '../../public/Tracks/trackImagePaths';
 import Link from 'next/link';
 
 const toPascalCase = (str) => {
