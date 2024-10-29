@@ -14,7 +14,7 @@ interface Track {
   img: { src: string; sizes: string; type: string }[];
 }
 
-export default function AdminPanel() {
+function AdminPanel() {
   const [playlistName, setPlaylistName] = useState('');
   const [tracks, setTracks] = useState<Track[]>([]);
   const [createdPlaylist, setcreatedPlaylist] = useState('');
@@ -93,3 +93,5 @@ export default function AdminPanel() {
     </div>
   );
 }
+
+export default AdminPanel;
