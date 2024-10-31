@@ -9,7 +9,6 @@ import Tracklist from '../TrackList/TrackList';
 import { TrackProvider } from './TrackContex';
 import VolumeBar from '../VolumeBar/VolumeBar';
 import PlayerNavigation from '../PlayerNavigation/PlayerNavigation';
-import Loader from '../Loader/Loader';
 
 const PlayerBar = ({ trackList }) => {
   const {
