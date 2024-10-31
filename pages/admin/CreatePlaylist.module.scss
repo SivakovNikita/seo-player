@@ -1,0 +1,77 @@
+.page_container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  height: 100vh;
+  background-color: #598392;
+  color: #01161e;
+}
+
+.admin_panel_container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.tracks_list {
+  background-color: #124559;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.tracks_list_track_wrapper {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  background-color: #124559;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.tracks_list_span {
+  font-size: small;
+}
+
+.text_block {
+  background-color: #124559;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.text_block_span {
+  font-size: small;
+}
+
+.text_block_ul {
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.input {
+  width: 95%;
+  height: 15px;
+}
+
+.button {
+  color: #01161e;
+  text-decoration: none;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #eff6e0;
+  height: 24px;
+  &:hover {
+    background-color: #00a386;
+  }
+}

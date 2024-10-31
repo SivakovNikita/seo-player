@@ -32,7 +32,7 @@ function CreatePlaylist() {
     const updatedTracks = tracks.map((track, i) => (i === index ? { ...track, [field]: value } : track));
     setTracks(updatedTracks);
   };
-
+  console.log(tracks);
   const createPlaylist = async () => {
     try {
       const response = await fetch('/api/createPlaylist', {
@@ -52,23 +52,50 @@ function CreatePlaylist() {
     }
   };
 
+  const handleDeleteTrack = (index) => {
+    const updatedTracks = [...tracks];
+    updatedTracks.splice(index, 1);
+    setTracks(updatedTracks);
+  };
+
   return (
     <div className={styles.page_container}>
       <div className={styles.admin_panel_container}>
         <h1 style={{ color: 'white' }}>Создайте новый SEO-плейлист</h1>
+        {/* <div className={styles.text_block}>
+          <span>
+            Чтобы создать плейлист, придумайте ему название, запишите его латиницей, например для плейлста к новому
+            году, подойдет навзание <b>new yeras playlist</b>
+          </span>
+        </div> */}
         <div>
-          <div className={styles.new_player_name}>
+          <div className={styles.text_block}>
             <span>Введите название нового плейлиста</span>
             <input
+              className={styles.input}
               type="text"
               placeholder="NewCoolPlayList"
               value={playlistName}
               onChange={(e) => setPlaylistName(e.target.value)}
             />
           </div>
+          <div className={styles.text_block}>
+            <span>Нужно доавить треки. Для каждого нового трека, нужно заполнить три пункта:</span>
+            <ul className={styles.text_block_ul}>
+              <li>
+                <span>1. Название трека</span>
+              </li>
+              <li>
+                <span>2. Ссылка на файл URL</span>
+              </li>
+              <li>
+                <span>3. Продолжительность трека (МИН:СЕК)</span>
+              </li>
+            </ul>
+          </div>
 
           {tracks.map((track, index) => (
-            <div className={styles.tracks_list} key={index}>
+            <div className={styles.tracks_list_track_wrapper} key={index}>
               <span className={styles.tracks_list_span}>Название трека</span>
               <input
                 type="text"
@@ -90,21 +117,33 @@ function CreatePlaylist() {
                 value={track.duration}
                 onChange={(e) => handleChange(index, 'duration', e.target.value)}
               />
-              <button>Удалить трек</button>
+              <button className={styles.button} onClick={() => handleDeleteTrack(index)}>
+                Удалить трек
+              </button>
             </div>
           ))}
         </div>
 
-        <button onClick={handleAddTrack}>Добавить трек</button>
-        <button onClick={createPlaylist}>Сохранить плейлист</button>
-        {createdPlaylist && (
-          <Link href={`http://localhost:3000/players/${toPascalCase(playlistName)}Playlist`}>
-            ссылка на новый плейлист
-          </Link>
-        )}
-        <button>
-          <Link href="/admin/EditPlaylist">Отредактировать существующий плейлист</Link>
+        <button className={styles.button} onClick={handleAddTrack}>
+          Добавить трек
         </button>
+        <button className={styles.button} onClick={createPlaylist}>
+          Сохранить и опубликовать плейлист
+        </button>
+        {createdPlaylist && (
+          <div>
+            <Link href={`http://localhost:3000/players/${toPascalCase(playlistName)}Playlist`}>
+              <button className={styles.button}>Cсылка на новый плейлист!</button>
+            </Link>
+            <div>
+              <span>Готовый iframe для вставки на лендинг:</span>
+            </div>
+            <span></span>
+          </div>
+        )}
+        <Link href="/admin/EditPlaylist">
+          <button className={styles.button}>Отредактировать существующий плейлист</button>
+        </Link>
       </div>
     </div>
   );
