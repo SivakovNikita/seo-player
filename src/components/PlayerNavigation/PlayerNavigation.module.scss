@@ -22,10 +22,7 @@
   min-width: 10px;
   min-height: 10px;
   color: white;
-
-  &:hover {
-    color: gray;
-  }
+  cursor: pointer;
 }
 
 .btn_play_pause {
@@ -38,6 +35,7 @@
   min-width: 20px;
   min-height: 20px;
   color: white;
+  cursor: pointer;
 
   &:hover {
     color: gray;

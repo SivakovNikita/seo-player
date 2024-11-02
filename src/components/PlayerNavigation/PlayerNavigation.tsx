@@ -13,7 +13,7 @@ const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, nex
           src="/images/navigation/Icon_prev_36x36.svg"
           width={isMobile ? 56 : 36}
           height={isMobile ? 56 : 36}
-          alt="stop button"
+          alt="prev button"
           priority={true}
         />
       </button>
@@ -41,7 +41,7 @@ const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, nex
           src="/images/navigation/Icon_next_36x36.svg"
           width={isMobile ? 56 : 36}
           height={isMobile ? 56 : 36}
-          alt="stop button"
+          alt="next button"
           priority={true}
         />
       </button>
