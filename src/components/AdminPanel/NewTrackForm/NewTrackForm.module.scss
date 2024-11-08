@@ -1,0 +1,79 @@
+// track_form
+// track_form_header
+// tracks_list_btn
+// tracks_list_track_wrapper
+// tracks_list_span
+// input
+
+.track_form {
+  background-color: #3e3e3e;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 10px;
+  margin: 5px;
+}
+
+.track_form_header {
+  font-weight: 16px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.tracks_list_btn {
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  border-style: none;
+  background-color: transparent;
+  height: 22px;
+  width: 22px;
+  font-weight: lighter;
+  margin-right: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: #000000;
+    transform: scale(1.01);
+  }
+}
+.tracks_list_span {
+  font-size: small;
+  color: #ffffff;
+}
+.tracks_list_track_wrapper {
+  background-color: #1c1c1c;
+  margin: 3px 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  border-radius: 8px;
+}
+.tracks_list_span {
+  font-size: small;
+  color: #ffffff;
+}
+.input {
+  width: 95%;
+  height: 15px;
+  border: 1px solid #333333;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+}

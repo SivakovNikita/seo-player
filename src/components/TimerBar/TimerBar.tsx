@@ -1,4 +1,4 @@
-import getFormattedTime from '../PlayerBar/getFormattedTime';
+import getFormattedTime from '../../utils/getFormattedTime';
 import styles from './TimerBar.module.scss';
 
 const TimerBar = ({ currentTrackDuration, duration }) => {
@@ -8,14 +8,12 @@ const TimerBar = ({ currentTrackDuration, duration }) => {
   return (
     <div className={styles.timer_container}>
       <div className={styles.timer_wrapper}>
-        <span className={styles.timer_wrapper_span}>{formattedTime.min ? formattedTime.min : '00'}</span>
+        <span>{formattedTime.min ? formattedTime.min : '00'}</span>
         <span>:</span>
         <span>{formattedTime.sec ? formattedTime.sec : '00'}</span>
       </div>
       <div className={styles.timer_wrapper}>
-        <span className={styles.timer_wrapper_span}>
-          {formattedTrackDuration.min ? formattedTrackDuration.min : '00'}
-        </span>
+        <span>{formattedTrackDuration.min ? formattedTrackDuration.min : '00'}</span>
         <span>:</span>
         <span>{formattedTrackDuration.sec ? formattedTrackDuration.sec : '00'}</span>
       </div>

@@ -3,7 +3,7 @@ import { TrackContext } from '../PlayerBar/TrackContex';
 import styles from './Track.module.scss';
 import { useContext, useEffect, useState } from 'react';
 import Equalizer from '../Equalizer/Equalizer';
-import useWindowWidth from './useWindowWidth';
+import useWindowWidth from '../../utils/useWindowWidth';
 import Image from 'next/image';
 import React from 'react';
 import Loader from '../Loader/Loader';

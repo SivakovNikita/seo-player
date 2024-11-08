@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styles from './PlayerNavigation.module.scss';
-import useWindowWidth from '../Track/useWindowWidth';
+import useWindowWidth from '../../utils/useWindowWidth';
 
 const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, next, pause, play }) => {
   const width = useWindowWidth();

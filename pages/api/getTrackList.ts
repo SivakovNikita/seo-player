@@ -2,9 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Redis } from '@upstash/redis';
 // актуальный api
 const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  url: process.env.KV_REST_API_URL,
+  token: process.env.KV_REST_API_TOKEN,
 });
+
+const checkValidityName = (playlistName) => {
+  try {
+  } catch (error) {}
+};
 
 async function getAllKeysHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -14,8 +19,10 @@ async function getAllKeysHandler(req: NextApiRequest, res: NextApiResponse) {
     do {
       const [newCursor, foundKeys] = await redis.scan(cursor);
       cursor = newCursor;
+
       keys.push(...foundKeys);
     } while (cursor !== '0');
+    console.log(keys);
 
     res.status(200).json({ keys });
   } catch (error) {

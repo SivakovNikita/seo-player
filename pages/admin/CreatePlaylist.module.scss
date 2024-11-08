@@ -4,74 +4,171 @@
   align-items: flex-start;
   overflow-y: auto;
   height: 100vh;
-  background-color: #598392;
-  color: #01161e;
+  background-color: #121212;
+  color: #ffffff;
 }
 
 .admin_panel_container {
-  color: white;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 500px;
-  min-width: 300px;
-}
-
-.tracks_list {
-  background-color: #124559;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 10px;
-}
-
-.tracks_list_track_wrapper {
-  margin-top: 3px;
-  margin-bottom: 3px;
-  background-color: #124559;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 10px;
-}
-
-.tracks_list_span {
-  font-size: small;
+  min-width: 360px;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 .text_block {
-  background-color: #124559;
-  padding: 10px;
+  background-color: #1c1c1c;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 10px;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+.text_block_label {
+  font-size: 16px;
+  font-weight: lighter;
 }
 
 .text_block_span {
   font-size: small;
+  color: #ffffff;
 }
 
 .text_block_ul {
-  margin-bottom: 3px;
-  margin-top: 3px;
+  margin: 3px 0;
 }
 
 .input {
   width: 95%;
-  height: 15px;
+  height: 26px;
+  border: 1px solid #333333;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+}
+
+.input_not_valid {
+  border: 2px solid #ff4c4c;
+
+  &:focus {
+    outline: none;
+    border: 2px solid #e53935;
+    box-shadow: 0 0 5px rgba(229, 57, 53, 0.5);
+  }
+}
+
+.input_valid {
+  border: 1px solid #81c784; /* Зеленая граница для валидного ввода */
+
+  &:focus {
+    outline: none;
+    border: 1px solid #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
 }
 
 .button {
-  color: #01161e;
+  color: #ffffff;
   text-decoration: none;
   border-radius: 5px;
   border-style: none;
-  background-color: #eff6e0;
-  height: 24px;
+  background-color: #4caf50;
+  height: 32px;
+  padding: 4px 12px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+
   &:hover {
     background-color: #00a386;
+    transform: scale(1.05);
   }
+}
+
+// формочка с новыми треками
+.track_form {
+  background-color: #3e3e3e;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 5px;
+  margin: 5px;
+}
+
+.track_form_header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tracks_list {
+  background-color: #1c1c1c;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.tracks_list_track_wrapper {
+  background-color: #1c1c1c;
+  margin: 3px 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.tracks_list_span {
+  font-size: small;
+  color: #ffffff;
+}
+
+.tracks_list_btn {
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #8c0000;
+  height: 22px;
+  padding: 4px 12px;
+  font-weight: bold;
+  margin-right: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: #000000;
+    transform: scale(1.01);
+  }
+}
+
+.error_plate {
+  font-size: 12px;
+  height: 3vh;
+  padding: 4px 12px;
+
+  background-color: hsl(0, 100%, 27%, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

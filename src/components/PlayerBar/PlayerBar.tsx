@@ -1,7 +1,6 @@
 import styles from './PlayerBar.module.scss';
-import Image from 'next/image';
-import { usePlayer } from './usePalyer';
-import useMediaSession from './useMediaSession';
+import { usePlayer } from '../../hooks/usePalyer';
+import useMediaSession from '../../hooks/useMediaSession';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { useMemo } from 'react';
 import React from 'react';
