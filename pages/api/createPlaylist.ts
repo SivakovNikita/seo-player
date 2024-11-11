@@ -10,7 +10,6 @@ const setHandler = async (req, res) => {
   try {
     let isAvaible = await redis.exists(req.body.name);
     let isValidLength = req.body.name.length;
-    console.log(isValidLength);
 
     if (!isAvaible && isValidLength) {
       let validName = toPascalCase(req.body.name) + 'Playlist';

@@ -17,10 +17,12 @@ const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, nex
           priority={true}
         />
       </button>
+
       <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
         {isPlaying ? (
           <Image
             src="/images/navigation/Icon_pause_36x36.svg"
+            // fill={true}
             width={isMobile ? 56 : 36}
             height={isMobile ? 56 : 36}
             alt="stop button"

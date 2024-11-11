@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './EditPlaylist.module.scss';
 import Link from 'next/link';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 interface Track {
   title: string;
@@ -18,9 +20,10 @@ function EditPlaylist() {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const response = await fetch('/api/getPlayLists');
+        const response = await fetch('/api/getPlaylists');
         const data = await response.json();
-        setPlaylists(data.playlists);
+
+        setPlaylists(data.keys);
       } catch (error) {
         console.error('Failed to fetch playlists:', error);
       }
@@ -31,11 +34,13 @@ function EditPlaylist() {
 
   useEffect(() => {
     if (playlistToEdit) {
+      console.log(playlistToEdit);
+
       const fetchData = async () => {
         try {
           const response = await fetch(`/api/getPlaylistContent?name=${playlistToEdit}`);
           const data = await response.json();
-          setPlaylistData(data);
+          setPlaylistData(data.playlistData.tracks);
         } catch (error) {
           console.error('Failed to fetch playlist content:', error);
         }
@@ -55,19 +60,23 @@ function EditPlaylist() {
       console.error('Failed to save playlist changes:', error);
     }
   };
+  console.log(playlistData);
 
   return (
     <div className={styles.page_container}>
       <div className={styles.admin_panel_container}>
         <h2>Редактирование плейлистов</h2>
         <h3>Плейлисты в базе</h3>
-        <ul>
-          {playlists.map((playlist) => (
-            <li onClick={() => setPlaylistToEdit(playlist)} key={playlist}>
-              {playlist}
-            </li>
-          ))}
-        </ul>
+        <Dropdown
+          options={playlists}
+          placeholder="Выберите плейлист"
+          onChange={(selectedOption) => {
+            if (selectedOption && selectedOption.value) {
+              setPlaylistToEdit(selectedOption.value);
+            }
+          }}
+        />
+
         {Array.isArray(playlistData) && playlistData.length > 0 ? (
           <form>
             {playlistData.map((track, index) => (

@@ -1,15 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Redis } from '@upstash/redis';
-// актуальный api
+
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
   token: process.env.KV_REST_API_TOKEN,
 });
-
-const checkValidityName = (playlistName) => {
-  try {
-  } catch (error) {}
-};
 
 async function getAllKeysHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
