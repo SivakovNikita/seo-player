@@ -10,21 +10,21 @@
   color: white;
   height: 48px;
   width: 558px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(0, 0, 0);
   border: 1px solid;
   border-color: #ededed;
-  position: sticky;
-  top: 80%;
-  bottom: 20px;
+  position: absolute;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   transition: transform 0.3s, height 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .player_container__active {
   height: 100px;
   width: 558px;
-  transform: translate(-50%, -52px);
+  transform: translateX(-50%);
 }
 
 .player_divider {
