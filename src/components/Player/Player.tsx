@@ -48,7 +48,7 @@ const Player = ({ trackList }) => {
   }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackDuration, trackList]);
 
   return (
-    <div className={styles.page}>
+    <div>
       <div className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}>
         <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
           <a>
