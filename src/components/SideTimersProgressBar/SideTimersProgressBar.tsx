@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import styles from './ProgressBar.module.scss';
+import styles from './SideTimersProgressBar.module.scss';
 import React from 'react';
-import TimerBar from '../TimerBar/TimerBar';
+import Timer from '../Timer/Timer';
 
 interface ProgressBarProps {
   currentTime: number;
@@ -10,7 +10,7 @@ interface ProgressBarProps {
   onSeek: (time: number) => void;
 }
 
-const ProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }: ProgressBarProps) => {
+const SideTimersProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }: ProgressBarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const dragginTimeRef = useRef<number | null>(null);
   const [dragginTime, setDragginTime] = useState<number | null>(null);
@@ -51,12 +51,20 @@ const ProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }:
   const calculatedWidth = dragginTime !== null ? (dragginTime / duration) * 100 : progressPercentage;
 
   return (
-    <div ref={ref} className={styles.progress_bar} onMouseDown={handleStart} onTouchStart={handleStart}>
-      <TimerBar currentTrackDuration={currentTime} duration={duration} />
-      <div className={styles.track_loading_progress} style={{ width: `${loadProgress}%` }}></div>
-      <div className={styles.track_progress} style={{ width: `${calculatedWidth}%` }}></div>
+    <div className={styles.progress_bar_wrapper}>
+      <div>
+        <Timer time={currentTime} />
+      </div>
+      <div ref={ref} className={styles.progress_bar} onMouseDown={handleStart} onTouchStart={handleStart}>
+        <div className={styles.track_loading_progress} style={{ width: `${loadProgress}%` }}></div>
+        <div className={styles.track_progress} style={{ width: `${calculatedWidth}%` }}></div>
+      </div>
+      <div>
+        <Timer time={duration} />
+      </div>
     </div>
   );
 });
-ProgressBar.displayName = 'ProgressBar';
-export default ProgressBar;
+
+SideTimersProgressBar.displayName = 'SideTimersProgressBar';
+export default SideTimersProgressBar;

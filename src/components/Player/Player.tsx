@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { usePlayer } from '../../../src/hooks/usePalyer';
 import useMediaSession from '../../hooks/useMediaSession';
 import PlayPauseControl from '../PlayPauseControl/PlayPauseControl';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import styles from './Player.module.scss';
 import { useMemo, useState } from 'react';
+import SideTimersProgressBar from '../SideTimersProgressBar/SideTimersProgressBar';
 
 const Player = ({ trackList }) => {
   const {
@@ -48,7 +48,6 @@ const Player = ({ trackList }) => {
   }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackDuration, trackList]);
 
   return (
-    // <div className={styles.page}>
     <div>
       <div className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}>
         <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
@@ -70,15 +69,17 @@ const Player = ({ trackList }) => {
               alt={'Музыка для бизнеса:' + track.artist}
             />
           </div>
-          <span>{track.artist}</span>
+
           <span>{track.title}</span>
           <PlayPauseControl isPlaying={isPlaying} pause={pause} play={play} />
-          <ProgressBar
-            currentTime={currentTrackDuration}
-            duration={trackDuration}
-            loadProgress={loadProgress}
-            onSeek={handleSeek}
-          />
+          <div className={styles.progress_bar_wrapper}>
+            <SideTimersProgressBar
+              currentTime={currentTrackDuration}
+              duration={trackDuration}
+              loadProgress={loadProgress}
+              onSeek={handleSeek}
+            />
+          </div>
         </div>
       </div>
     </div>

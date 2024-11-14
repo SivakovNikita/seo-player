@@ -2,6 +2,8 @@ import getFormattedTime from '../../utils/getFormattedTime';
 import styles from './TimerBar.module.scss';
 
 const TimerBar = ({ currentTrackDuration, duration }) => {
+  console.log(currentTrackDuration, duration);
+
   const formattedTime = getFormattedTime(currentTrackDuration);
   const formattedTrackDuration = getFormattedTime(duration);
 
