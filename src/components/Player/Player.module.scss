@@ -106,16 +106,17 @@
 }
 
 .progress_bar_wrapper {
-  width: 580px;
+  width: 380px;
   margin-right: 20px;
+  margin-left: 20px;
 }
 
-// обложка
 .images_wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 .track_image {
@@ -134,7 +135,16 @@
   }
 }
 
+.track_title {
+  margin-left: 10px;
+}
+
 .player_indicators_wrapper {
   position: absolute;
   z-index: 2;
+}
+
+.playPause_btn_wrapper {
+  margin-left: 20px;
+  margin-right: 20px;
 }

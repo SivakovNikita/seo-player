@@ -81,9 +81,10 @@ const Player = ({ trackList }) => {
             alt={'Музыка для бизнеса:' + track.artist}
           />
         </div>
-
-        <span>{track.title}</span>
-        <PlayPauseControl isPlaying={isPlaying} pause={pause} play={play} />
+        <span className={styles.track_title}>{track.title}</span>
+        <div className={styles.playPause_btn_wrapper}>
+          <PlayPauseControl isPlaying={isPlaying} pause={pause} play={play} />
+        </div>
         <div className={styles.progress_bar_wrapper}>
           <SideTimersProgressBar
             currentTime={currentTrackDuration}
