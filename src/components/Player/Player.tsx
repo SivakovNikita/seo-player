@@ -52,7 +52,6 @@ const Player = ({ trackList }) => {
   useEffect(() => {
     const newHeight = isPlaying ? '100px' : '50px';
     window.parent.postMessage({ height: newHeight }, '*');
-    console.log('newHeight: ', newHeight);
   }, [isPlaying]);
 
   return (
