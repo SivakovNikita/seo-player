@@ -6,6 +6,8 @@ import PlayPauseControl from '../PlayPauseControl/PlayPauseControl';
 import styles from './Player.module.scss';
 import { useMemo, useState } from 'react';
 import SideTimersProgressBar from '../SideTimersProgressBar/SideTimersProgressBar';
+import Loader from '../Loader/Loader';
+import Equalizer from '../Equalizer/Equalizer';
 
 const Player = ({ trackList }) => {
   const {
@@ -49,7 +51,10 @@ const Player = ({ trackList }) => {
 
   return (
     <div>
-      <div className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}>
+      <div
+        style={{ height: isPlaying ? '100px' : '50px' }}
+        className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}
+      >
         <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
           <a>
             <div className={clsx({ [styles.player_cta_button]: true, [styles.player_cta_button__active]: isPlaying })}>
@@ -61,6 +66,9 @@ const Player = ({ trackList }) => {
 
         <div className={styles.player_controls_wrapper}>
           <div className={styles.images_wrapper}>
+            <div className={styles.player_indicators_wrapper}>
+              {isPlaying ? isLoading ? <Loader isLoading={isLoading} /> : <Equalizer /> : null}
+            </div>
             <Image
               className={clsx({ [styles.track_image]: true, [styles.track_image__active]: isPlaying })}
               width={30}
