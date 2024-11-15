@@ -18,8 +18,8 @@
   //   border-color: #ededed;
   background: rgba(0, 0, 0, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
 
   border: 1px solid #00b399;
   border-radius: 10px;
@@ -154,4 +154,10 @@
 .playPause_btn_wrapper {
   margin-left: 20px;
   margin-right: 20px;
+  transition: margin 0.2s ease;
+
+  @media (max-width: 640px) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

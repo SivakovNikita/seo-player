@@ -57,16 +57,17 @@ const Player = ({ trackList }) => {
 
   return (
     <div
-      style={{ height: isPlaying ? '100px' : '50px' }}
+      //   style={{ height: isPlaying ? '100px' : '50px' }}
       className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}
     >
       <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
-        <Link href="https://app.zvuk-b2b.com/register?promocode=playerbar" prefetch={true} target="_parent">
+        <a href="https://app.zvuk-b2b.com/register?promocode=playerbar" target="_blank">
           <div className={clsx({ [styles.player_cta_button]: true, [styles.player_cta_button__active]: isPlaying })}>
             Слушать весь плейлист бесплатно!
           </div>
-        </Link>
+        </a>
       </div>
+
       <div className={clsx({ [styles.player_divider]: true, [styles.player_divider__active]: isPlaying })}></div>
 
       <div className={styles.player_controls_wrapper}>
