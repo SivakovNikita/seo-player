@@ -80,9 +80,12 @@ function EditPlaylist() {
         {Array.isArray(playlistData) && playlistData.length > 0 ? (
           <form>
             {playlistData.map((track, index) => (
-              <div key={index}>
-                <span>Название трека:</span>
+              <div key={index} className={styles.track_form}>
+                <div className={styles.track_form_header}>
+                  <span>Название трека:</span>
+                </div>
                 <input
+                  className={styles.input}
                   value={track.title || ''}
                   onChange={(e) => {
                     const updatedTrack = { ...track, title: e.target.value };
@@ -92,6 +95,7 @@ function EditPlaylist() {
                 />
                 <span>Путь к файлу с треком:</span>
                 <input
+                  className={styles.input}
                   value={track.src || ''}
                   onChange={(e) => {
                     const updatedTrack = { ...track, src: e.target.value };
@@ -101,14 +105,14 @@ function EditPlaylist() {
                 />
               </div>
             ))}
-            <button type="button" onClick={handleSave}>
+            <button className={styles.button} type="button" onClick={handleSave}>
               Сохранить изменения
             </button>
           </form>
         ) : (
           <p>Нет данных для редактирования</p>
         )}
-        <button>
+        <button className={styles.button}>
           <Link href="/admin/CreatePlaylist">Создать новый плейлист</Link>
         </button>
       </div>

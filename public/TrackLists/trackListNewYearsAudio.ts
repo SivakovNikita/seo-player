@@ -1,7 +1,7 @@
 export const trackListNewYearsAudio = [
   {
-    title: 'Звуки праздника',
-    src: '/api/audio?file=Tracks/newyears/Sounds_of_the_holiday.mp3',
+    title: 'Пусть все задуманное исполнится',
+    src: '/api/audio?file=Tracks/newyears/01.mp3',
     artist: 'Звук Бизнес',
     duration: '00:18',
     img: [
@@ -39,7 +39,7 @@ export const trackListNewYearsAudio = [
   },
   {
     title: 'Новый год в разных странах',
-    src: '/api/audio?file=Tracks/newyears/New_Year_in_different_countries.mp3',
+    src: '/api/audio?file=Tracks/newyears/03.mp3',
     artist: 'Звук Бизнес',
     duration: '00:57',
     img: [
@@ -76,8 +76,8 @@ export const trackListNewYearsAudio = [
     ],
   },
   {
-    title: 'Новогодняя статистика',
-    src: '/api/audio?file=Tracks/newyears/New_Years_statistics.mp3',
+    title: 'Дед Мороз',
+    src: '/api/audio?file=Tracks/newyears/02.mp3',
     artist: 'Звук Бизнес',
     duration: '00:42',
     img: [

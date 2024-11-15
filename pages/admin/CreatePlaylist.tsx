@@ -7,7 +7,6 @@ import clsx from 'clsx';
 import debounce from 'lodash.debounce';
 import toPascalCase from '../../src/utils/toPascalCase';
 import IframeTemplate from '../../src/components/AdminPanel/IframeTemplate/IframeTemplate';
-import { log } from 'console';
 
 interface Track {
   title: string;
