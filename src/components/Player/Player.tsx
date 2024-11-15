@@ -61,7 +61,7 @@ const Player = ({ trackList }) => {
       className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}
     >
       <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
-        <Link href="https://app.zvuk-b2b.com/register?promocode=playerbar" prefetch={true}>
+        <Link href="https://app.zvuk-b2b.com/register?promocode=playerbar" prefetch={true} target="_parent">
           <div className={clsx({ [styles.player_cta_button]: true, [styles.player_cta_button__active]: isPlaying })}>
             Слушать весь плейлист бесплатно!
           </div>
