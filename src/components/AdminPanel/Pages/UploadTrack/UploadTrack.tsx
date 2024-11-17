@@ -12,8 +12,10 @@ const UploadTrack = () => {
     event.preventDefault();
 
     if (!inputFileRef.current?.files) {
-      throw new Error('No file selected');
+      alert('Пожалуйста, выберите файл!');
+      return;
     }
+
     const file = inputFileRef.current.files[0];
 
     const formData = new FormData();
@@ -25,15 +27,25 @@ const UploadTrack = () => {
         body: formData,
       });
 
+      const contentType = response.headers.get('content-type') || '';
+      const text = await response.text();
+
       if (!response.ok) {
-        throw new Error('Ошибка загрузки файла');
+        if (contentType.includes('application/json')) {
+          const errorData = JSON.parse(text);
+          throw new Error(errorData.error || 'Ошибка загрузки файла');
+        } else {
+          throw new Error(`Unexpected response from server: ${text}`);
+        }
       }
 
-      const result = await response.json();
+      const result = JSON.parse(text);
+      console.log(result);
 
       setBlob(result);
     } catch (error) {
-      console.error('Ошибка загрузки файла:', error);
+      console.error('Ошибка загрузки файла:', error.message);
+      alert(`Ошибка: ${error.message}`);
     }
   };
 
