@@ -1,7 +1,7 @@
 export const HelloFromWebPlaylist = [
   {
     "title": "new track",
-    "src": "https://f.muzlab.ru/7tj1rb70z03y_loudnorm.mp3",
+    "src": "zalupa",
     "artist": "Звук Бизнес",
     "duration": "03:22",
     "img": [

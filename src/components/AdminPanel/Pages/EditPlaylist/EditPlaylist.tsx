@@ -16,6 +16,7 @@ function EditPlaylist() {
   const [playlists, setPlaylists] = useState<string[]>([]);
   const [playlistData, setPlaylistData] = useState<Track[]>([]);
   const [playlistToEdit, setPlaylistToEdit] = useState<string | null>(null);
+  const [isUpdated, setIsUpdated] = useState(false);
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -24,6 +25,7 @@ function EditPlaylist() {
         const data = await response.json();
 
         setPlaylists(data.keys);
+        setIsUpdated(false);
       } catch (error) {
         console.error('Failed to fetch playlists:', error);
       }
@@ -34,8 +36,6 @@ function EditPlaylist() {
 
   useEffect(() => {
     if (playlistToEdit) {
-      console.log(playlistToEdit);
-
       const fetchData = async () => {
         try {
           const response = await fetch(`/api/getPlaylistContent?name=${playlistToEdit}`);
@@ -56,11 +56,11 @@ function EditPlaylist() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: playlistToEdit, data: playlistData }),
       });
+      setIsUpdated(!isUpdated);
     } catch (error) {
       console.error('Failed to save playlist changes:', error);
     }
   };
-  console.log(playlistData);
 
   return (
     <div className={styles.page_container}>
@@ -71,6 +71,7 @@ function EditPlaylist() {
           options={playlists}
           placeholder="Выберите плейлист"
           onChange={(selectedOption) => {
+            setIsUpdated(!isUpdated);
             if (selectedOption && selectedOption.value) {
               setPlaylistToEdit(selectedOption.value);
             }
@@ -86,6 +87,7 @@ function EditPlaylist() {
                 </div>
                 <input
                   className={styles.input}
+                  disabled={isUpdated}
                   value={track.title || ''}
                   onChange={(e) => {
                     const updatedTrack = { ...track, title: e.target.value };
@@ -96,6 +98,7 @@ function EditPlaylist() {
                 <span>Путь к файлу с треком:</span>
                 <input
                   className={styles.input}
+                  disabled={isUpdated}
                   value={track.src || ''}
                   onChange={(e) => {
                     const updatedTrack = { ...track, src: e.target.value };
@@ -105,16 +108,17 @@ function EditPlaylist() {
                 />
               </div>
             ))}
-            <button className={styles.button} type="button" onClick={handleSave}>
-              Сохранить изменения
-            </button>
+            {isUpdated ? (
+              <span>Данные плейлиста успешно обновлены!</span>
+            ) : (
+              <button className={styles.button} type="button" onClick={handleSave}>
+                Сохранить изменения
+              </button>
+            )}
           </form>
         ) : (
           <p>Нет данных для редактирования</p>
         )}
-        <button className={styles.button}>
-          <Link href="/admin/CreatePlaylist">Создать новый плейлист</Link>
-        </button>
       </div>
     </div>
   );

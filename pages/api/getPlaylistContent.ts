@@ -6,8 +6,6 @@ const redis = new Redis({
 });
 
 export default async function handler(req, res) {
-  console.log('REQ: ', req);
-
   if (req.method === 'GET') {
     const { name } = req.query;
 

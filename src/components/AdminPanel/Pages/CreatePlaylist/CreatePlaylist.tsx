@@ -1,12 +1,12 @@
 import { useCallback, useRef, useState } from 'react';
-import TrackForm from '../../src/components/AdminPanel/NewTrackForm/NewTrackForm';
+import TrackForm from '../../NewTrackForm/NewTrackForm';
 import styles from './CreatePlaylist.module.scss';
-import { trackImagePaths } from '../../public/Tracks/trackImagePaths';
+import { trackImagePaths } from '../../../../../public/Tracks/trackImagePaths';
 import Link from 'next/link';
 import clsx from 'clsx';
 import debounce from 'lodash.debounce';
-import toPascalCase from '../../src/utils/toPascalCase';
-import IframeTemplate from '../../src/components/AdminPanel/IframeTemplate/IframeTemplate';
+import toPascalCase from '../../../../utils/toPascalCase';
+import IframeTemplate from '../../IframeTemplate/IframeTemplate';
 
 interface Track {
   title: string;
@@ -149,9 +149,12 @@ function CreatePlaylist() {
         <button className={styles.button} onClick={handleAddTrack}>
           {tracks.length > 0 ? 'Добавить еще один трек' : 'Добавить трек'}
         </button>
-        <button className={styles.button} onClick={createPlaylist}>
-          Сохранить и опубликовать плейлист
-        </button>
+        {playlistName && (
+          <button className={styles.button} onClick={createPlaylist}>
+            Сохранить и опубликовать плейлист
+          </button>
+        )}
+
         {createdPlaylist && (
           <div>
             <Link href={`/players/${toPascalCase(playlistName)}Playlist`}>
@@ -160,9 +163,6 @@ function CreatePlaylist() {
             <IframeTemplate src={toPascalCase(playlistName)} />
           </div>
         )}
-        <Link href="/admin/EditPlaylist">
-          <button className={styles.button}>Отредактировать существующий плейлист</button>
-        </Link>
       </div>
     </form>
   );

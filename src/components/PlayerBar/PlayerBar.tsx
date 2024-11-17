@@ -10,8 +10,6 @@ import VolumeBar from '../VolumeBar/VolumeBar';
 import PlayerNavigation from '../PlayerNavigation/PlayerNavigation';
 
 const PlayerBar = ({ trackList }) => {
-  console.log(trackList);
-
   const {
     isPlaying,
     isLoading,

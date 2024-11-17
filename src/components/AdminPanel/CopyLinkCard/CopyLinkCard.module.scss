@@ -1,0 +1,47 @@
+.iframe_wrapper {
+  margin-top: 15px;
+  background-color: #3e3e3e;
+  padding: 10px;
+  font-size: 10px;
+  max-width: 360px;
+}
+
+.iframe_heading {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.code_wrapper {
+  overflow: hidden;
+  word-break: break-all;
+  background-color: #1c1c1c;
+  line-height: 20px;
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.copy_btn {
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #4caf50;
+  height: 32px;
+  padding: 4px 12px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: #00a386;
+    transform: scale(1.05);
+  }
+}
+
+.code {
+  border-radius: 3px;
+  font-family: courier, monospace;
+  padding: 0 3px;
+}
