@@ -1,9 +1,10 @@
 import formidable from 'formidable';
+import fs from 'fs';
 import { put } from '@vercel/blob';
 
 export const config = {
   api: {
-    bodyParser: false, // Отключаем встроенный парсер тела запроса
+    bodyParser: false,
   },
 };
 
@@ -14,7 +15,7 @@ const uploadTrack = async (req, res) => {
 
   const form = formidable();
 
-  form.parse(req, async (err, fields, files) => {
+  form.parse(req, async (err, files) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to parse form data' });
     }
@@ -26,7 +27,8 @@ const uploadTrack = async (req, res) => {
     }
 
     try {
-      const blob = await put(`tracks/${file.originalFilename}`, file.filepath, {
+      const fileStream = fs.createReadStream(file.filepath);
+      const blob = await put(`tracks/${file.originalFilename}`, fileStream, {
         access: 'public',
         token: process.env.BLOB_READ_WRITE_TOKEN,
       });
