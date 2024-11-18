@@ -3,14 +3,18 @@ import type { PutBlobResult } from '@vercel/blob';
 import { useState, useRef } from 'react';
 import CopyLinkCard from '../../CopyLinkCard/CopyLinkCard';
 import UploadTrackForm from '../../UploadTrackForm/UploadTrackForm';
+import Loader from '../../../Loader/Loader';
+import clsx from 'clsx';
 
 const UploadTrack = () => {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadFailed, setIsLoadFailed] = useState(false);
 
   const handleUpload = async (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
     if (!inputFileRef.current?.files) {
       alert('Пожалуйста, выберите файл!');
       return;
@@ -31,6 +35,7 @@ const UploadTrack = () => {
       const text = await response.text();
 
       if (!response.ok) {
+        setIsLoadFailed(true);
         if (contentType.includes('application/json')) {
           const errorData = JSON.parse(text);
           throw new Error(errorData.error || 'Ошибка загрузки файла');
@@ -40,9 +45,9 @@ const UploadTrack = () => {
       }
 
       const result = JSON.parse(text);
-      console.log(result);
 
       setBlob(result);
+      setIsLoading(false);
     } catch (error) {
       console.error('Ошибка загрузки файла:', error.message);
       alert(`Ошибка: ${error.message}`);
@@ -56,12 +61,16 @@ const UploadTrack = () => {
 
         <form className={styles.text_block} onSubmit={handleUpload}>
           <input className={styles.input} name="file" ref={inputFileRef} type="file" required />
-          {!blob && (
+          {!blob && !isLoading && (
             <button className={styles.button} type="submit">
               Загрузить
             </button>
           )}
+          <div className={clsx({ [styles.loader_container]: true, [styles.loader_container__active]: isLoading })}>
+            <Loader isLoading={isLoading} />
+          </div>
           {blob && <span>Ура, трек загружен!</span>}
+          {!blob && isLoadFailed && <span>Ошибка загрузки</span>}
         </form>
         {blob && (
           <div>

@@ -1,38 +1,22 @@
-import { useState } from 'react';
-import CreatePlaylist from '../../src/components/AdminPanel/Pages/CreatePlaylist/CreatePlaylist';
-import EditPlaylist from '../../src/components/AdminPanel/Pages/EditPlaylist/EditPlaylist';
-import UploadTrack from '../../src/components/AdminPanel/Pages/UploadTrack/UploadTrack';
-import styles from './index.module.scss';
+'use client';
 
-function AdminPanel() {
-  const [currentPage, setCurrentPage] = useState(<CreatePlaylist />);
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import Layout from '../../src/components/AdminPanel/Layout/Layout';
 
-  const handleClick = (component) => {
-    setCurrentPage(component);
-  };
+export default function AdminPanelPage() {
+  const router = useRouter();
+  const { page } = router.query;
 
-  return (
-    <div>
-      <header className={styles.header}>
-        <nav className={styles.nav}>
-          <div className={styles.links_container}>
-            <ul className={styles.nav_list}>
-              <li className={styles.nav_item} onClick={() => handleClick(<CreatePlaylist />)}>
-                Создать плейлист
-              </li>
-              <li className={styles.nav_item} onClick={() => handleClick(<EditPlaylist />)}>
-                Отредактировать плейлист
-              </li>
-              <li className={styles.nav_item} onClick={() => handleClick(<UploadTrack />)}>
-                Загрузить трек
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      {currentPage}
-    </div>
-  );
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return <Layout page={page as string} />;
 }
-
-export default AdminPanel;
