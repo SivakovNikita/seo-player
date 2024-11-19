@@ -3,6 +3,7 @@ import styles from './CopyLinkCard.module.scss';
 
 const CopyLinkCard = (src) => {
   const [isCopied, setIsCopied] = useState(false);
+
   async function copyContent() {
     try {
       const linkCard = document.getElementById('linkCard')?.textContent;

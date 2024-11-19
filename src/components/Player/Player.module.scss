@@ -72,6 +72,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  &__mobile {
+    display: none;
+    word-wrap: normal;
+    word-break: normal;
+  }
 }
 
 .player_cta_section {
@@ -116,6 +122,11 @@
   width: 380px;
   margin-right: 20px;
   margin-left: 20px;
+
+  &__mobile {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
 }
 
 .images_wrapper {

@@ -9,8 +9,12 @@ import SideTimersProgressBar from '../SideTimersProgressBar/SideTimersProgressBa
 import Loader from '../Loader/Loader';
 import Equalizer from '../Equalizer/Equalizer';
 import Link from 'next/link';
+import useWindowWidth from '../../utils/useWindowWidth';
 
 const Player = ({ trackList }) => {
+  const width = useWindowWidth();
+  const isMobile = width <= 430;
+
   const {
     isPlaying,
     isLoading,
@@ -70,7 +74,9 @@ const Player = ({ trackList }) => {
 
       <div className={clsx({ [styles.player_divider]: true, [styles.player_divider__active]: isPlaying })}></div>
 
-      <div className={styles.player_controls_wrapper}>
+      <div
+        className={clsx({ [styles.player_controls_wrapper]: true, [styles.player_controls_wrapper__mobile]: isMobile })}
+      >
         <div className={styles.images_wrapper}>
           <div className={styles.player_indicators_wrapper}>
             {isPlaying ? isLoading ? <Loader isLoading={isLoading} /> : <Equalizer /> : null}

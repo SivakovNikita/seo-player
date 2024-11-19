@@ -11,6 +11,7 @@ const UploadTrack = () => {
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadFailed, setIsLoadFailed] = useState(false);
+  const readyToload = !blob && !isLoading;
 
   const handleUpload = async (event) => {
     event.preventDefault();
@@ -61,11 +62,11 @@ const UploadTrack = () => {
 
         <form className={styles.text_block} onSubmit={handleUpload}>
           <input className={styles.input} name="file" ref={inputFileRef} type="file" required />
-          {!blob && !isLoading && (
+          {readyToload ? (
             <button className={styles.button} type="submit">
               Загрузить
             </button>
-          )}
+          ) : null}
           <div className={clsx({ [styles.loader_container]: true, [styles.loader_container__active]: isLoading })}>
             <Loader isLoading={isLoading} />
           </div>

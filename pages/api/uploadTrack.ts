@@ -14,8 +14,8 @@ const uploadTrack = async (req, res) => {
   }
 
   const form = formidable({
-    multiples: false, // Загрузка одного файла
-    keepExtensions: true, // Сохраняем расширение файла
+    multiples: false,
+    keepExtensions: true,
     maxFileSize: 20 * 1024 * 1024, // Лимит файла 20MB
   });
 
