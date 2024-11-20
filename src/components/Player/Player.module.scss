@@ -27,6 +27,7 @@
 
   bottom: 0;
   left: 50%;
+  margin-bottom: 5px;
   transform: translateX(-50%);
   transition: transform 0.3s, height 0.3s;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -168,7 +169,6 @@
   transition: margin 0.2s ease;
 
   @media (max-width: 640px) {
-    margin-left: 10px;
     margin-right: 10px;
   }
 }
