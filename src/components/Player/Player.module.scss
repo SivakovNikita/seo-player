@@ -7,6 +7,9 @@
 }
 
 .player_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   margin-left: 10px;
   margin-right: 10px;
   overflow: hidden;
@@ -42,7 +45,7 @@
   position: absolute;
   bottom: 50px;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.3s;
 
   &__active {
     opacity: 1;
@@ -55,7 +58,7 @@
   width: 100%;
   padding: 5px;
   margin-top: 5px;
-  //   margin-left: 20px;
+  margin-left: 20px;
   position: absolute;
   bottom: 0;
   display: flex;
@@ -87,21 +90,21 @@
   height: 50px;
   width: 100%;
   top: 0;
-  animation: 0.2s 0.1s ease both;
+  animation: 0.3s 0.1s ease both;
   &__active {
     opacity: 1;
   }
 }
 
 .player_cta_button {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   color: white;
   text-align: center;
   border-radius: 14px;
   font-size: 12px;
-  height: 22px;
+  height: 0;
   width: 220px;
   background-color: #00b399;
   transform: scale(0.9);
@@ -109,6 +112,8 @@
   cursor: pointer;
 
   &__active {
+    display: flex;
+    height: 22px;
     opacity: 1;
     transition: opacity 0.2s, transform 0.2s;
     transition-delay: 0.2s;
