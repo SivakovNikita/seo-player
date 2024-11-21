@@ -57,13 +57,11 @@ const Player = ({ trackList }) => {
   useEffect(() => {
     const newHeight = isPlaying ? '100px' : '50px';
     window.parent.postMessage({ height: newHeight }, '*');
+    window.parent.postMessage({ reachGoal: 'playerbar-test' }, '*');
   }, [isPlaying]);
 
   return (
-    <div
-      //   style={{ height: isPlaying ? '100px' : '50px' }}
-      className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}
-    >
+    <div className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}>
       <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
         <a href="https://app.zvuk-b2b.com/register?promocode=playerbar" target="_blank">
           <div className={clsx({ [styles.player_cta_button]: true, [styles.player_cta_button__active]: isPlaying })}>
@@ -75,7 +73,10 @@ const Player = ({ trackList }) => {
       <div className={clsx({ [styles.player_divider]: true, [styles.player_divider__active]: isPlaying })}></div>
 
       <div
-        className={clsx({ [styles.player_controls_wrapper]: true, [styles.player_controls_wrapper__mobile]: isMobile })}
+        className={clsx({
+          [styles.player_controls_wrapper]: true,
+          [styles.player_controls_wrapper__mobile]: isMobile,
+        })}
       >
         <div className={styles.images_wrapper}>
           <div className={styles.player_indicators_wrapper}>
