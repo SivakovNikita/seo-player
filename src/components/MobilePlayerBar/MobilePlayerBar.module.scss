@@ -13,7 +13,8 @@
 
   height: 50px;
   width: 98%;
-  max-width: 1160px;
+  max-width: 730px;
+  min-width: 320px;
 
   position: relative;
   display: flex;
@@ -60,28 +61,36 @@
 
 .player_controls_wrapper {
   height: 49px;
+  margin-right: 20px;
   box-sizing: border-box;
 
   width: 100%;
   padding: 5px;
   position: absolute;
   bottom: 0;
+
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  // align-items: center;
   justify-content: center;
   gap: 5px;
   font-size: 10px;
-  word-wrap: break-word;
-  word-break: break-word;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  // word-wrap: break-word;
+  // word-break: break-word;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // white-space: nowrap;
+}
 
-  &__mobile {
-    word-wrap: normal;
-    word-break: normal;
-  }
+.playPause_btn_wrapper {
+  margin-right: 10px;
+}
+
+.player_controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
 
 .player_cta_section {
@@ -127,60 +136,27 @@
 
 .progress_bar_wrapper {
   width: 380px;
-  margin-right: 20px;
-  margin-left: 20px;
-
-  &__mobile {
-    display: none;
-    margin-right: 5px;
-    margin-left: 5px;
-  }
-}
-
-.images_wrapper {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-
-  &__mobile {
-    display: none;
-  }
-}
-
-.track_image {
-  z-index: 1;
-  width: 36px;
-  height: 36px;
-  border-radius: 5px;
-  filter: grayscale(100%);
-  &__active {
-    filter: grayscale(0%);
-  }
-
   @media (max-width: 430px) {
-    display: none;
-    width: 48px;
-    height: 48px;
+    // margin-left: 10px;
+    margin-right: 15px;
   }
 }
 
 .track_title {
-  margin-left: 10px;
+  position: fixed;
+  bottom: 32px;
 }
 
-.player_indicators_wrapper {
-  position: absolute;
-  z-index: 2;
+.track_title_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .playPause_btn_wrapper {
-  margin-left: 20px;
-  margin-right: 20px;
   transition: margin 0.2s ease;
-
-  @media (max-width: 640px) {
-    margin-right: 10px;
-  }
 }

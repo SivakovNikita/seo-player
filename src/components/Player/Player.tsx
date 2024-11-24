@@ -10,10 +10,11 @@ import Loader from '../Loader/Loader';
 import Equalizer from '../Equalizer/Equalizer';
 import Link from 'next/link';
 import useWindowWidth from '../../utils/useWindowWidth';
+import MobilePlayerBar from '../MobilePlayerBar/MobilePlayerBar';
 
 const Player = ({ trackList }) => {
   const width = useWindowWidth();
-  const isMobile = width <= 430;
+  const isMobile = width <= 700;
 
   const {
     isPlaying,
@@ -52,7 +53,7 @@ const Player = ({ trackList }) => {
           prev: !isPrevDisabled,
         }
       : { title: '', artist: '', duration: '', artwork: [], next: false, prev: false };
-  }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackDuration, trackList]);
+  }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackDuration, trackList, isPlaying]);
 
   useEffect(() => {
     const newHeight = isPlaying ? '100px' : '50px';
@@ -60,7 +61,19 @@ const Player = ({ trackList }) => {
     window.parent.postMessage({ reachGoal: 'playerbar-test' }, '*');
   }, [isPlaying]);
 
-  return (
+  return isMobile ? (
+    <MobilePlayerBar
+      isLoading={isLoading}
+      isPlaying={isPlaying}
+      play={play}
+      pause={pause}
+      trackDuration={trackDuration}
+      currentTrackDuration={currentTrackDuration}
+      loadProgress={loadProgress}
+      handleSeek={handleSeek}
+      track={track}
+    />
+  ) : (
     <div className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}>
       <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
         <a href="https://app.zvuk-b2b.com/register?promocode=playerbar" target="_blank">
@@ -78,7 +91,7 @@ const Player = ({ trackList }) => {
           [styles.player_controls_wrapper__mobile]: isMobile,
         })}
       >
-        <div className={styles.images_wrapper}>
+        <div className={clsx({ [styles.images_wrapper]: true, [styles.images_wrapper__mobile]: isMobile })}>
           <div className={styles.player_indicators_wrapper}>
             {isPlaying ? isLoading ? <Loader isLoading={isLoading} /> : <Equalizer /> : null}
           </div>
@@ -90,7 +103,9 @@ const Player = ({ trackList }) => {
             alt={'Музыка для бизнеса:' + track.artist}
           />
         </div>
+
         <span className={styles.track_title}>{track.title}</span>
+
         <div className={styles.playPause_btn_wrapper}>
           <PlayPauseControl isPlaying={isPlaying} pause={pause} play={play} />
         </div>

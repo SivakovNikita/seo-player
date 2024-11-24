@@ -12,16 +12,16 @@ const PlayPauseControl = ({ isPlaying, pause, play }) => {
         {isPlaying ? (
           <Image
             src="/images/navigation/Icon_pause_36x36.svg"
-            width={isMobile ? 56 : 36}
-            height={isMobile ? 56 : 36}
+            width={isMobile ? 46 : 36}
+            height={isMobile ? 46 : 36}
             alt="stop button"
             priority={true}
           />
         ) : (
           <Image
             src="/images/navigation/Icon_play_36x36.svg"
-            width={isMobile ? 56 : 36}
-            height={isMobile ? 56 : 36}
+            width={isMobile ? 46 : 36}
+            height={isMobile ? 46 : 36}
             alt="play button"
             priority={true}
           />

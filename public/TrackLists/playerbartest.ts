@@ -1,4 +1,4 @@
-export const playerbartest = [
+const playerbartest = [
   {
     title: 'Звуки праздника',
     src: '/api/audio?file=Tracks/newyears/Sounds_of_the_holiday.mp3',
@@ -38,3 +38,5 @@ export const playerbartest = [
     ],
   },
 ];
+
+export default playerbartest;
