@@ -29,7 +29,7 @@ const MobilePlayerBar = ({
 
       <div className={styles.player_controls_wrapper}>
         <div className={styles.track_title_wrapper}>
-          <span className={styles.track_title}>{track?.title || 'Без названия'}</span>
+          <span className={styles.track_title}>{track?.title || 'Демо плейлист'}</span>
         </div>
 
         <div className={styles.player_controls}>
