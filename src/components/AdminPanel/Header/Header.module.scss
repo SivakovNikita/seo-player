@@ -22,11 +22,19 @@
 
 .links_container {
   width: 100%;
+  max-width: 900px;
   gap: 10px;
-  padding-right: 10px;
+
+  @media (max-width: 440px) {
+    gap: 8px;
+  }
+  @media (max-width: 320px) {
+    gap: 5px;
+  }
 }
 
 .nav_list {
+  max-width: 800px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -51,5 +59,11 @@
 
   &__active {
     color: #4caf50;
+  }
+  @media (max-width: 440px) {
+    font-size: 10px;
+  }
+  @media (max-width: 320px) {
+    font-size: 8px;
   }
 }

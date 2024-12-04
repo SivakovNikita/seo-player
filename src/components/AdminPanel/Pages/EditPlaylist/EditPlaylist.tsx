@@ -67,7 +67,7 @@ function EditPlaylist() {
     <div className={styles.page_container}>
       <div className={styles.admin_panel_container}>
         <h2>Редактирование плейлистов</h2>
-        <h3>Плейлисты в базе</h3>
+        <h3>Выберите плейлист:</h3>
         <Dropdown
           options={playlists}
           placeholder="Выберите плейлист"

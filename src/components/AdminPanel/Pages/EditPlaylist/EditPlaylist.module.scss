@@ -3,9 +3,10 @@
   justify-content: center;
   align-items: flex-start;
   overflow-y: auto;
-  height: 100vh;
+  height: 100dvb;
   background-color: #121212;
   color: #ffffff;
+  margin-bottom: 10px;
 }
 
 .admin_panel_container {
@@ -17,31 +18,6 @@
   min-width: 360px;
   padding-top: 5vh;
   padding-bottom: 5vh;
-}
-
-.text_block {
-  background-color: #1c1c1c;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 10px;
-  border-radius: 8px;
-  margin: 5px;
-}
-
-.text_block_label {
-  font-size: 16px;
-  font-weight: lighter;
-}
-
-.text_block_span {
-  font-size: small;
-  color: #ffffff;
-}
-
-.text_block_ul {
-  margin: 3px 0;
 }
 
 .input {
@@ -89,6 +65,7 @@
   background-color: #4caf4f82;
   height: 32px;
   padding: 4px 12px;
+  margin-bottom: 50px;
   font-weight: bold;
   transition: background-color 0.3s, transform 0.2s;
 
@@ -98,7 +75,6 @@
   }
 }
 
-// формочка с новыми треками
 .track_form {
   background-color: #3e3e3e;
   border-radius: 8px;
@@ -109,6 +85,13 @@
   padding: 15px;
   gap: 10px;
   margin-bottom: 5px;
+  width: 400px;
+  @media (max-width: 430px) {
+    width: 300px;
+  }
+  @media (max-width: 330px) {
+    width: 280px;
+  }
 }
 
 .track_form_header {

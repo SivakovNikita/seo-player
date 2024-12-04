@@ -10,7 +10,7 @@ function Header() {
 
   useEffect(() => {
     setIsCurrent(window.location.pathname);
-  }, []); // Запускаем эффект только один раз, при монтировании компонента
+  }, []);
 
   const links = [
     { route: '/admin?page=CreatePlaylist', text: 'Создать плейлист' },
@@ -28,7 +28,7 @@ function Header() {
         <div className={styles.links_container}>
           <ul className={styles.nav_list}>
             <Link href="/admin/">
-              <Image src="/images/zvuk business logo.png" alt="Звук Бизнес" width={105} height={25} />
+              <Image src="/images/zvuk business logo.png" alt="Звук Бизнес" width={105} height={28} />
             </Link>
             {links.map((link) => (
               <li key={link.route} className={styles.nav_item}>
