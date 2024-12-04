@@ -41,6 +41,7 @@ function EditPlaylist() {
           const response = await fetch(`/api/getPlaylistContent?name=${playlistToEdit}`);
           const data = await response.json();
           setPlaylistData(data.playlistData.tracks);
+          setIsUpdated(false);
         } catch (error) {
           console.error('Failed to fetch playlist content:', error);
         }
@@ -56,7 +57,7 @@ function EditPlaylist() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: playlistToEdit, data: playlistData }),
       });
-      setIsUpdated(!isUpdated);
+      setIsUpdated(true);
     } catch (error) {
       console.error('Failed to save playlist changes:', error);
     }

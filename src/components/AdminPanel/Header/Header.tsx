@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
@@ -26,6 +27,9 @@ function Header() {
       <div className={styles.nav}>
         <div className={styles.links_container}>
           <ul className={styles.nav_list}>
+            <Link href="/admin/">
+              <Image src="/images/zvuk business logo.png" alt="Звук Бизнес" width={105} height={25} />
+            </Link>
             {links.map((link) => (
               <li key={link.route} className={styles.nav_item}>
                 <Link

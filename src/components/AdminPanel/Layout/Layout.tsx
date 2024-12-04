@@ -2,6 +2,7 @@ import Header from '../Header/Header';
 import CreatePlaylist from '../Pages/CreatePlaylist/CreatePlaylist';
 import EditPlaylist from '../Pages/EditPlaylist/EditPlaylist';
 import UploadTrack from '../Pages/UploadTrack/UploadTrack';
+import WelcomePage from '../Pages/WelcomePage/WelcomePage';
 
 export default function Layout({ page }: { page: string }) {
   let content;
@@ -17,7 +18,7 @@ export default function Layout({ page }: { page: string }) {
       content = <UploadTrack />;
       break;
     default:
-      content = <h1>Добро пожаловать в админ-панель!</h1>;
+      content = <WelcomePage />;
       break;
   }
 
