@@ -1,12 +1,8 @@
-import CreatePlaylist from '../Pages/CreatePlaylist/CreatePlaylist';
-import EditPlaylist from '../Pages/EditPlaylist/EditPlaylist';
-import UploadTrack from '../Pages/UploadTrack/UploadTrack';
-import WelcomePage from '../Pages/WelcomePage/WelcomePage';
 import Header from '../Header/Header';
-import { ClerkProvider, SignedIn, SignIn } from '@clerk/nextjs';
+import { ClerkProvider, SignedIn } from '@clerk/nextjs';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const PUBLISHABLE_KEY = 'pk_test_ZnVsbC1qb2V5LTgxLmNsZXJrLmFjY291bnRzLmRldiQ';
 
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
