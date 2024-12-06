@@ -1,5 +1,6 @@
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton, SignUpButton, useSignIn } from '@clerk/nextjs';
+import { SignInButton, useSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
+import styles from './SignInForm.module.scss';
 
 const SignInForm = () => {
   const { signIn } = useSignIn();
@@ -9,8 +10,13 @@ const SignInForm = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    const email = formData.get('email');
-    const password = formData.get('password');
+    const email = String(formData.get('email')) ?? '';
+    const password = String(formData.get('password')) ?? '';
+
+    if (!signIn) {
+      console.error('signIn is undefined');
+      return;
+    }
 
     try {
       const result = await signIn.create({
@@ -30,16 +36,38 @@ const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">Email</label>
-      <input id="email" name="email" placeholder="email" type="email" required />
+    <div className={styles.form_container}>
+      <div className={styles.form_wrapper}>
+        <h1 className={styles.form_header}>Вход в админ. панель</h1>
+        <br></br>
+        <form onSubmit={handleSubmit} className={styles.signin_form}>
+          <label htmlFor="email">Почтовый адрес</label>
+          <input
+            className={styles.signin_input}
+            id="email"
+            name="email"
+            placeholder="admin@zvuk.com"
+            type="email"
+            required
+          />
 
-      <label htmlFor="password">Password</label>
-      <input id="password" name="password" placeholder="password" type="password" required />
-      <SignInButton forceRedirectUrl="/admin">
-        <button type="submit">Sign In</button>
-      </SignInButton>
-    </form>
+          <label htmlFor="password">Пароль</label>
+          <input
+            className={styles.signin_input}
+            id="password"
+            name="password"
+            placeholder="password"
+            type="password"
+            required
+          />
+          <SignInButton forceRedirectUrl="/admin">
+            <button className={styles.button} type="submit">
+              Войти
+            </button>
+          </SignInButton>
+        </form>
+      </div>
+    </div>
   );
 };
 
