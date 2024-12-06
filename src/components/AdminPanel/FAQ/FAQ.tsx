@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import CrossIcon from '../CrossIcon/CrossIcon';
 import FAQTextContent from '../FAQTextContent/FAQTextContent';
 import styles from './FAQ.module.scss';
@@ -19,7 +20,7 @@ const FAQ = ({ FAQData }: FAQComponentProps) => {
     <div className={styles.faq_wrapper}>
       <h1>
         На этом сайте можно создать или отредактировать <a href="players/BarbershopAudioPlaylist">плейлист</a> или
-        <a href="/playerbars/BarbershopAudioPlaylist">плеербар</a>
+        <Link href="/playerbars/BarbershopAudioPlaylist">плеербар</Link>
       </h1>
 
       <ul className={styles.faq_container}>
