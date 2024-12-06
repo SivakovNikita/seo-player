@@ -17,7 +17,6 @@ async function getAllKeysHandler(req: NextApiRequest, res: NextApiResponse) {
 
       keys.push(...foundKeys);
     } while (cursor !== '0');
-    console.log(keys);
 
     res.status(200).json({ keys });
   } catch (error) {

@@ -7,6 +7,15 @@
   gap: 10px;
 }
 
+.progress_bar_timer_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  margin-right: 5px;
+}
+
 .progress_bar {
   display: flex;
   align-items: center;

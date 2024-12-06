@@ -78,9 +78,9 @@ function CreatePlaylist() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: playlistName,
+          name: playlistName.trim(),
           playlistData: JSON.stringify({
-            title: playlistTitle,
+            title: playlistTitle.trim(),
             content: playlistContent,
             tracks: JSON.parse(JSON.stringify(tracks)),
           }),

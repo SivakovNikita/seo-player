@@ -10,6 +10,7 @@ interface Params extends ParsedUrlQuery {
 
 type PlaylistProps = {
   playlist: string[];
+  playlistName: string;
 };
 
 export const getServerSideProps: GetServerSideProps<PlaylistProps> = async (context) => {
@@ -22,14 +23,13 @@ export const getServerSideProps: GetServerSideProps<PlaylistProps> = async (cont
 
   const playlistData = await redis.get(playlistName);
   const playlist = Array.isArray(playlistData) ? playlistData : Object.values(playlistData || {});
-  console.log('ssr: ', playlist);
 
   return {
-    props: { playlist },
+    props: { playlist, playlistName },
   };
 };
 
-export default function PlayerBar({ playlist }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+const PlayerBar = ({ playlist, playlistName }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   if (!playlist || playlist.length === 0) {
     return <div style={{ color: 'white' }}>Ошибка загрузки данных плейлиста.</div>;
   }
@@ -41,7 +41,9 @@ export default function PlayerBar({ playlist }: InferGetServerSidePropsType<type
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{playlist[0]}</title>
       </Head>
-      <Player trackList={playlist[2]} />
+      <Player trackList={playlist[2]} trackListName={playlistName} />
     </>
   );
-}
+};
+
+export default PlayerBar;

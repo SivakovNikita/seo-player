@@ -52,7 +52,7 @@ const SideTimersProgressBar = React.memo(({ currentTime, duration, loadProgress,
 
   return (
     <div className={styles.progress_bar_wrapper}>
-      <div>
+      <div className={styles.progress_bar_timer_wrapper}>
         <Timer time={currentTime} />
       </div>
       <div ref={ref} className={styles.progress_bar} onMouseDown={handleStart} onTouchStart={handleStart}>

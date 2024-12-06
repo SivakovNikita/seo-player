@@ -12,9 +12,13 @@ import Link from 'next/link';
 import useWindowWidth from '../../utils/useWindowWidth';
 import MobilePlayerBar from '../MobilePlayerBar/MobilePlayerBar';
 
-const Player = ({ trackList }) => {
+const Player = ({ trackList, trackListName }) => {
   const width = useWindowWidth();
   const isMobile = width <= 700;
+  const REG_LINK = 'https://app.zvuk-b2b.com/register?promocode=playerbar';
+  const href = REG_LINK + trackListName;
+
+  console.log(trackListName);
 
   const {
     isPlaying,
@@ -76,7 +80,7 @@ const Player = ({ trackList }) => {
   ) : (
     <div className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}>
       <div className={clsx({ [styles.player_cta_section]: true, [styles.player_cta_section__active]: isPlaying })}>
-        <a href="https://app.zvuk-b2b.com/register?promocode=playerbar" target="_blank">
+        <a href={href} target="_blank">
           <div className={clsx({ [styles.player_cta_button]: true, [styles.player_cta_button__active]: isPlaying })}>
             Слушать весь плейлист бесплатно!
           </div>

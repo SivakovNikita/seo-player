@@ -1,31 +1,19 @@
-import Header from '../Header/Header';
 import CreatePlaylist from '../Pages/CreatePlaylist/CreatePlaylist';
 import EditPlaylist from '../Pages/EditPlaylist/EditPlaylist';
 import UploadTrack from '../Pages/UploadTrack/UploadTrack';
 import WelcomePage from '../Pages/WelcomePage/WelcomePage';
+import Header from '../Header/Header';
+import { ClerkProvider, SignedIn, SignIn } from '@clerk/nextjs';
 
-export default function Layout({ page }: { page: string }) {
-  let content;
-
-  switch (page) {
-    case 'CreatePlaylist':
-      content = <CreatePlaylist />;
-      break;
-    case 'EditPlaylist':
-      content = <EditPlaylist />;
-      break;
-    case 'UploadTrack':
-      content = <UploadTrack />;
-      break;
-    default:
-      content = <WelcomePage />;
-      break;
-  }
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
   return (
-    <>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <Header />
-      <>{content}</>
-    </>
+      <SignedIn>{children}</SignedIn>
+    </ClerkProvider>
   );
-}
+};
+
+export default Layout;

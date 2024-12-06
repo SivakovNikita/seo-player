@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 
 function Header() {
   const [isCurrent, setIsCurrent] = useState<string | null>(null);
@@ -13,9 +14,9 @@ function Header() {
   }, []);
 
   const links = [
-    { route: '/admin?page=CreatePlaylist', text: 'Создать плейлист' },
-    { route: '/admin?page=EditPlaylist', text: 'Отредактировать плейлист' },
-    { route: '/admin?page=UploadTrack', text: 'Загрузить трек' },
+    { route: '/admin/CreatePlaylist', text: 'Создать плейлист' },
+    { route: '/admin/EditPlaylist', text: 'Отредактировать плейлист' },
+    { route: '/admin/UploadTrack', text: 'Загрузить трек' },
   ];
 
   const handleClick = (route: string) => {
@@ -43,6 +44,9 @@ function Header() {
                 </Link>
               </li>
             ))}
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </ul>
         </div>
       </div>

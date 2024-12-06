@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import styles from './WelcomePage.module.scss';
 import FAQ from '../../FAQ/FAQ';
 import FAQData from '../../../../../public/data/faqData';

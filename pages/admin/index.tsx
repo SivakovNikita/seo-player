@@ -1,22 +1,15 @@
-'use client';
-
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import Layout from '../../src/components/AdminPanel/Layout/Layout';
+import WelcomePage from '../../src/components/AdminPanel/Pages/WelcomePage/WelcomePage';
 
-export default function AdminPanelPage() {
-  const router = useRouter();
-  const { page } = router.query;
+const AdminPanelPage = () => {
+  return (
+    <Layout>
+      <Suspense fallback={<div>Loading...</div>}>
+        <WelcomePage />
+      </Suspense>
+    </Layout>
+  );
+};
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  return <Layout page={page as string} />;
-}
+export default AdminPanelPage;

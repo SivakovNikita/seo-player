@@ -17,7 +17,10 @@ const FAQ = ({ FAQData }: FAQComponentProps) => {
 
   return (
     <div className={styles.faq_wrapper}>
-      <h1>Привет! На этом сайте можно создать, отредактировать новый плейлист или плеербар</h1>
+      <h1>
+        На этом сайте можно создать или отредактировать <a href="players/BarbershopAudioPlaylist">плейлист</a> или
+        <a href="/playerbars/BarbershopAudioPlaylist">плеербар</a>
+      </h1>
 
       <ul className={styles.faq_container}>
         {FAQData.map((item, index) => {
