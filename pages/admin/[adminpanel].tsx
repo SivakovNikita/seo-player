@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Layout from '../../src/components/AdminPanel/Layout/Layout';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const CreatePlaylist = dynamic(() => import('../../src/components/AdminPanel/Pages/CreatePlaylist/CreatePlaylist'));
 const EditPlaylist = dynamic(() => import('../../src/components/AdminPanel/Pages/EditPlaylist/EditPlaylist'));
@@ -21,8 +22,13 @@ const AdminPanel = () => {
       default:
     }
   };
+  const PUBLISHABLE_KEY = 'pk_test_ZnVsbC1qb2V5LTgxLmNsZXJrLmFjY291bnRzLmRldiQ';
 
-  return <Layout>{renderComponent()}</Layout>;
+  return (
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <Layout>{renderComponent()}</Layout>
+    </ClerkProvider>
+  );
 };
 
 export default AdminPanel;
