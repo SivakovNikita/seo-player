@@ -3,7 +3,7 @@ import SignInForm from '../../src/components/SignInForm/SignInForm';
 
 const Login = () => {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={process.env.NEXTPUBLIC_CLERK_PUBLISHABLE_KEY}>
       <SignInForm />
     </ClerkProvider>
   );

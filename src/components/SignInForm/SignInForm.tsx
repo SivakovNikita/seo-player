@@ -41,15 +41,17 @@ const SignInForm = () => {
         <h1 className={styles.form_header}>Вход в админ. панель</h1>
         <br></br>
         <form onSubmit={handleSubmit} className={styles.signin_form}>
-          <label htmlFor="email">Почтовый адрес</label>
-          <input
-            className={styles.signin_input}
-            id="email"
-            name="email"
-            placeholder="admin@zvuk.com"
-            type="email"
-            required
-          />
+          <div className={styles.input_wrapper}>
+            <label htmlFor="email">Почтовый адрес</label>
+            <input
+              className={styles.signin_input}
+              id="email"
+              name="email"
+              placeholder="admin@zvuk.com"
+              type="email"
+              required
+            />
+          </div>
 
           <label htmlFor="password">Пароль</label>
           <input

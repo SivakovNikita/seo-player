@@ -34,6 +34,13 @@
   gap: 5px;
 }
 
+.styles.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
 .signin_input {
   width: 200px;
   margin-bottom: 10px;
