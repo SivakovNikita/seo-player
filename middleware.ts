@@ -2,6 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 const isProtectedRoute = createRouteMatcher(['/admin(.*)']);
+const PUBLISHABLE_KEY = 'pk_test_ZnVsbC1qb2V5LTgxLmNsZXJrLmFjY291bnRzLmRldiQ';
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
