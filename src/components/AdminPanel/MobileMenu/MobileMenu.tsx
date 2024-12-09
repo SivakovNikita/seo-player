@@ -15,11 +15,10 @@ interface MobileMenuInterface {
   links: Link[];
 }
 
-// types
 const MobileMenu = ({ isActive, toggleMenu, links }: MobileMenuInterface) => {
+  const [isCurrent, setIsCurrent] = useState<string | null>(null);
   if (!isActive) return null;
 
-  const [isCurrent, setIsCurrent] = useState<string | null>(null);
   const handleClick = (route: string) => {
     toggleMenu();
     setIsCurrent(route);
