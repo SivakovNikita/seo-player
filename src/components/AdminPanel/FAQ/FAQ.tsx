@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import CrossIcon from '../CrossIcon/CrossIcon';
 import FAQTextContent from '../FAQTextContent/FAQTextContent';
 import styles from './FAQ.module.scss';
@@ -18,10 +17,7 @@ const FAQ = ({ FAQData }: FAQComponentProps) => {
 
   return (
     <div className={styles.faq_wrapper}>
-      <h1>
-        На этом сайте можно создать или отредактировать <a href="players/BarbershopAudioPlaylist">плейлист</a> или
-        <Link href="/playerbars/BarbershopAudioPlaylist">плеербар</Link>
-      </h1>
+      <h1>На этом сайте можно создать или отредактировать плейлист или плеербар.</h1>
 
       <ul className={styles.faq_container}>
         {FAQData.map((item, index) => {

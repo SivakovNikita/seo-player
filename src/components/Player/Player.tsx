@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { usePlayer } from '../../../src/hooks/usePalyer';
-import useMediaSession from '../../hooks/useMediaSession';
 import PlayPauseControl from '../PlayPauseControl/PlayPauseControl';
 import styles from './Player.module.scss';
 import { useEffect, useMemo, useState } from 'react';
 import SideTimersProgressBar from '../SideTimersProgressBar/SideTimersProgressBar';
 import Loader from '../Loader/Loader';
 import Equalizer from '../Equalizer/Equalizer';
-import Link from 'next/link';
+import useMediaSession from '../../hooks/useMediaSession';
 import useWindowWidth from '../../utils/useWindowWidth';
 import MobilePlayerBar from '../MobilePlayerBar/MobilePlayerBar';
 
@@ -17,8 +16,6 @@ const Player = ({ trackList, trackListName }) => {
   const isMobile = width <= 700;
   const REG_LINK = 'https://app.zvuk-b2b.com/register?promocode=playerbar';
   const href = REG_LINK + trackListName;
-
-  console.log(trackListName);
 
   const {
     isPlaying,
@@ -58,6 +55,13 @@ const Player = ({ trackList, trackListName }) => {
         }
       : { title: '', artist: '', duration: '', artwork: [], next: false, prev: false };
   }, [currentTrackIndex, isNextDisabled, isPrevDisabled, trackDuration, trackList, isPlaying]);
+
+  useMediaSession({
+    track,
+    onPlay: play,
+    onPause: pause,
+    onPreviousTrack: prev,
+  });
 
   useEffect(() => {
     const newHeight = isPlaying ? '100px' : '50px';

@@ -6,9 +6,11 @@
   transition: all 0.5s ease;
   opacity: 0;
   visibility: hidden;
+  padding-left: 5px;
 }
 
 .text_content_active {
+  padding-left: 5px;
   max-height: var(--text-height);
   opacity: 1;
   visibility: visible;

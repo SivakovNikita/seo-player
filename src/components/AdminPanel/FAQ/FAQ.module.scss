@@ -38,6 +38,7 @@ $button-hover-background: #00b399;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.35;
+
   background-color: $button-background;
   color: white;
   width: 100%;
@@ -47,7 +48,7 @@ $button-hover-background: #00b399;
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  padding: 10px 0 10px 0;
+  padding: 10px 5px 10px 5px;
   cursor: pointer;
 
   &:focus {

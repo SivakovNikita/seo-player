@@ -92,7 +92,6 @@ const PlayerBar = ({ trackList }) => {
       >
         <Tracklist />
       </TrackProvider>
-      {/* <div className={styles.trackList_cta}>Весь плейлист доступен в личном кабинете ↗</div> */}
     </div>
   );
 };
