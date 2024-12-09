@@ -11,6 +11,7 @@ const UploadTrack = () => {
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadFailed, setIsLoadFailed] = useState(false);
+  const [isFileName, setFileName] = useState('');
   const readyToload = !blob && !isLoading;
 
   const handleUpload = async (event) => {
@@ -55,15 +56,32 @@ const UploadTrack = () => {
     }
   };
 
+  const handleChange = (event) => {
+    event.preventDefault();
+    let fileName = event.target.value;
+    setFileName(fileName);
+  };
+
   return (
     <div className={styles.page_container}>
       <div className={styles.admin_panel_container}>
         <h1>Загрузите новый трек</h1>
 
         <form className={styles.text_block} onSubmit={handleUpload}>
-          <input className={styles.input} name="file" ref={inputFileRef} type="file" required />
+          <label className={styles.button}>
+            {isFileName ? isFileName : 'Выбрать файл 🔍'}
+            <input
+              onChange={handleChange}
+              ref={inputFileRef}
+              style={{ display: 'none' }}
+              name="file"
+              type="file"
+              required
+            />
+          </label>
+
           {readyToload ? (
-            <button className={styles.button} type="submit">
+            <button className={styles.button_upload} type="submit">
               Загрузить
             </button>
           ) : null}

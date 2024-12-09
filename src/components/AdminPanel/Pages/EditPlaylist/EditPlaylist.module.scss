@@ -20,6 +20,18 @@
   padding-bottom: 5vh;
 }
 
+.tracklists_dropdown_input {
+  width: 430px;
+  border-radius: 4px;
+
+  @media (max-width: 430px) {
+    width: 330px;
+  }
+  @media (max-width: 330px) {
+    width: 280px;
+  }
+}
+
 .input {
   width: 95%;
   height: 16px;
@@ -86,6 +98,7 @@
   gap: 10px;
   margin-bottom: 5px;
   width: 400px;
+
   @media (max-width: 430px) {
     width: 300px;
   }

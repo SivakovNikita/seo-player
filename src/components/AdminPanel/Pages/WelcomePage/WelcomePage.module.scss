@@ -8,6 +8,8 @@
   min-height: 100lvh;
   width: 100%;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .page_wrapper {

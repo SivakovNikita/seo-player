@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styles from './EditPlaylist.module.scss';
-import Link from 'next/link';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
@@ -69,6 +68,7 @@ function EditPlaylist() {
         <h2>Редактирование плейлистов</h2>
         <h3>Выберите плейлист:</h3>
         <Dropdown
+          className={styles.tracklists_dropdown_input}
           options={playlists}
           placeholder="Выберите плейлист"
           onChange={(selectedOption) => {
