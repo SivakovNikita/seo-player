@@ -100,11 +100,11 @@ function CreatePlaylist() {
   };
 
   return (
-    <form className={styles.page_container}>
+    <div className={styles.page_container}>
       <div className={styles.admin_panel_container}>
         <h1>Создайте новый SEO-плейлист</h1>
 
-        <div>
+        <form>
           <div className={styles.text_block}>
             <label className={styles.text_block_label}>Введите название нового плейлиста</label>
             <input
@@ -144,7 +144,7 @@ function CreatePlaylist() {
               handleDeleteTrack={handleDeleteTrack}
             />
           ))}
-        </div>
+        </form>
 
         <button className={styles.button} onClick={handleAddTrack}>
           {tracks.length > 0 ? 'Добавить еще один трек' : 'Добавить трек'}
@@ -164,7 +164,7 @@ function CreatePlaylist() {
           </div>
         )}
       </div>
-    </form>
+    </div>
   );
 }
 

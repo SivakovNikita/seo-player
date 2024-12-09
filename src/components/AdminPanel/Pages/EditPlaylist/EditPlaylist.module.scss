@@ -3,11 +3,13 @@
   justify-content: center;
   align-items: flex-start;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   height: 100dvb;
   background-color: #121212;
   color: #ffffff;
   margin-bottom: 10px;
-  padding-top: 30px;
+  margin-top: 50px;
 }
 
 .admin_panel_container {
