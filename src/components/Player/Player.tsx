@@ -80,6 +80,7 @@ const Player = ({ trackList, trackListName }) => {
       loadProgress={loadProgress}
       handleSeek={handleSeek}
       track={track}
+      link={href}
     />
   ) : (
     <div className={clsx({ [styles.player_container]: true, [styles.player_container__active]: isPlaying })}>
@@ -93,13 +94,8 @@ const Player = ({ trackList, trackListName }) => {
 
       <div className={clsx({ [styles.player_divider]: true, [styles.player_divider__active]: isPlaying })}></div>
 
-      <div
-        className={clsx({
-          [styles.player_controls_wrapper]: true,
-          [styles.player_controls_wrapper__mobile]: isMobile,
-        })}
-      >
-        <div className={clsx({ [styles.images_wrapper]: true, [styles.images_wrapper__mobile]: isMobile })}>
+      <div className={styles.player_controls_wrapper}>
+        <div className={styles.images_wrapper}>
           <div className={styles.player_indicators_wrapper}>
             {isPlaying ? isLoading ? <Loader isLoading={isLoading} /> : <Equalizer /> : null}
           </div>

@@ -1,8 +1,10 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 import PlayPauseControl from '../PlayPauseControl/PlayPauseControl';
 import styles from './MobilePlayerBar.module.scss';
 import SideTimersProgressBar from '../SideTimersProgressBar/SideTimersProgressBar';
 import Loader from '../Loader/Loader';
+import Equalizer from '../Equalizer/Equalizer';
 
 const MobilePlayerBar = ({
   isPlaying,
@@ -14,11 +16,12 @@ const MobilePlayerBar = ({
   loadProgress,
   handleSeek,
   track,
+  link,
 }) => {
   return (
     <div className={clsx(styles.player_container, { [styles.player_container__active]: isPlaying })}>
       <div className={clsx(styles.player_cta_section, { [styles.player_cta_section__active]: isPlaying })}>
-        <a href="https://app.zvuk-b2b.com/register?promocode=playerbar" target="_blank" rel="noopener noreferrer">
+        <a href={link} target="_blank" rel="noopener noreferrer">
           <div className={clsx(styles.player_cta_button, { [styles.player_cta_button__active]: isPlaying })}>
             Слушать весь плейлист бесплатно!
           </div>
@@ -34,8 +37,10 @@ const MobilePlayerBar = ({
 
         <div className={styles.player_controls}>
           <div className={styles.playPause_btn_wrapper}>
-            <PlayPauseControl isPlaying={isPlaying} pause={pause} play={play} />
-            {isLoading && !isPlaying && <Loader isLoading={isLoading} />}
+            <div className={styles.player_indicators_wrapper}>
+              <PlayPauseControl isPlaying={isPlaying} pause={pause} play={play} />
+              {isPlaying && isLoading && <Loader isLoading={isLoading} />}
+            </div>
           </div>
 
           <div className={styles.progress_bar_wrapper}>

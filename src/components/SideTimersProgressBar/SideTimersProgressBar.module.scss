@@ -5,6 +5,10 @@
   width: 100%;
   box-sizing: content-box;
   gap: 10px;
+
+  @media (max-width: 430px) {
+    width: 90%;
+  }
 }
 
 .progress_bar_timer_wrapper {
