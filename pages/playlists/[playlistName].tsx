@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import PlayerBar from '../../src/components/PlayerBar/PlayerBar';
+import Playlist from '../../src/components/Playlist/Playlist';
 import { Redis } from '@upstash/redis';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
@@ -40,7 +40,7 @@ export default function Player({ playlist }: InferGetServerSidePropsType<typeof 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{playlist[0]}</title>
       </Head>
-      <PlayerBar trackList={playlist[2]} />
+      <Playlist trackList={playlist[2]} />
     </>
   );
 }

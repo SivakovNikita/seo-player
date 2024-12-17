@@ -1,15 +1,15 @@
-import styles from './PlayerBar.module.scss';
-import { usePlayer } from '../../hooks/usePalyer';
+import styles from './Playlist.module.scss';
+import React from 'react';
 import useMediaSession from '../../hooks/useMediaSession';
 import ProgressBar from '../ProgressBar/ProgressBar';
-import { useMemo } from 'react';
-import React from 'react';
 import Tracklist from '../TrackList/TrackList';
-import { TrackProvider } from './TrackContex';
 import VolumeBar from '../VolumeBar/VolumeBar';
 import PlayerNavigation from '../PlayerNavigation/PlayerNavigation';
+import { usePlayer } from '../../hooks/usePalyer';
+import { useMemo } from 'react';
+import { TrackProvider } from './TrackContex';
 
-const PlayerBar = ({ trackList }) => {
+const Playlist = ({ trackList }) => {
   const {
     isPlaying,
     isLoading,
@@ -96,4 +96,4 @@ const PlayerBar = ({ trackList }) => {
   );
 };
 
-export default PlayerBar;
+export default Playlist;

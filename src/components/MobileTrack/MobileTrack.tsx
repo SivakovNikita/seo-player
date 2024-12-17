@@ -1,11 +1,11 @@
+import styles from './MobileTrack.module.scss';
 import clsx from 'clsx';
-import { TrackContext } from '../Playlist/TrackContex';
-import styles from './Track.module.scss';
+import React from 'react';
+import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
+import { TrackContext } from '../Playlist/TrackContex';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from '../../utils/useWindowWidth';
-import Image from 'next/image';
-import React from 'react';
 import Loader from '../Loader/Loader';
 
 type TrackImage = {
@@ -27,7 +27,7 @@ interface TrackInterface {
   index: number;
 }
 
-const Track = ({ track, index }: TrackInterface) => {
+const MobileTrack = ({ track, index }: TrackInterface) => {
   const { play, pause, next, state, currentIndex, isLoading } = useContext(TrackContext);
 
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);
@@ -135,4 +135,4 @@ const Track = ({ track, index }: TrackInterface) => {
   );
 };
 
-export default Track;
+export default MobileTrack;

@@ -7,13 +7,12 @@
   max-width: 600px;
   min-width: 220px;
   height: 36px;
-  margin: 5px 5px 5px 5px;
-  padding: 3px 3px 3px 3px;
+
   transition: border 0.3s ease;
   border: 1px solid transparent;
   border-radius: 5px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 5px;
+  margin-bottom: 1px;
 
   &__active {
     color: #1bd4b3;
@@ -21,10 +20,6 @@
 
   &:hover {
     border: 1px solid #9c99a1;
-  }
-
-  @media (max-width: 430px) {
-    height: 48px;
   }
 }
 
@@ -42,11 +37,6 @@
   filter: grayscale(100%);
   &__active {
     filter: grayscale(0%);
-  }
-
-  @media (max-width: 430px) {
-    width: 48px;
-    height: 48px;
   }
 }
 
@@ -123,11 +113,6 @@
   color: white;
   font-size: 16px;
   transition: width 0.5s ease-in-out;
-
-  @media (max-width: 430px) {
-    width: 48px;
-    height: 48px;
-  }
 }
 
 .visible {
