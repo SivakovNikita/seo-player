@@ -11,8 +11,8 @@ const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, nex
       <button className={styles.btn_navigate} disabled={isPrevDisabled} onClick={prev}>
         <Image
           src="/images/navigation/Icon_prev_36x36.svg"
-          width={isMobile ? 56 : 36}
-          height={isMobile ? 56 : 36}
+          width={isMobile ? 46 : 36}
+          height={isMobile ? 46 : 36}
           alt="prev button"
           priority={true}
         />
@@ -23,16 +23,16 @@ const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, nex
           <Image
             src="/images/navigation/Icon_pause_36x36.svg"
             // fill={true}
-            width={isMobile ? 56 : 36}
-            height={isMobile ? 56 : 36}
+            width={isMobile ? 46 : 36}
+            height={isMobile ? 46 : 36}
             alt="stop button"
             priority={true}
           />
         ) : (
           <Image
             src="/images/navigation/Icon_play_36x36.svg"
-            width={isMobile ? 56 : 36}
-            height={isMobile ? 56 : 36}
+            width={isMobile ? 46 : 36}
+            height={isMobile ? 46 : 36}
             alt="play button"
             priority={true}
           />
@@ -41,8 +41,8 @@ const PlayerNavigation = ({ isPlaying, isPrevDisabled, isNextDisabled, prev, nex
       <button className={styles.btn_navigate} onClick={() => next()} disabled={isNextDisabled}>
         <Image
           src="/images/navigation/Icon_next_36x36.svg"
-          width={isMobile ? 56 : 36}
-          height={isMobile ? 56 : 36}
+          width={isMobile ? 46 : 36}
+          height={isMobile ? 46 : 36}
           alt="next button"
           priority={true}
         />
