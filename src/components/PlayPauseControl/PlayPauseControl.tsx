@@ -1,7 +1,14 @@
 import Image from 'next/image';
 import styles from './PlayPauseControl.module.scss';
+import React from 'react';
 
-const PlayPauseControl = ({ isPlaying, pause, play }) => {
+interface PlayPauseControlInterface {
+  isPlaying: boolean;
+  pause: () => void;
+  play: () => void;
+}
+
+const PlayPauseControl = React.memo(({ isPlaying, pause, play }: PlayPauseControlInterface) => {
   return (
     <div className={styles.player_navigation}>
       <button className={styles.btn_play_pause} onClick={isPlaying ? pause : play}>
@@ -25,6 +32,6 @@ const PlayPauseControl = ({ isPlaying, pause, play }) => {
       </button>
     </div>
   );
-};
+});
 
 export default PlayPauseControl;

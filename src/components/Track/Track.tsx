@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { TrackContext } from '../Playlist/TrackContex';
 import styles from './Track.module.scss';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from '../../utils/useWindowWidth';
 import Image from 'next/image';
@@ -27,7 +27,7 @@ interface TrackInterface {
   index: number;
 }
 
-const Track = ({ track, index }: TrackInterface) => {
+const Track = React.memo(({ track, index }: TrackInterface) => {
   const { play, pause, next, state, currentIndex, isLoading } = useContext(TrackContext);
 
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(state && currentIndex === index);
@@ -133,6 +133,6 @@ const Track = ({ track, index }: TrackInterface) => {
       </div>
     </div>
   );
-};
+});
 
 export default Track;

@@ -13,7 +13,7 @@ export const usePlayer = <T extends { src: string }>({
   const [currentTrackIndex, setCurrentTrackIndex] = useState(startIndex);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
-  const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
+  const [currentTrackDuration, setCurrentTrackDuration] = useState(0); // out
   const [currentVolume, setCurrentVolume] = useState(0);
   const [isPrevDisabled, setPrevDisabled] = useState(true);
   const [isNextDisabled, setNextDisabled] = useState(true);
@@ -183,7 +183,7 @@ export const usePlayer = <T extends { src: string }>({
 
     const updateTime = () => {
       setCurrentTrackDuration(audio.currentTime);
-    };
+    }; // out
 
     const handleEnd = () => {
       if (repeat === 'one') {
@@ -211,7 +211,7 @@ export const usePlayer = <T extends { src: string }>({
     audio.addEventListener('play', handlePlayStop);
     audio.addEventListener('pause', handlePlayStop);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('timeupdate', updateTime);
+    // audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('ended', handleEnd);
     audio.addEventListener('progress', handleProgress);
 
@@ -220,7 +220,7 @@ export const usePlayer = <T extends { src: string }>({
       audio.removeEventListener('play', handlePlayStop);
       audio.removeEventListener('pause', handlePlayStop);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('timeupdate', updateTime);
+      // audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('ended', handleEnd);
       audio.removeEventListener('progress', handleProgress);
     };
@@ -235,6 +235,7 @@ export const usePlayer = <T extends { src: string }>({
   }, [currentTrackIndex, queue.length, repeat]);
 
   return {
+    audio,
     isPlaying,
     isLoading,
     audioContext,

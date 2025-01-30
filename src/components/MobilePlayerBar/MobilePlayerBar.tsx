@@ -1,18 +1,16 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import PlayPauseControl from '../PlayPauseControl/PlayPauseControl';
 import styles from './MobilePlayerBar.module.scss';
 import SideTimersProgressBar from '../SideTimersProgressBar/SideTimersProgressBar';
 import Loader from '../Loader/Loader';
-import Equalizer from '../Equalizer/Equalizer';
 
 const MobilePlayerBar = ({
+  audio,
   isPlaying,
   isLoading,
   play,
   pause,
   trackDuration,
-  currentTrackDuration,
   loadProgress,
   handleSeek,
   track,
@@ -36,7 +34,7 @@ const MobilePlayerBar = ({
         </div>
 
         <div className={styles.player_controls}>
-          <div className={styles.playPause_btn_wrapper}>
+          <div className={styles.playPause_btn_wrapper} key={'playPauseControl'}>
             <div className={styles.player_indicators_wrapper}>
               <PlayPauseControl isPlaying={isPlaying} pause={pause} play={play} />
               {isPlaying && isLoading && <Loader isLoading={isLoading} />}
@@ -45,7 +43,7 @@ const MobilePlayerBar = ({
 
           <div className={styles.progress_bar_wrapper}>
             <SideTimersProgressBar
-              currentTime={currentTrackDuration}
+              audio={audio}
               duration={trackDuration}
               loadProgress={loadProgress}
               onSeek={handleSeek}

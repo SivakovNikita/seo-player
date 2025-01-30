@@ -18,22 +18,18 @@ const Player = ({ trackList, trackListName }) => {
   const href = REG_LINK + trackListName;
 
   const {
+    audio,
     isPlaying,
     isLoading,
     pause,
     play,
-    next,
-    setNext,
     prev,
-    adjustVolume,
     handleSeek,
-    currentVolume,
     currentTrackIndex,
     isPrevDisabled,
     isNextDisabled,
     trackDuration,
     loadProgress,
-    currentTrackDuration,
   } = usePlayer({
     queue: trackList,
     startIndex: 0,
@@ -71,12 +67,12 @@ const Player = ({ trackList, trackListName }) => {
 
   return isMobile ? (
     <MobilePlayerBar
+      audio={audio}
       isLoading={isLoading}
       isPlaying={isPlaying}
       play={play}
       pause={pause}
       trackDuration={trackDuration}
-      currentTrackDuration={currentTrackDuration}
       loadProgress={loadProgress}
       handleSeek={handleSeek}
       track={track}
@@ -115,7 +111,7 @@ const Player = ({ trackList, trackListName }) => {
         </div>
         <div className={styles.progress_bar_wrapper}>
           <SideTimersProgressBar
-            currentTime={currentTrackDuration}
+            audio={audio}
             duration={trackDuration}
             loadProgress={loadProgress}
             onSeek={handleSeek}

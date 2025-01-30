@@ -29,6 +29,7 @@ const MobileEmbedPlayer = ({}) => {
   };
 
   const {
+    audio,
     isPlaying,
     isLoading,
     pause,
@@ -42,7 +43,6 @@ const MobileEmbedPlayer = ({}) => {
     isNextDisabled,
     trackDuration,
     loadProgress,
-    currentTrackDuration,
   } = usePlayer({
     queue: trackListNewYear,
     startIndex: 0,
@@ -113,12 +113,7 @@ const MobileEmbedPlayer = ({}) => {
                 pause={pause}
                 play={play}
               />
-              <ProgressBar
-                currentTime={currentTrackDuration}
-                duration={trackDuration}
-                loadProgress={loadProgress}
-                onSeek={handleSeek}
-              />
+              <ProgressBar audio={audio} duration={trackDuration} loadProgress={loadProgress} onSeek={handleSeek} />
             </div>
           ) : (
             // это 100000 вынести в компонент

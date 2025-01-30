@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import debounce from 'lodash.debounce';
 import toPascalCase from '../../../../utils/toPascalCase';
 import IframeTemplate from '../../IframeTemplate/IframeTemplate';
+import CheckBox from '../../CheckBox/CheckBox';
 
 interface Track {
   title: string;
@@ -133,6 +134,7 @@ function CreatePlaylist() {
               onChange={(e) => setPlaylistTitle(e.target.value)}
               required
             />
+            <CheckBox />
           </div>
           {/* вынес в комопнент */}
           {tracks.map((track, index) => (

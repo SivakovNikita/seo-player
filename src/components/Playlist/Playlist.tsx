@@ -11,6 +11,7 @@ import { TrackProvider } from './TrackContex';
 
 const Playlist = ({ trackList }) => {
   const {
+    audio,
     isPlaying,
     isLoading,
     pause,
@@ -71,12 +72,7 @@ const Playlist = ({ trackList }) => {
         />
 
         <div className={styles.controls_wrapper}>
-          <ProgressBar
-            currentTime={currentTrackDuration}
-            duration={trackDuration}
-            loadProgress={loadProgress}
-            onSeek={handleSeek}
-          />
+          <ProgressBar audio={audio} duration={trackDuration} loadProgress={loadProgress} onSeek={handleSeek} />
         </div>
         <VolumeBar currentVolume={currentVolume} adjustVolume={adjustVolume} />
       </div>

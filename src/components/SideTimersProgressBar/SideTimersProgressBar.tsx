@@ -1,19 +1,26 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './SideTimersProgressBar.module.scss';
 import React from 'react';
 import Timer from '../Timer/Timer';
 
 interface ProgressBarProps {
-  currentTime: number;
+  audio: HTMLAudioElement | null;
   duration: number;
   loadProgress: number;
   onSeek: (time: number) => void;
 }
 
-const SideTimersProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }: ProgressBarProps) => {
+const SideTimersProgressBar = React.memo(({ audio, duration, loadProgress, onSeek }: ProgressBarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const dragginTimeRef = useRef<number | null>(null);
   const [dragginTime, setDragginTime] = useState<number | null>(null);
+  const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
+
+  const updateTime = () => {
+    if (audio) {
+      setCurrentTrackDuration(audio.currentTime);
+    }
+  };
 
   const handleSeek = (e: MouseEvent | TouchEvent) => {
     if (ref.current) {
@@ -47,13 +54,22 @@ const SideTimersProgressBar = React.memo(({ currentTime, duration, loadProgress,
     }
   };
 
-  const progressPercentage = Math.round((currentTime / duration) * 100);
+  useEffect(() => {
+    if (!audio) return;
+    audio.addEventListener('timeupdate', updateTime);
+
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime);
+    };
+  }, [audio]);
+
+  const progressPercentage = Math.round((currentTrackDuration / duration) * 100);
   const calculatedWidth = dragginTime !== null ? (dragginTime / duration) * 100 : progressPercentage;
 
   return (
     <div className={styles.progress_bar_wrapper}>
       <div className={styles.progress_bar_timer_wrapper}>
-        <Timer time={currentTime} />
+        <Timer time={currentTrackDuration} />
       </div>
       <div ref={ref} className={styles.progress_bar} onMouseDown={handleStart} onTouchStart={handleStart}>
         <div className={styles.track_loading_progress} style={{ width: `${loadProgress}%` }}></div>
@@ -66,5 +82,5 @@ const SideTimersProgressBar = React.memo(({ currentTime, duration, loadProgress,
   );
 });
 
-SideTimersProgressBar.displayName = 'SideTimersProgressBar';
+// SideTimersProgressBar.displayName = 'SideTimersProgressBar';
 export default SideTimersProgressBar;

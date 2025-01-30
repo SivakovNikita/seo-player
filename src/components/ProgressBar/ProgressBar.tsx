@@ -1,19 +1,36 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './ProgressBar.module.scss';
 import React from 'react';
 import TimerBar from '../TimerBar/TimerBar';
 
 interface ProgressBarProps {
-  currentTime: number;
+  audio: HTMLAudioElement | null;
   duration: number;
   loadProgress: number;
   onSeek: (time: number) => void;
 }
 
-const ProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }: ProgressBarProps) => {
+const ProgressBar = React.memo(({ audio, duration, loadProgress, onSeek }: ProgressBarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const dragginTimeRef = useRef<number | null>(null);
   const [dragginTime, setDragginTime] = useState<number | null>(null);
+  const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
+
+  const updateTime = () => {
+    if (audio) {
+      setCurrentTrackDuration(audio.currentTime);
+    }
+  };
+
+  useEffect(() => {
+    if (!audio) return;
+    console.log(typeof audio);
+    audio.addEventListener('timeupdate', updateTime);
+
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime);
+    };
+  }, [audio]);
 
   const handleSeek = (e: MouseEvent | TouchEvent) => {
     if (ref.current) {
@@ -21,6 +38,7 @@ const ProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }:
       const { left: containerX, width: containerWidth } = ref.current.getBoundingClientRect();
       const newPosition = Math.max(Math.min(posX - containerX, containerWidth), 0) / containerWidth;
       const newTime = newPosition * duration;
+      console.log(newTime);
       setDragginTime(newTime);
       dragginTimeRef.current = newTime;
     }
@@ -47,16 +65,16 @@ const ProgressBar = React.memo(({ currentTime, duration, loadProgress, onSeek }:
     }
   };
 
-  const progressPercentage = Math.round((currentTime / duration) * 100);
+  const progressPercentage = Math.round((currentTrackDuration / duration) * 100);
   const calculatedWidth = dragginTime !== null ? (dragginTime / duration) * 100 : progressPercentage;
 
   return (
     <div ref={ref} className={styles.progress_bar} onMouseDown={handleStart} onTouchStart={handleStart}>
-      <TimerBar currentTrackDuration={currentTime} duration={duration} />
+      <TimerBar currentTrackDuration={currentTrackDuration} duration={duration} />
       <div className={styles.track_loading_progress} style={{ width: `${loadProgress}%` }}></div>
       <div className={styles.track_progress} style={{ width: `${calculatedWidth}%` }}></div>
     </div>
   );
 });
-ProgressBar.displayName = 'ProgressBar';
+
 export default ProgressBar;
