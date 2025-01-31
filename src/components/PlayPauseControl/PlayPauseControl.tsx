@@ -33,5 +33,6 @@ const PlayPauseControl = React.memo(({ isPlaying, pause, play }: PlayPauseContro
     </div>
   );
 });
+PlayPauseControl.displayName = 'PlayPauseControl';
 
 export default PlayPauseControl;
