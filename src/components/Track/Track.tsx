@@ -134,5 +134,6 @@ const Track = React.memo(({ track, index }: TrackInterface) => {
     </div>
   );
 });
+Track.displayName = 'Track';
 
 export default Track;

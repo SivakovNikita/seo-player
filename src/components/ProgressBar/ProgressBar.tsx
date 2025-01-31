@@ -76,5 +76,6 @@ const ProgressBar = React.memo(({ audio, duration, loadProgress, onSeek }: Progr
     </div>
   );
 });
+ProgressBar.displayName = 'ProgressBar';
 
 export default ProgressBar;

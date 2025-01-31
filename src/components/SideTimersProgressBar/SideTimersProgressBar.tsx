@@ -82,5 +82,5 @@ const SideTimersProgressBar = React.memo(({ audio, duration, loadProgress, onSee
   );
 });
 
-// SideTimersProgressBar.displayName = 'SideTimersProgressBar';
+SideTimersProgressBar.displayName = 'SideTimersProgressBar';
 export default SideTimersProgressBar;

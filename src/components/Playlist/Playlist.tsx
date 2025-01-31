@@ -27,7 +27,6 @@ const Playlist = ({ trackList }) => {
     isNextDisabled,
     trackDuration,
     loadProgress,
-    currentTrackDuration,
   } = usePlayer({
     queue: trackList,
     startIndex: 0,
@@ -91,5 +90,6 @@ const Playlist = ({ trackList }) => {
     </div>
   );
 };
+Playlist.displayName = 'Playlist';
 
 export default Playlist;
