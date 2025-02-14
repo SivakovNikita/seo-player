@@ -27,7 +27,7 @@ const IframeTemplate = (src) => {
             <html>
             <iframe
                 class="player"
-                src="https://seo-player.vercel.app/players/${src.src}Playlist"
+                src="https://seo-player.vercel.app/playlists/${src.src}Playlist"
                 width="100%"
                 height="100%"
                 frameBorder="0"
