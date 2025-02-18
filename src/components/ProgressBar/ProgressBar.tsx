@@ -24,7 +24,6 @@ const ProgressBar = React.memo(({ audio, duration, loadProgress, onSeek }: Progr
 
   useEffect(() => {
     if (!audio) return;
-    console.log(typeof audio);
     audio.addEventListener('timeupdate', updateTime);
 
     return () => {
@@ -38,7 +37,6 @@ const ProgressBar = React.memo(({ audio, duration, loadProgress, onSeek }: Progr
       const { left: containerX, width: containerWidth } = ref.current.getBoundingClientRect();
       const newPosition = Math.max(Math.min(posX - containerX, containerWidth), 0) / containerWidth;
       const newTime = newPosition * duration;
-      console.log(newTime);
       setDragginTime(newTime);
       dragginTimeRef.current = newTime;
     }
