@@ -23,7 +23,7 @@ This project is built using modern web technologies including:
 - **React.js**: To create interactive user interfaces.
 - **TypeScript**: For improved code quality and type safety.
 - **SASS**: For enhanced styling capabilities.
-- <img src="{https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=whit}" />
+<img src="{https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=whit}" />
 
 ## Database and Storage
 The application utilizes a Redis database to efficiently store playlists. Additionally, cloud storage is implemented for scenarios requiring the upload of audio files for specific playlists, ensuring that users have a wide array of audio content at their disposal.
