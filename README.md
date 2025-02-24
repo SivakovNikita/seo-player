@@ -33,7 +33,10 @@ This project is built using modern web technologies including:
 - **React.js**: To create interactive user interfaces.
 - **TypeScript**: For improved code quality and type safety.
 - **SASS**: For enhanced styling capabilities.
-  <img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=whit" style="height: 100px; width:100px;"/>
+
+<img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=whit"/>
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
 
 ## Database and Storage
 
