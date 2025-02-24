@@ -13,12 +13,14 @@ import { createPortal } from 'react-dom';
 import Modal from '../../UI/Modal/Modal';
 import ControlPanel from '../../UI/ControlPanel/ControlPanel';
 
-const MobileEmbedPlayer = ({}) => {
+const MobileEmbedPlayer = ({ playlist, playlistName }) => {
+  const [title, subtitle, imageSrc, content, tracks] = playlist;
   const text = `Звук Бизнес — аудиосервис для бизнеса. C 2016 года мы создаём музыкальную атмосферу в заведениях и помогаем брендам звучать красиво, увеличивать продажи и нравиться людям. Аудиосервис позволяет формировать музыкальные волны под любую целевую аудиторию, управлять удалённо музыкальным оформлением в сети заведений и добавлять любой аудиоконтент в свой музыкальный поток.`;
   const [portal, setPortal] = useState<HTMLElement | null>(null);
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
+  console.log(Array.isArray(playlist));
 
   useEffect(() => {
     setPortal(document.getElementById('portal'));
@@ -45,7 +47,7 @@ const MobileEmbedPlayer = ({}) => {
     trackDuration,
     loadProgress,
   } = usePlayer({
-    queue: trackListChillPop,
+    queue: tracks,
     startIndex: 0,
     repeat: 'none',
   });
@@ -84,30 +86,24 @@ const MobileEmbedPlayer = ({}) => {
           <button className={styles.button}>Войти</button>
         </div>
         <div className={styles.mobile_player_metadata_wrapper}>
-          <Image
-            className={styles.playlist_cover}
-            src="/images/playlistCovers/playlist_cover.png"
-            width={48}
-            height={48}
-            alt="Звук Бизнес"
-          />
+          <Image className={styles.playlist_cover} src={imageSrc} width={48} height={48} alt={title} />
           <div className={styles.mobile_player_metadata}>
             <div className={styles.mobile_palyer_metadata_title}>
-              <span className={styles.title}>Музыка для салона красоты</span>
-              <span className={styles.sub_title}>Легальная фоновая музыка для бизнеса</span>
+              <span className={styles.title}>{title}</span>
+              <span className={styles.sub_title}>{subtitle}</span>
             </div>
-            <div role="button" className={styles.circle_button}>
+            {/* <div role="button" className={styles.circle_button}>
               <span>•</span>
               <span>•</span>
               <span>•</span>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* треклист */}
         <div className={styles.mobile_palyer_tracklist}>
           <TrackProvider
             isLoading={isLoading}
-            trackList={trackListChillPop}
+            trackList={tracks}
             play={play}
             pause={pause}
             next={setNext}

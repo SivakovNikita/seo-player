@@ -5,7 +5,7 @@ function MyApp() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('https://zvuk-b2b.com/?utm_source=seo-player&utm_medium=redirect');
+    router.push('https://zvuk-b2b.com/?utm_source=seo-player&utm_medium=redirect-from-playlist');
   }, [router]);
 
   return null;

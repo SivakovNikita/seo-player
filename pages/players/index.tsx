@@ -1,7 +1,14 @@
-import MobileEmbedPlayer from '../../src/components/EmbedPlayer/MobileEmbedPlayer/MobileEmbedPlayer';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-const App = () => {
-  return <MobileEmbedPlayer />;
-};
+function MyApp() {
+  const router = useRouter();
 
-export default App;
+  useEffect(() => {
+    router.push('https://zvuk-b2b.com/?utm_source=seo-player&utm_medium=redirect-from-embed-player');
+  }, [router]);
+
+  return null;
+}
+
+export default MyApp;

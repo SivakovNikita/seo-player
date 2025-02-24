@@ -4,6 +4,7 @@ import { Redis } from '@upstash/redis';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { Analytics } from '@vercel/analytics/react';
+import MobileEmbedPlayer from '../../src/components/EmbedPlayer/MobileEmbedPlayer/MobileEmbedPlayer';
 
 interface Params extends ParsedUrlQuery {
   playlistName: string;
@@ -23,6 +24,7 @@ export const getServerSideProps: GetServerSideProps<PlaylistProps> = async (cont
   });
 
   const playlistData = await redis.get(playlistName);
+  console.log(typeof playlistData);
   const playlist = Array.isArray(playlistData) ? playlistData : Object.values(playlistData || {});
 
   return {
@@ -43,7 +45,7 @@ const PlayerBar = ({ playlist, playlistName }: InferGetServerSidePropsType<typeo
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{playlist[0]}</title>
       </Head>
-      <Player trackList={playlist[2]} trackListName={playlistName} />
+      <MobileEmbedPlayer playlist={playlist} playlistName={playlistName} />
     </>
   );
 };
