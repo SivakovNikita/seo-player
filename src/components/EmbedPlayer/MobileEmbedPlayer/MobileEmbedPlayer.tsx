@@ -9,29 +9,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Modal from '../../UI/Modal/Modal';
 import ControlPanel from '../../UI/ControlPanel/ControlPanel';
-import useModal from '../../../hooks/useModal';
-import useMediaSession from '../../../hooks/useMediaSession';
-import Link from 'next/link';
 
-interface Track {
-  title?: string;
-  artist?: string;
-  src?: string;
-  img?: { src: string; sizes: string; type: string }[];
-  duration?: string;
-}
-
-interface MobileEmbedPlayerInterface {
-  title: string;
-  subtitle: string;
-  imageSrc: string;
-  content: string;
-  tracks: Track[];
-}
-
-const MobileEmbedPlayer = ({ playlist }) => {
-  console.log(playlist);
-  const [title, subtitle, imageSrc, , tracks] = playlist;
+const MobileEmbedPlayer = ({ playlist, playlistName }) => {
+  const [title, subtitle, imageSrc, content, tracks] = playlist;
+  const text = `Звук Бизнес — аудиосервис для бизнеса. C 2016 года мы создаём музыкальную атмосферу в заведениях и помогаем брендам звучать красиво, увеличивать продажи и нравиться людям. Аудиосервис позволяет формировать музыкальные волны под любую целевую аудиторию, управлять удалённо музыкальным оформлением в сети заведений и добавлять любой аудиоконтент в свой музыкальный поток.`;
   const [portal, setPortal] = useState<HTMLElement | null>(null);
   const { isOpen, content, openModal, closeModal, handlePlaybackChange } = useModal();
 
