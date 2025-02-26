@@ -36,3 +36,25 @@
 .children {
   font-size: 10px;
 }
+
+.button {
+  height: 30px;
+  width: fit-content;
+  border: 1px solid;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #00b399;
+
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: #ffffff;
+    color: black;
+    transform: scale(1.05);
+  }
+}

@@ -20,14 +20,14 @@ const UploadTrackForm = ({ inputFileRef, setBlob, blob }) => {
       console.log(response);
 
       if (!response.ok) {
-        throw new Error('Failed to upload file');
+        throw new Error('Ошибка загрузки файла');
       }
 
       const result = await response.json();
 
       setBlob(result);
     } catch (error) {
-      console.error('Ошибка загрузки файла:', error);
+      console.error('Ошибка загрузки файла: ', error);
     }
   };
 

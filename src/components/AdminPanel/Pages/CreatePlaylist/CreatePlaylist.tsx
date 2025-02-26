@@ -8,6 +8,8 @@ import debounce from 'lodash.debounce';
 import toPascalCase from '../../../../utils/toPascalCase';
 import IframeTemplate from '../../IframeTemplate/IframeTemplate';
 import CheckBox from '../../CheckBox/CheckBox';
+import UploadTrackForm from '../../UploadTrackForm/UploadTrackForm';
+import UploadTrack from '../UploadTrack/UploadTrack';
 
 interface Track {
   title: string;
@@ -24,6 +26,12 @@ function CreatePlaylist() {
   const [createdPlaylist, setCreatedPlaylist] = useState(false);
   const [isValidName, setIsValidName] = useState(true);
   const inputRef = useRef(null);
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (option) => {
+    setSelectedOption((prev) => (prev === option ? '' : option));
+    console.log(option);
+  };
   const playlistContent = `Автор: Звук Бизнес, Категория: Музыкальный плейлист, Цена: Бесплатно, Длительность: 120 минут, Описание: ${playlistTitle}`;
   const regex = /([a-zA-Z]*\s*\d*)/gm;
 
@@ -134,9 +142,8 @@ function CreatePlaylist() {
               onChange={(e) => setPlaylistTitle(e.target.value)}
               required
             />
-            <CheckBox />
+            <CheckBox handler={handleOptionChange} selected={selectedOption} />
           </div>
-          {/* вынес в комопнент */}
           {tracks.map((track, index) => (
             <TrackForm
               key={index}
@@ -146,6 +153,7 @@ function CreatePlaylist() {
               handleDeleteTrack={handleDeleteTrack}
             />
           ))}
+          {selectedOption === 'embedplayer' ? <UploadTrack /> : null}
         </form>
 
         <button className={styles.button} onClick={handleAddTrack}>
