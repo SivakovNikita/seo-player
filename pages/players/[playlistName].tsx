@@ -24,7 +24,6 @@ export const getServerSideProps: GetServerSideProps<PlaylistProps> = async (cont
   });
 
   const playlistData = await redis.get(playlistName);
-  console.log(typeof playlistData);
   const playlist = Array.isArray(playlistData) ? playlistData : Object.values(playlistData || {});
 
   return {
@@ -32,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<PlaylistProps> = async (cont
   };
 };
 
-const PlayerBar = ({ playlist, playlistName }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const PlayerBar = ({ playlist }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   if (!playlist || playlist.length === 0) {
     return <div style={{ color: 'white' }}>Ошибка загрузки данных плейлиста.</div>;
   }
@@ -45,7 +44,7 @@ const PlayerBar = ({ playlist, playlistName }: InferGetServerSidePropsType<typeo
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{playlist[0]}</title>
       </Head>
-      <MobileEmbedPlayer playlist={playlist} playlistName={playlistName} />
+      <MobileEmbedPlayer playlist={playlist} />
     </>
   );
 };

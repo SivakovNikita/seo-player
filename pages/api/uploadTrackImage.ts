@@ -35,7 +35,7 @@ const uploadTrack = async (req, res) => {
     try {
       const fileBuffer = await readFile(file.filepath);
 
-      const blob = await put(`tracks/${file.originalFilename}`, fileBuffer, {
+      const blob = await put(`trackImage/${file.originalFilename}`, fileBuffer, {
         access: 'public',
         token: process.env.BLOB_READ_WRITE_TOKEN,
       });

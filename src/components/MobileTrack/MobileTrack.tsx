@@ -7,6 +7,7 @@ import { TrackContext } from '../Playlist/TrackContex';
 import Equalizer from '../Equalizer/Equalizer';
 import useWindowWidth from '../../utils/useWindowWidth';
 import Loader from '../Loader/Loader';
+import useMediaSession from '../../hooks/useMediaSession';
 
 type TrackImage = {
   src: string;
