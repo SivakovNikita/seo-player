@@ -5,16 +5,20 @@ import { usePlayer } from '../../../hooks/usePalyer';
 import MobileTrackList from '../../MobileTrackList/MobileTrackList';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import PlayerNavigation from '../../PlayerNavigation/PlayerNavigation';
+import useMediaSession from '../../../hooks/useMediaSession';
+import useModal from '../../../hooks/useModal';
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Modal from '../../UI/Modal/Modal';
 import ControlPanel from '../../UI/ControlPanel/ControlPanel';
+import Link from 'next/link';
 
 const MobileEmbedPlayer = ({ playlist, playlistName }) => {
   const [title, subtitle, imageSrc, content, tracks] = playlist;
+  console.log(content);
   const text = `Звук Бизнес — аудиосервис для бизнеса. C 2016 года мы создаём музыкальную атмосферу в заведениях и помогаем брендам звучать красиво, увеличивать продажи и нравиться людям. Аудиосервис позволяет формировать музыкальные волны под любую целевую аудиторию, управлять удалённо музыкальным оформлением в сети заведений и добавлять любой аудиоконтент в свой музыкальный поток.`;
   const [portal, setPortal] = useState<HTMLElement | null>(null);
-  const { isOpen, content, openModal, closeModal, handlePlaybackChange } = useModal();
+  const { isOpen, textContent, openModal, closeModal, handlePlaybackChange } = useModal();
 
   useEffect(() => {
     setPortal(document.getElementById('portal'));
@@ -56,7 +60,7 @@ const MobileEmbedPlayer = ({ playlist, playlistName }) => {
     <div className={styles.background}>
       <div className={styles.mobile_player_container}>
         <div id="portal"></div>
-        {isOpen && portal && createPortal(<Modal onClose={closeModal}>{content}</Modal>, portal)}
+        {isOpen && portal && createPortal(<Modal onClose={closeModal}>{textContent}</Modal>, portal)}
         <div className={styles.mobile_player_header}>
           <Image
             className={styles.logo}

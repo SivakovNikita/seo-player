@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [content, setContent] = useState(null);
+  const [textContent, setContent] = useState(null);
   const [trigger, setTrigger] = useState(null);
   const [hasInteracted, setHasInteracted] = useState(false);
 
@@ -36,7 +36,7 @@ const useModal = () => {
     }
   };
 
-  return { isOpen, content, trigger, openModal, closeModal, handlePlaybackChange };
+  return { isOpen, textContent, trigger, openModal, closeModal, handlePlaybackChange };
 };
 
 export default useModal;

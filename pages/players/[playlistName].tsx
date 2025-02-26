@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<PlaylistProps> = async (cont
   };
 };
 
-const PlayerBar = ({ playlist }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const PlayerBar = ({ playlist, playlistName }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   if (!playlist || playlist.length === 0) {
     return <div style={{ color: 'white' }}>Ошибка загрузки данных плейлиста.</div>;
   }
@@ -44,7 +44,7 @@ const PlayerBar = ({ playlist }: InferGetServerSidePropsType<typeof getServerSid
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{playlist[0]}</title>
       </Head>
-      <MobileEmbedPlayer playlist={playlist} />
+      <MobileEmbedPlayer playlist={playlist} playlistName={playlistName} />
     </>
   );
 };
