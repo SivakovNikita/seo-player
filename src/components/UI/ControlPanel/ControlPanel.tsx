@@ -1,7 +1,4 @@
-import Link from 'next/link';
-import styles from './sadsda.module.scss';
-import { useState } from 'react';
-import clsx from 'clsx';
+import styles from './ControlPanel.module.scss';
 
 const ControlPanel = ({ play }) => {
   const REG_LINK = 'https://app.zvuk-b2b.com/register?promocode=embed-player';

@@ -18,7 +18,6 @@ const MobileEmbedPlayer = ({ playlist, playlistName }) => {
   const REG_LINK = 'https://app.zvuk-b2b.com/register?promocode=embed-player-';
   const href = REG_LINK + playlistName;
   const [portal, setPortal] = useState<HTMLElement | null>(null);
-  const { isOpen, textContent, openModal, closeModal, handlePlaybackChange } = useModal();
 
   useEffect(() => {
     setPortal(document.getElementById('portal'));
@@ -40,6 +39,7 @@ const MobileEmbedPlayer = ({ playlist, playlistName }) => {
     trackDuration,
     loadProgress,
   } = usePlayer({ queue: tracks, startIndex: 0, repeat: 'none' });
+  const { isOpen, textContent, trigger, openModal, closeModal, handlePlaybackChange, setUserPaused } = useModal();
 
   const track = useMemo(() => {
     return tracks[currentTrackIndex];
@@ -87,10 +87,13 @@ const MobileEmbedPlayer = ({ playlist, playlistName }) => {
             isLoading={isLoading}
             trackList={tracks}
             play={play}
-            pause={pause}
             next={setNext}
             state={isPlaying}
             currentIndex={currentTrackIndex}
+            pause={() => {
+              setUserPaused();
+              pause();
+            }}
           >
             <MobileTrackList />
           </TrackProvider>
@@ -105,8 +108,11 @@ const MobileEmbedPlayer = ({ playlist, playlistName }) => {
                   isNextDisabled={isNextDisabled}
                   prev={prev}
                   next={next}
-                  pause={pause}
                   play={play}
+                  pause={() => {
+                    setUserPaused();
+                    pause();
+                  }}
                 />
                 <ProgressBar audio={audio} duration={trackDuration} loadProgress={loadProgress} onSeek={handleSeek} />
               </div>
