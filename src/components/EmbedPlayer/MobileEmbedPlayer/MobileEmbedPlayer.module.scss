@@ -47,10 +47,11 @@
   aspect-ratio: 16/9;
 }
 
-.button {
+.button_login {
   height: 25px;
   width: 78px;
   border: 1px solid;
+  cursor: pointer;
 
   font-family: 'SBSansDisplay-Light';
   color: white;
@@ -104,6 +105,10 @@
   font-weight: 400;
   letter-spacing: 0em;
   color: white;
+
+  @media (max-width: 330px) {
+    font-size: 12px;
+  }
 }
 
 .sub_title {
@@ -113,6 +118,10 @@
   font-weight: 400;
   letter-spacing: 0em;
   color: #949494;
+
+  @media (max-width: 330px) {
+    font-size: 10px;
+  }
 }
 
 .circle_button {

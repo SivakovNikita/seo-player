@@ -1,25 +1,20 @@
 import Link from 'next/link';
-import styles from './ControlPanel.module.scss';
+import styles from './sadsda.module.scss';
 import { useState } from 'react';
 import clsx from 'clsx';
 
 const ControlPanel = ({ play }) => {
-  const [isHovered, setIshovered] = useState(false);
-
+  const REG_LINK = 'https://app.zvuk-b2b.com/register?promocode=embed-player';
   return (
     <div className={styles.initial_controls_wrapper}>
       <button className={styles.button_play} onClick={play}>
-        ▶ Воспроизвести
+        <img src="/images/navigation/embed-play.svg"></img> Воспроизвести
       </button>
-      <div
-        className={clsx({ [styles.navigation_wrapper]: true, [styles.navigation_wrapper__active]: isHovered })}
-        onMouseEnter={() => setIshovered(true)}
-        onMouseLeave={() => setIshovered(false)}
-      >
-        <Link className={styles.link} href="/players">
-          <span>Открыть Звук Бизнес</span>
-          <span style={{ fontSize: '10px' }}> ↗</span>
-        </Link>
+      <div>
+        <a className={styles.text_link} href={REG_LINK} target="_blank">
+          <span>Открыть Звук Бизнес </span>
+          <img src="/images/navigation/embed-arrow.svg"></img>
+        </a>
       </div>
     </div>
   );

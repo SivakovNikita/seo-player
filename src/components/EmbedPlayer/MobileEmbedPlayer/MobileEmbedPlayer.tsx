@@ -15,8 +15,8 @@ import Link from 'next/link';
 
 const MobileEmbedPlayer = ({ playlist, playlistName }) => {
   const [title, subtitle, imageSrc, content, tracks] = playlist;
-  console.log(content);
-  const text = `Звук Бизнес — аудиосервис для бизнеса. C 2016 года мы создаём музыкальную атмосферу в заведениях и помогаем брендам звучать красиво, увеличивать продажи и нравиться людям. Аудиосервис позволяет формировать музыкальные волны под любую целевую аудиторию, управлять удалённо музыкальным оформлением в сети заведений и добавлять любой аудиоконтент в свой музыкальный поток.`;
+  const REG_LINK = 'https://app.zvuk-b2b.com/register?promocode=embed-player-';
+  const href = REG_LINK + playlistName;
   const [portal, setPortal] = useState<HTMLElement | null>(null);
   const { isOpen, textContent, openModal, closeModal, handlePlaybackChange } = useModal();
 
@@ -69,8 +69,8 @@ const MobileEmbedPlayer = ({ playlist, playlistName }) => {
             height={30}
             alt="Звук Бизнес"
           />
-          <Link href="https://zvuk-b2b.com/?utm_source=embed&utm_campaign=log-in&utm_content=button">
-            <button className={styles.button}>Войти</button>
+          <Link href={href} target="_blank">
+            <button className={styles.button_login}>Войти</button>
           </Link>
         </div>
         <div className={styles.mobile_player_metadata_wrapper}>
