@@ -12,10 +12,11 @@
 }
 
 .text_link {
+  font-family: 'SBSansDisplay-Light';
   text-decoration: none;
   font-size: 15px;
   line-height: 1.33;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0em;
   color: white;
 
@@ -25,6 +26,11 @@
 }
 
 .button_play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
   height: 30px;
   width: 167px;
   border: 1px solid;
