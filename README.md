@@ -8,12 +8,15 @@ This project is a customizable audio player designed to be easily integrated int
 
 The audio player comes with three variations:
 
-- **Playlist**: A complete list of audio tracks that can be played in order.
-- example: https://zvuk-b2b.com/plejlist-na-khellouin
-- **Player Bar**: A widget that allows users to control playback without leaving the current page.
-- example: https://zvuk-b2b.com/rest
 - **Embed Player**: A simple player that can be embedded directly into any webpage.
-- example:
+- example on production: https://zvuk-b2b.com/blog/52
+- example: https://seo-player.vercel.app/players/EmbedPlaylistChillHouse
+- **Playlist**: A complete list of audio tracks that can be played in order.
+- example on production: https://zvuk-b2b.com/plejlist-na-khellouin
+- example: https://seo-player.vercel.app/playlists/ItalianRestPlaylist
+- **Player Bar**: A widget that allows users to control playback without leaving the current page.
+- example on production: https://zvuk-b2b.com/resthttps://seo-player.vercel.app/playlists/ItalianRestPlaylist
+- example: https://seo-player.vercel.app/playerbars/FitnessDemoPlaylistPlaylist
 
 All variations function through iframe integration, ensuring flexibility and ease of use.
 
