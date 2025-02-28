@@ -15,7 +15,7 @@ The audio player comes with three variations:
 - example on production: https://zvuk-b2b.com/plejlist-na-khellouin
 - example: https://seo-player.vercel.app/playlists/ItalianRestPlaylist
 - **Player Bar**: A widget that allows users to control playback without leaving the current page.
-- example on production: https://zvuk-b2b.com/resthttps://seo-player.vercel.app/playlists/ItalianRestPlaylist
+- example on production: https://zvuk-b2b.com/rest
 - example: https://seo-player.vercel.app/playerbars/FitnessDemoPlaylistPlaylist
 
 All variations function through iframe integration, ensuring flexibility and ease of use.
