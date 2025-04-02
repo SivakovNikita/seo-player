@@ -3,7 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['f.muzlab.ru'],
+    domains: ['f.muzlab.ru', 'static.tildacdn.com'],
   },
 };
 export default nextConfig;
