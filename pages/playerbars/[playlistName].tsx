@@ -12,25 +12,34 @@ interface Params extends ParsedUrlQuery {
 type PlaylistProps = {
   playlist: string[];
   playlistName: string;
+  queryString?: string;
 };
 
 export const getServerSideProps: GetServerSideProps<PlaylistProps> = async (context) => {
-  const { playlistName } = context.params as Params;
+  const { playlistName, ...queryParams } = context.query;
+
+  const playlistNameValue =
+    typeof playlistName === 'string' ? playlistName : Array.isArray(playlistName) ? playlistName[0] : '';
 
   const redis = new Redis({
     url: process.env.KV_REST_API_URL,
     token: process.env.KV_REST_API_TOKEN,
   });
 
-  const playlistData = await redis.get(playlistName);
+  const playlistData = await redis.get(playlistNameValue);
   const playlist = Array.isArray(playlistData) ? playlistData : Object.values(playlistData || {});
 
+  const queryString =
+    Object.keys(queryParams).length > 0
+      ? '?' + new URLSearchParams(queryParams as Record<string, string>).toString()
+      : '';
+
   return {
-    props: { playlist, playlistName },
+    props: { playlist, playlistName: playlistNameValue, queryString },
   };
 };
 
-const PlayerBar = ({ playlist, playlistName }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const PlayerBar = ({ playlist, playlistName, queryString }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   if (!playlist || playlist.length === 0) {
     return <div style={{ color: 'white' }}>Ошибка загрузки данных плейлиста.</div>;
   }
@@ -43,7 +52,7 @@ const PlayerBar = ({ playlist, playlistName }: InferGetServerSidePropsType<typeo
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{playlist[0]}</title>
       </Head>
-      <Player trackList={playlist[2]} trackListName={playlistName} />
+      <Player trackList={playlist[2]} trackListName={playlistName} queryString={queryString} />
     </>
   );
 };

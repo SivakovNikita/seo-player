@@ -11,11 +11,15 @@ import useMediaSession from '../../hooks/useMediaSession';
 import useWindowWidth from '../../utils/useWindowWidth';
 import MobilePlayerBar from '../MobilePlayerBar/MobilePlayerBar';
 
-const Player = ({ trackList, trackListName }) => {
+const Player = ({ trackList, trackListName, queryString = '' }) => {
   const width = useWindowWidth();
   const isMobile = width <= 700;
   const REG_LINK = 'https://app.zvuk-b2b.com/register?promocode=playerbar';
-  const href = REG_LINK + trackListName;
+  let href = REG_LINK + trackListName;
+
+  if (queryString) {
+    href += `&${queryString.slice(1)}`;
+  }
 
   const {
     audio,
