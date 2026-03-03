@@ -66,8 +66,19 @@ const Player = ({ trackList, trackListName, queryString = '' }) => {
   useEffect(() => {
     const newHeight = isPlaying ? '100px' : '50px';
     window.parent.postMessage({ height: newHeight }, '*');
-    window.parent.postMessage({ reachGoal: 'playerbar-test' }, '*');
+    // window.parent.postMessage({ reachGoal: 'playerbar-test' }, '*');
   }, [isPlaying]);
+
+  const handleCtaClick = () => {
+    pause();
+    window.parent.postMessage(
+      {
+        reachGoal: 'player-cta-click',
+        params: { trackTitle: track.title },
+      },
+      '*',
+    );
+  };
 
   return isMobile ? (
     <MobilePlayerBar
@@ -88,7 +99,7 @@ const Player = ({ trackList, trackListName, queryString = '' }) => {
         <a href={href} target="_blank">
           <div
             className={clsx({ [styles.player_cta_button]: true, [styles.player_cta_button__active]: isPlaying })}
-            onClick={pause}
+            onClick={handleCtaClick}
           >
             Слушать весь плейлист бесплатно!
           </div>
